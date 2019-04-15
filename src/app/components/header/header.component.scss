@@ -1,0 +1,40 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.header-box {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    border-bottom: 1px solid #000;
+    margin: 0;
+    background: #6d5fd3;
+    &-nav {
+        display: flex;
+        margin: 0;
+        width: 100%;
+    }
+    &-clearfix {
+        height: 70px;
+    }
+}
+
+nav {
+    ul {
+        display: flex;
+        list-style: none;
+    }
+    a {
+        display: block;
+        padding: 20px;
+        border-right: 1px dashed #2e2e78;
+        cursor: pointer;
+        color: #fff;
+        text-decoration: none;
+        &:hover {
+            background: #988de0
+        }
+    }
+}
