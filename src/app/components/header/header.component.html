@@ -1,10 +1,11 @@
 <div class='header-box'>
-    <div class='header-box-nav'>
+    <div class='header-box'>
+        <img src="/assets/images/logo.png" alt="Логотип" class='header-box-logo'>
         <nav>
-            <ul>
-                <li><a routerLink='/'>Головна</a></li>
-                <li><a routerLink='/info'>Про вакцини</a></li>
-                <li><a routerLink='/contact'>Наші контакти</a></li>
+            <ul class='header-box-nav'>
+                <li><a class='header-box-nav-item' routerLink='/' routerLinkActive='header-box-nav-item-active' [routerLinkActiveOptions]="{exact:true}">Головна</a></li>
+                <li><a class='header-box-nav-item' routerLink='/info' routerLinkActive='header-box-nav-item-active' [routerLinkActiveOptions]="{exact:true}">Про вакцини</a></li>
+                <li><a class='header-box-nav-item' routerLink='/contact' routerLinkActive='header-box-nav-item-active' [routerLinkActiveOptions]="{exact:true}">Наші контакти</a></li>
             </ul>
         </nav>
     </div>
