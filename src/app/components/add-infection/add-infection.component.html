@@ -1,0 +1,22 @@
+<div>
+  <div>
+    <span>Додати Елемент</span>
+    <form (ngSubmit)="onSubmit()">
+      <div class="infection-block">
+        <div class="input-field">
+          <input type="text" placeholder="Add Nane" [(ngModel)]="infection.name" name="name">
+          <label>Name</label>
+        </div>
+        <div class="input-field">
+          <input type="text" placeholder="Add Result" [(ngModel)]="infection.result" name="result">
+          <label>Result</label>
+        </div>
+        <div class="input-field">
+          <input type="text" placeholder="Add Simptoms" [(ngModel)]="infection.simptoms" name="simptoms">
+          <label>Simptoms</label>
+        </div>
+        <input type="submit" value="Submit" class="button">
+      </div>
+    </form>
+  </div>
+</div>

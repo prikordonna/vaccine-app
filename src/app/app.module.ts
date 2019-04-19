@@ -9,6 +9,19 @@ import { ContactPageComponent } from './components/contact-page/contact-page.com
 import { InfoPageComponent } from './components/info-page/info-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 
+import { FormsModule } from '@angular/forms';
+
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { VaccinesComponent } from './components/vaccines/vaccines.component';
+
+import { VaccineService } from './services/vaccine.service';
+import { AddInfectionComponent } from './components/add-infection/add-infection.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,12 +29,21 @@ import { MainPageComponent } from './components/main-page/main-page.component';
     FooterComponent,
     ContactPageComponent,
     InfoPageComponent,
-    MainPageComponent
-  ],
+    MainPageComponent,
+    VaccinesComponent,
+    AddInfectionComponent
+    ],
   imports: [
-    BrowserModule, AppRoutingModule
+    BrowserModule, 
+    AppRoutingModule,
+    BrowserModule,
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireStorageModule
   ],
-  providers: [],
+  providers: [VaccineService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
