@@ -1,5 +1,12 @@
-<h1>Welcome!</h1>
-<app-add-infection></app-add-infection>
-<app-vaccines></app-vaccines>
-
-
+<div class="main-wrapper">
+    <app-header></app-header>
+    <div class='container'>
+        <router-outlet></router-outlet>
+    </div>
+  <div class="admin-example">
+    <h1>Welcome admin!</h1>
+    <app-add-infection></app-add-infection>
+    <app-vaccines></app-vaccines>
+  </div>
+    <app-footer></app-footer>
+</div>

@@ -1,6 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module'
+
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ContactPageComponent } from './components/contact-page/contact-page.component';
+import { InfoPageComponent } from './components/info-page/info-page.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
+
 import { FormsModule } from '@angular/forms';
 
 import { AngularFireModule } from '@angular/fire';
@@ -17,10 +25,17 @@ import { AddInfectionComponent } from './components/add-infection/add-infection.
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    ContactPageComponent,
+    InfoPageComponent,
+    MainPageComponent,
     VaccinesComponent,
     AddInfectionComponent
-  ],
+    ],
   imports: [
+    BrowserModule, 
+    AppRoutingModule,
     BrowserModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),

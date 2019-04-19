@@ -137,5 +137,10 @@
       }
     }
   },
-  "defaultProject": "firestore"
+  "defaultProject": "vaccine-app",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
