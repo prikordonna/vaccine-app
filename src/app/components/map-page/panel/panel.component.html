@@ -1,0 +1,18 @@
+<div class="clinic-panel">
+  <ul class="clinic-list">
+    <li *ngFor="let location of locationList , let i = index">
+        <div class="clinic" (click)="openWindow(location, i)">
+            <div class="title">{{ location.title }}</div>
+            <div class="clinic-name">
+              {{location.clinic_name}}
+            </div>
+            <div class="clinic-web">
+              <a href="{{location.website}}" target="_blank">Відвідати веб-сайт</a>
+            </div>           
+            <div class="clinic-address">{{location.address}}
+            </div>
+            <div class="vaccines"><b>Вакцини:</b> {{location.vaccines}}</div>           
+        </div>
+    </li>
+  </ul>
+</div>

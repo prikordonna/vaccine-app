@@ -1,0 +1,10 @@
+div {
+    display: flex;
+    justify-content: space-between;
+    app-panel {
+        width: 20%;
+    }
+    app-map {
+        width: 78%;
+    }
+}

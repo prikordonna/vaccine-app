@@ -1,0 +1,30 @@
+.clinic-panel {    
+    overflow: auto;
+    ul.clinic-list {
+        list-style-type: none;
+        li {
+            padding: .8em;
+            &:hover {
+                background-color: #bce0e6; 
+                opacity: 0.8;               
+                cursor: pointer;
+            }
+            .clinic {
+                .title {                    
+                    font-size: 1em;
+                    font-weight: 500;
+                }
+                .clinic-name {
+                    font-style: italic;
+                }
+                .clinic-web a {
+                    color: #000;
+                }
+                .clinic-name, .clinic-web, .clinic-address, .vaccines {
+                    font-size: .8em;
+                    padding-top: .3em;
+                }               
+            }
+        }
+    }
+}
