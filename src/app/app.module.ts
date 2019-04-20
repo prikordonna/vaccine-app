@@ -18,6 +18,17 @@ import { PanelComponent } from './components/map-page/panel/panel.component';
 import { MapsService } from './maps.service';
 import { LocationsService } from './locations.service';
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { VaccinesComponent } from './components/vaccines/vaccines.component';
+
+import { VaccineService } from './services/vaccine.service';
+import { AddInfectionComponent } from './components/add-infection/add-infection.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,16 +39,30 @@ import { LocationsService } from './locations.service';
     MainPageComponent,
     MapPageComponent,
     MapComponent,
-    PanelComponent
+    PanelComponent,
+    VaccinesComponent,
+    AddInfectionComponent,
+
   ],
   imports: [
-    BrowserModule, AppRoutingModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB3a71eakX1ji_aFPmQpGf5gWD278RRl4o'}),
+    BrowserModule, 
+    AppRoutingModule,
+    BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireStorageModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB3a71eakX1ji_aFPmQpGf5gWD278RRl4o'
+    }),
   ],
-  providers: [LocationsService, MapsService],
+  providers: [
+    LocationsService, 
+    VaccineService,
+    MapsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

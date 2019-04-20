@@ -1,0 +1,39 @@
+<div *ngIf="infections?.length > 0;else noItems">
+  <ul *ngFor="let infection of infections">
+    <li><strong>{{infection.name}}</strong>: <br>
+      ID: {{infection.id}} <br>
+      Симптоми: {{infection.simptoms}} <br>
+      Наслідки: {{infection.result}}
+      <a href="#" class="edit">
+        <i (click)="editInfection($event, infection)" class="material-icons">edit</i>
+        <i *ngIf="editState && infectionToEdit.id == infection.id" (click)="cancelEditing()" class="material-icons">cancel</i>
+      </a>
+      <div *ngIf="editState && infectionToEdit.id == infection.id">
+        <form (ngSubmit)="updateInfection(infection)">
+          <div class="infection-block">
+            <div class="input-field">
+              <input type="text" placeholder="Add Nane" [(ngModel)]="infection.name" name="name">
+              <label>Name</label>
+            </div>
+            <div class="input-field">
+              <input type="text" placeholder="Add Result" [(ngModel)]="infection.result" name="result">
+              <label>Result</label>
+            </div>
+            <div class="input-field">
+              <input type="text" placeholder="Add Simptoms" [(ngModel)]="infection.simptoms" name="simptoms">
+              <label>Simptoms</label>
+            </div>
+            <input type="submit" value="Save" class="button-save">
+            <input (click)="deleteInfection($event, infection)" type="submit" value="Delete" class="button-delete">
+          </div>
+        </form>
+      </div>
+
+    </li>
+  </ul>
+</div>
+
+<ng-template #noItems>
+  <hr>
+  <h5>Відсутній елемент списку!</h5>
+</ng-template>
