@@ -5,7 +5,6 @@ import { ContactPageComponent } from './components/contact-page/contact-page.com
 import { InfoPageComponent } from './components/info-page/info-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { MapPageComponent } from './components/map-page/map-page.component';
-import { AdminPageComponent } from './components/admin-page/admin-page.component';
 
 const routs: Routes = [
   {
@@ -19,9 +18,6 @@ const routs: Routes = [
   },
   {
     path: 'map', component: MapPageComponent
-  },
-  {
-    path: "settings", component: AdminPageComponent
   }
 ];
 
