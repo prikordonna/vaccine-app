@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { VaccineService } from '../../services/vaccine.service';
-import { Infection } from '../../models/Infection';
+import { VaccineService } from '../../../services/vaccine.service';
+import { Infection } from '../../../models/Infection';
 
 @Component({
   selector: 'app-add-infection',

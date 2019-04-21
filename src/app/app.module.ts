@@ -24,10 +24,11 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { VaccinesComponent } from './components/vaccines/vaccines.component';
+import { VaccinesComponent } from './components/admin-page/vaccines/vaccines.component';
 
 import { VaccineService } from './services/vaccine.service';
-import { AddInfectionComponent } from './components/add-infection/add-infection.component';
+import { AddInfectionComponent } from './components/admin-page/add-infection/add-infection.component';
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
 
 @NgModule({
   declarations: [
@@ -42,8 +43,8 @@ import { AddInfectionComponent } from './components/add-infection/add-infection.
     PanelComponent,
     VaccinesComponent,
     AddInfectionComponent,
-
-  ],
+    AdminPageComponent
+    ],
   imports: [
     BrowserModule, 
     AppRoutingModule,
