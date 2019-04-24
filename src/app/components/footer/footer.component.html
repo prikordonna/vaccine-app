@@ -1,14 +1,18 @@
 <div class='footer-box'>
     <nav class="footer-box-nav main">
       <ul>
-        <li><a>Головна</a></li>
-        <li><a>Інфо</a></li>
-        <li><a>Карта</a></li>
-        <li><a>Блог</a></li>
+        <li routerLink='/'><a>Головна</a></li>
+        <li routerLink='/info'><a>Інфо</a></li>
+      </ul>
+      <ul>
+        <li routerLink='/map'><a>Карта</a></li>
+        <li><a>Запитання/Відповіді</a></li>
       </ul>
     </nav>
     <img src="/assets/images/logo.png" alt="Логотип" class='footer-box-logo'>
-    <ul class='footer-box-nav contacts'>
-      <li><a>Контакти</a></li>
-    </ul>
+    <nav class="footer-box-nav">
+      <ul class='footer-box-nav contacts'>
+        <li routerLink='/contact'><a>Контакти</a></li>
+      </ul>
+    </nav>
 </div>
