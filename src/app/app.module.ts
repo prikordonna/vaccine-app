@@ -43,8 +43,8 @@ import { AdminPageComponent } from './components/admin-page/admin-page.component
     PanelComponent,
     VaccinesComponent,
     AddInfectionComponent,
-
-  ],
+    AdminPageComponent
+    ],
   imports: [
     BrowserModule, 
     AppRoutingModule,
