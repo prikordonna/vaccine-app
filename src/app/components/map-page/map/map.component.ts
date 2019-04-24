@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Marker } from '../../../../../models/marker';
+import { Marker } from '../../../models/marker';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
-import { LocationsService } from '../../../locations.service';
-import { MapsService } from '../../../maps.service';
+import { LocationsService } from '../../../services/locations.service';
+import { MapsService } from '../../../services/maps.service';
 
 @Component({
   selector: 'app-map',

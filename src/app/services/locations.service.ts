@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Marker } from '../../models';
+import { Marker } from '../models/marker';
 
 @Injectable()
 export class LocationsService {
@@ -47,6 +47,18 @@ export class LocationsService {
 
   getMarkers() {
     return this.markers;
+  }
+
+  addMarker(marker: Marker) {
+    this.markers.push(marker);
+  }
+
+  deleteMarker(marker: Marker) {
+    // this.markers.splice(, 1)
+  }
+
+  updateMarker(marker: Marker) {
+
   }
 
 }

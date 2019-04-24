@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { } from 'googlemaps';
-import { MapsService } from '../../../maps.service';
-import { LocationsService } from '../../../locations.service';
-import { Marker } from '../../../../../models';
+import { MapsService } from '../../../services/maps.service';
+import { LocationsService } from '../../../services/locations.service';
+import { Marker } from '../../../models/marker';
 
 @Component({
   selector: 'app-panel',

@@ -15,8 +15,8 @@ import { MapPageComponent } from './components/map-page/map-page.component';
 import { MapComponent } from './components/map-page/map/map.component';
 import { PanelComponent } from './components/map-page/panel/panel.component';
 
-import { MapsService } from './maps.service';
-import { LocationsService } from './locations.service';
+import { MapsService } from '../app/services/maps.service';
+import { LocationsService } from '../app/services/locations.service';
 
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
@@ -29,6 +29,11 @@ import { VaccinesComponent } from './components/admin-page/vaccines/vaccines.com
 import { VaccineService } from './services/vaccine.service';
 import { AddInfectionComponent } from './components/admin-page/add-infection/add-infection.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { AddLocationComponent } from './components/admin-page/add-location/add-location.component';
+import { LocationsComponent } from './components/admin-page/locations/locations.component';
+
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatTabsModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -43,7 +48,9 @@ import { AdminPageComponent } from './components/admin-page/admin-page.component
     PanelComponent,
     VaccinesComponent,
     AddInfectionComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    AddLocationComponent,
+    LocationsComponent
     ],
   imports: [
     BrowserModule, 
@@ -58,6 +65,8 @@ import { AdminPageComponent } from './components/admin-page/admin-page.component
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB3a71eakX1ji_aFPmQpGf5gWD278RRl4o'
     }),
+    BrowserAnimationsModule,
+    MatTabsModule
   ],
   providers: [
     LocationsService, 
