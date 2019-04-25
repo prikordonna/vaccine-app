@@ -1,0 +1,10 @@
+<div *ngIf='auth.user$ | async as user; else login'>
+    <h1>Welcome {{user.displayName}}</h1>
+    <div *ngIf='auth.canEdit(user)'>
+        <a routerLink='/settings'>Адмін панель</a>
+    </div>
+    <button (click)='auth.SignOut()'>Вийти</button>
+</div>
+<ng-template #login>
+
+</ng-template>

@@ -6,6 +6,7 @@ import { InfoPageComponent } from './components/info-page/info-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { MapPageComponent } from './components/map-page/map-page.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routs: Routes = [
   {
@@ -22,6 +23,9 @@ const routs: Routes = [
   },
   {
     path: "settings", component: AdminPageComponent
+  },
+  {
+    path: "profile", component: UserProfileComponent
   }
 ];
 
