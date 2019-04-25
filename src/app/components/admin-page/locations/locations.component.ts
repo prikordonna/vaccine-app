@@ -9,6 +9,8 @@ import { Marker } from '../../../models/marker';
 })
 export class LocationsComponent implements OnInit {
   public locations: Marker[];
+  editState: boolean = false;
+  locationToEdit: Marker;
 
   constructor(
     private locationsService: LocationsService
@@ -16,5 +18,24 @@ export class LocationsComponent implements OnInit {
 
   ngOnInit() {
     this.locations = this.locationsService.getMarkers();
+  }
+
+  deleteLocation(location) {
+    this.cancelEditing();
+    this.locationsService.deleteMarker(location);
+
+  }
+  editLocation(location) {
+    this.editState = true;
+    this.locationToEdit = location;
+
+  }
+  updateLocation(location) {
+    this.locationsService.updateMarker(location);
+    this.cancelEditing();
+  }
+  cancelEditing() {
+    this.editState = false;
+    this.locationToEdit = null;
   }
 }

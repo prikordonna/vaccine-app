@@ -6,6 +6,7 @@ export class LocationsService {
 
   markers: Marker[] = [
     {
+      id: 0,
       lat: 49.815353,
       lng: 24.047695,
       title: 'A',
@@ -18,6 +19,7 @@ export class LocationsService {
       vaccines: 'Гепатит В, Туберкольоз, Кашлюк'
     },
     {
+      id: 1,
       lat: 49.833641,
       lng: 24.005774,
       title: 'B',
@@ -30,6 +32,7 @@ export class LocationsService {
       vaccines: 'Туберкольоз, Кір, Краснуха'
     },
     {
+      id:2,
       lat: 49.790133,
       lng: 24.058170,
       title: 'C',
@@ -53,8 +56,8 @@ export class LocationsService {
     this.markers.push(marker);
   }
 
-  deleteMarker(marker: Marker) {
-    // this.markers.splice(, 1)
+  deleteMarker(index) {
+    this.markers.splice(index, 1)
   }
 
   updateMarker(marker: Marker) {

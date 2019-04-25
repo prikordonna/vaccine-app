@@ -1,3 +1,36 @@
-<p>
-  add-location works!
-</p>
+<div>
+  <span>Додати Елемент</span>
+  <form (ngSubmit)="onSubmit()">
+    <div class="infection-block">
+      <div class="input-field">
+        <input type="text" placeholder="Add  LAT" [(ngModel)]="location.lat" name="lat">
+        <label>LAT: </label>
+      </div>
+      <div class="input-field">
+        <input type="text" placeholder="Add  LNG" [(ngModel)]="location.lng" name="lng">
+        <label>LNG: </label>
+      </div>
+      <div class="input-field">
+        <input type="text" placeholder="Add  Title" [(ngModel)]="location.title" name="title">
+        <label>Title: </label>
+      </div>
+      <div class="input-field">
+        <input type="text" placeholder="Add  ID" [(ngModel)]="location.id" name="id">
+        <label>ID: </label>
+      </div>
+      <div class="input-field">
+        <input type="text" placeholder="Add Address" [(ngModel)]="location.address" name="address">
+        <label>Address: </label>
+      </div>
+      <div class="input-field">
+        <input type="text" placeholder="Add Web-site" [(ngModel)]="location.website" name="website">
+        <label>Web-site: </label>
+      </div>
+      <div class="input-field">
+        <input type="text" placeholder="Add Vaccines" [(ngModel)]="location.vaccines" name="vaccines">
+        <label>Vaccines: </label>
+      </div>
+      <input type="submit" value="Submit" class="button">
+    </div>
+  </form>
+</div>
