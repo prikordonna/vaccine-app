@@ -29,6 +29,7 @@ import { VaccinesComponent } from './components/admin-page/vaccines/vaccines.com
 import { VaccineService } from './services/vaccine.service';
 import { AddInfectionComponent } from './components/admin-page/add-infection/add-infection.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -43,10 +44,11 @@ import { AdminPageComponent } from './components/admin-page/admin-page.component
     PanelComponent,
     VaccinesComponent,
     AddInfectionComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    UserProfileComponent
     ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     AppRoutingModule,
     BrowserModule,
     FormsModule,
@@ -60,7 +62,7 @@ import { AdminPageComponent } from './components/admin-page/admin-page.component
     }),
   ],
   providers: [
-    LocationsService, 
+    LocationsService,
     VaccineService,
     MapsService
   ],

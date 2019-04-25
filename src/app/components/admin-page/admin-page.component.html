@@ -1,5 +1,13 @@
-<div class="admin-example">
-  <h1>Welcome admin!</h1>
-  <app-add-infection></app-add-infection>
-  <app-vaccines></app-vaccines>
+<div *ngIf='auth.user$ | async as user; else login'>
+    <div class="admin-example" *ngIf='auth.canEdit(user) else notAdmin'>
+        <app-add-infection></app-add-infection>
+        <app-vaccines></app-vaccines>
+    </div>
 </div>
+<ng-template #login>
+    <h1>Увійдіть, щоб отримати доступ</h1>
+    <button (click)='auth.SignIn()'>Login</button>
+</ng-template>
+<ng-template #notAdmin>
+    <h1>Ви не адмін</h1>
+</ng-template>
