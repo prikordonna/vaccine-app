@@ -15,7 +15,7 @@ export class AddLocationComponent implements OnInit {
     id: undefined,
     draggable: false,
     title: '',
-    icon: '',
+    icon: '/assets/images/vaccine.png',
     clinic_name: '',
     phone: '',
     address: '',
@@ -28,7 +28,26 @@ export class AddLocationComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() {   
+  onSubmit() {
+    if (this.location.lat != undefined && this.location.lng != undefined && this.location.id != undefined
+      && this.location.title != '' && this.location.clinic_name != '' && this.location.phone != ''
+      && this.location.address != '' && this.location.website != '' && this.location.vaccines != '') {
       this.locationService.addMarker(this.location);
+
+      this.location.lat = undefined;
+      this.location.lng = undefined;
+      this.location.id = undefined;
+      this.location.draggable = false;
+      this.location.title = '';
+      this.location.icon = '/assets/images/vaccine.png';
+      this.location.clinic_name = '';
+      this.location.phone = '';
+      this.location.address = '';
+      this.location.website = '';
+      this.location.vaccines = '';
+      
+    }
+    console.log(this.location);
   }
+  
 }

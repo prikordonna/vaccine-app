@@ -24,7 +24,14 @@ export class VaccineService {
       })})
     )}
    getInfection() {
-     return this.infections;
+     //return this.infections;
+     return this.infectionsCollection.snapshotChanges()
+      .pipe(
+        map(changes => changes.map(a => {
+        const data = a.payload.doc.data() as Infection;
+        data.id = a.payload.doc.id;
+        return data;
+      })))
    }
    addInfection(infection: Infection) {
     this.infectionsCollection.add(infection);

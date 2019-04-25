@@ -1,5 +1,5 @@
 export interface Marker {
-    id: number;
+    id: string;
     lat: number;
     lng: number;
     draggable: boolean;

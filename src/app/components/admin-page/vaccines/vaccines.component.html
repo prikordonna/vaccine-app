@@ -1,7 +1,6 @@
 <div *ngIf="infections?.length > 0;else noItems">
   <ul *ngFor="let infection of infections">
-    <li><strong>{{infection.name}}</strong>: <br>
-      ID: {{infection.id}} <br>
+    <li><strong>{{infection.name}}</strong><br>
       Симптоми: {{infection.simptoms}} <br>
       Наслідки: {{infection.result}}
       <a class="edit">

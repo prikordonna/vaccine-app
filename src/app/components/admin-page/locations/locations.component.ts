@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationsService } from '../../../services/locations.service';
 import { Marker } from '../../../models/marker';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-locations',
@@ -8,7 +9,7 @@ import { Marker } from '../../../models/marker';
   styleUrls: ['./locations.component.scss']
 })
 export class LocationsComponent implements OnInit {
-  public locations: Marker[];
+  locations: Marker[];
   editState: boolean = false;
   locationToEdit: Marker;
 
@@ -17,7 +18,10 @@ export class LocationsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.locations = this.locationsService.getMarkers();
+    // this.locations = this.locationsService.getMarkers();
+    this.locationsService.getMarkers().subscribe(locations =>
+      this.locations = locations
+    )
   }
 
   deleteLocation(location) {

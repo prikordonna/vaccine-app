@@ -3,32 +3,40 @@
   <form (ngSubmit)="onSubmit()">
     <div class="infection-block">
       <div class="input-field">
-        <input type="text" placeholder="Add  LAT" [(ngModel)]="location.lat" name="lat">
         <label>LAT: </label>
+        <input type="text" placeholder="Add  LAT" [(ngModel)]="location.lat" name="lat">
       </div>
       <div class="input-field">
-        <input type="text" placeholder="Add  LNG" [(ngModel)]="location.lng" name="lng">
         <label>LNG: </label>
+        <input type="text" placeholder="Add  LNG" [(ngModel)]="location.lng" name="lng">
       </div>
       <div class="input-field">
-        <input type="text" placeholder="Add  Title" [(ngModel)]="location.title" name="title">
         <label>Title: </label>
+        <input type="text" placeholder="Add  Title" [(ngModel)]="location.title" name="title">
       </div>
       <div class="input-field">
-        <input type="text" placeholder="Add  ID" [(ngModel)]="location.id" name="id">
         <label>ID: </label>
+        <input type="number" placeholder="Add  ID" [(ngModel)]="location.id" name="id">
       </div>
       <div class="input-field">
-        <input type="text" placeholder="Add Address" [(ngModel)]="location.address" name="address">
+          <label>Clinic name: </label>
+          <input type="text" placeholder="Add  Clinic Name" [(ngModel)]="location.clinic_name" name="clinic_name">
+        </div>
+      <div class="input-field">
         <label>Address: </label>
+        <input type="text" placeholder="Add Address" [(ngModel)]="location.address" name="address">
       </div>
       <div class="input-field">
-        <input type="text" placeholder="Add Web-site" [(ngModel)]="location.website" name="website">
         <label>Web-site: </label>
+        <input type="text" placeholder="Add Web-site" [(ngModel)]="location.website" name="website">
       </div>
       <div class="input-field">
-        <input type="text" placeholder="Add Vaccines" [(ngModel)]="location.vaccines" name="vaccines">
+          <label>Phone: </label>
+          <input type="text" placeholder="Add Phone" [(ngModel)]="location.phone" name="phone">
+        </div>
+      <div class="input-field">
         <label>Vaccines: </label>
+        <input type="text" placeholder="Add Vaccines" [(ngModel)]="location.vaccines" name="vaccines">
       </div>
       <input type="submit" value="Submit" class="button">
     </div>
