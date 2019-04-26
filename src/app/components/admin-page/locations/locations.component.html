@@ -1,0 +1,61 @@
+<div *ngIf="locations?.length > 0; else noItems">
+  <ul *ngFor="let location of locations">
+    <li><strong>{{location.clinic_name}}</strong><br>
+      Lat: {{location.lat}} <br>
+      Lng: {{location.lng}} <br>
+      Title: {{location.title}} <br>
+      ID: {{location.id}} <br>
+      Адрес: {{location.address}} <br>
+      Веб-сайт: {{location.website}} <br>
+      Присутні вакцини від інфекцій: {{location.vaccines}}
+      <a class="edit">
+        <i (click)="editLocation(location)" class="material-icons">edit</i>
+        <i *ngIf="editState && locationToEdit.id == location.id" (click)="cancelEditing()"
+          class="material-icons">cancel</i>
+      </a>
+      <div *ngIf="editState && locationToEdit.id == location.id">
+        <form (ngSubmit)="updateLocation(location)">
+          <div class="location-block">
+            <div class="input-field">
+              <input type="text" placeholder="Add LAT" [(ngModel)]="location.lat" name="lat">
+              <label>LAT: </label>
+            </div>
+            <div class="input-field">
+              <input type="text" placeholder="Add  LNG" [(ngModel)]="location.lng" name="lng">
+              <label>LNG: </label>
+            </div>
+            <div class="input-field">
+              <input type="text" placeholder="Add  Clinic Name" [(ngModel)]="location.id" name="id">
+              <label>ID: </label>
+            </div>
+
+            <div class="input-field">
+              <input type="text" placeholder="Add  Clinic Name" [(ngModel)]="location.clinic_name" name="name">
+              <label>Name: </label>
+            </div>
+            <div class="input-field">
+              <input type="text" placeholder="Add Address" [(ngModel)]="location.address" name="address">
+              <label>Address: </label>
+            </div>
+            <div class="input-field">
+              <input type="text" placeholder="Add Web-site" [(ngModel)]="location.website" name="website">
+              <label>Web-site: </label>
+            </div>
+            <div class="input-field">
+              <input type="text" placeholder="Add Vaccines" [(ngModel)]="location.vaccines" name="vaccines">
+              <label>Vaccines: </label>
+            </div>
+            <input type="submit" value="Save" class="button-save">
+            <input (click)="deleteLocation(location)" type="submit" value="Delete" class="button-delete">
+          </div>
+        </form>
+      </div>
+
+    </li>
+  </ul>
+</div>
+
+<ng-template #noItems>
+  <hr>
+  <h5>Відсутній елемент списку!</h5>
+</ng-template>

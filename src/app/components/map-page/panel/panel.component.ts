@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { } from 'googlemaps';
-import { MapsService } from '../../../maps.service';
-import { LocationsService } from '../../../locations.service';
-import { Marker } from '../../../../../models';
+import { MapsService } from '../../../services/maps.service';
+import { LocationsService } from '../../../services/locations.service';
+import { Marker } from '../../../models/marker';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-panel',
@@ -11,7 +12,7 @@ import { Marker } from '../../../../../models';
 })
 export class PanelComponent implements OnInit {
   public locations: Marker[];
-  public locationList: Marker[];
+  // public locationList:  Marker[];
 
   constructor(
     private mapsService: MapsService,
@@ -19,8 +20,12 @@ export class PanelComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.locations = this.locationsService.getMarkers();
-    this.locationList = this.locations;
+    // this.locations = this.locationsService.getMarkers();
+    // this.locationList = this.locations;
+
+    this.locationsService.getMarkers().subscribe(locations => 
+      this.locations = locations
+      )
   }
 
   openWindow(location: Marker, index: number) {

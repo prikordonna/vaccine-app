@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Marker } from '../../../../../models/marker';
+import { Marker } from '../../../models/marker';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
-import { LocationsService } from '../../../locations.service';
-import { MapsService } from '../../../maps.service';
+import { LocationsService } from '../../../services/locations.service';
+import { MapsService } from '../../../services/maps.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-map',
@@ -17,7 +18,7 @@ export class MapComponent implements OnInit {
 
   public openedWindow: number;
 
-  public markers: Marker[] = this.locationService.getMarkers();
+  public markers: Marker[];
 
   constructor(
     private locationService: LocationsService,
@@ -30,6 +31,13 @@ export class MapComponent implements OnInit {
     this.lat = this.mapsService.lat;
     this.lng = this.mapsService.lng;
     this.zoom = this.mapsService.zoom;
+
+    // this.locationsService.getMarkers().subscribe(locations => 
+    //   this.locations = locations
+    //   )
+    this.locationService.getMarkers().subscribe(markers =>
+        this.markers = markers
+      );
 
     // Zoom to new location after search
     this.mapsService.newCoordinators.subscribe(

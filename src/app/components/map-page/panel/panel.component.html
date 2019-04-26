@@ -1,6 +1,6 @@
 <div class="clinic-panel">
   <ul class="clinic-list">
-    <li *ngFor="let location of locationList , let i = index">
+    <li *ngFor="let location of locations , let i = index">
         <div class="clinic" (click)="openWindow(location, i)">
             <div class="title">{{ location.title }}</div>
             <div class="clinic-name">
