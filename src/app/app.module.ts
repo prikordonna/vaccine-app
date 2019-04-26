@@ -29,15 +29,11 @@ import { VaccinesComponent } from './components/admin-page/vaccines/vaccines.com
 import { VaccineService } from './services/vaccine.service';
 import { AddInfectionComponent } from './components/admin-page/add-infection/add-infection.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
-<<<<<<< HEAD
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-=======
 import { AddLocationComponent } from './components/admin-page/add-location/add-location.component';
 import { LocationsComponent } from './components/admin-page/locations/locations.component';
-
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material';
->>>>>>> origin/feature/map-page
 
 @NgModule({
   declarations: [
@@ -53,12 +49,9 @@ import { MatTabsModule } from '@angular/material';
     VaccinesComponent,
     AddInfectionComponent,
     AdminPageComponent,
-<<<<<<< HEAD
-    UserProfileComponent
-=======
+    UserProfileComponent,
     AddLocationComponent,
     LocationsComponent
->>>>>>> origin/feature/map-page
     ],
   imports: [
     BrowserModule,
