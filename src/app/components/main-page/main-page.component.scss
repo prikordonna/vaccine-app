@@ -1,0 +1,62 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+.main-box {
+    margin: auto;
+    width: 100%;
+    display: block;
+    &-top {
+        background: url(/assets/images/doctor.png) no-repeat center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        height: -webkit-fill-available;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        &-img{
+            z-index: -1;
+            // position: absolute;
+        }
+        &-text{
+            color: #F3F3F3;
+            text-align: center
+        }
+        &-button {
+            margin-top: 4em;
+            color: #ffffff;
+            background-color: #0993A3;
+            font-size: 24px;
+            border-radius: 28px;
+            border: none;
+            height: 85px;
+            width: 360px;
+            &:hover {
+                background-color: 
+                lighten(#0993A3, 5%);
+                transition: 0.3s;
+            }
+        }
+    }
+    &-footer {
+        background-image: url(/assets/images/plus.jpg);
+        height: -webkit-fill-available;
+        background-repeat: no-repeat;
+        background-size: contain;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &-img {
+            z-index: -1;
+        }
+        &-text{
+            font-size: 45px;
+            color: #F3F3F3;
+        }
+    }
+}

@@ -37,6 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule, MatIconModule, MatButtonModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 import {FlexLayoutModule} from "@angular/flex-layout";
 
+
 @NgModule({
   declarations: [
     AppComponent,
