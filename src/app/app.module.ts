@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module'
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { AgmCoreModule } from '@agm/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
@@ -11,9 +11,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ContactPageComponent } from './components/contact-page/contact-page.component';
 import { InfoPageComponent } from './components/info-page/info-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
-import { MapPageComponent } from './components/map-page/map-page.component';
-import { MapComponent } from './components/map-page/map/map.component';
-import { PanelComponent } from './components/map-page/panel/panel.component';
+
 import { VaccinesComponent } from './components/admin-page/vaccines/vaccines.component';
 import { LocationsComponent } from './components/admin-page/locations/locations.component';
 import { AddInfectionComponent } from './components/admin-page/add-infection/add-infection.component';
@@ -37,6 +35,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule, MatIconModule, MatButtonModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 import {FlexLayoutModule} from "@angular/flex-layout";
 
+import { StoreModule } from '@ngrx/store';
+import { appReducer } from './+store/index';
+import { MapModule } from './map-page/map.module';
+import { EffectsModule } from '@ngrx/effects';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,9 +48,6 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     ContactPageComponent,
     InfoPageComponent,
     MainPageComponent,
-    MapPageComponent,
-    MapComponent,
-    PanelComponent,
     VaccinesComponent,
     AddInfectionComponent,
     AdminPageComponent,
@@ -65,16 +65,16 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB3a71eakX1ji_aFPmQpGf5gWD278RRl4o'
-    }),
     BrowserAnimationsModule,
     MatTabsModule,
     MatIconModule, 
     MatButtonModule, 
     MatSidenavModule,
     MatToolbarModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    StoreModule.forRoot({ app: appReducer }),
+    MapModule,
+    EffectsModule.forRoot([]),
   ],
   providers: [
     LocationsService,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Marker } from '../../../models/marker';
+import { Location } from '../../../models/location';
 import { LocationsService } from '../../../services/locations.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { LocationsService } from '../../../services/locations.service';
 })
 export class AddLocationComponent implements OnInit {
 
-  location: Marker = {
+  location: Location = {
     lat: undefined,
     lng: undefined,
     id: undefined,
