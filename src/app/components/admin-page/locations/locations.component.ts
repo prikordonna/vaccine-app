@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationsService } from '../../../services/locations.service';
-import { Marker } from '../../../models/marker';
+import { Location } from '../../../models/location';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./locations.component.scss']
 })
 export class LocationsComponent implements OnInit {
-  locations: Marker[];
+  locations: Location[];
   editState: boolean = false;
-  locationToEdit: Marker;
+  locationToEdit: Location;
 
   constructor(
     private locationsService: LocationsService
@@ -19,7 +19,7 @@ export class LocationsComponent implements OnInit {
 
   ngOnInit() {
     // this.locations = this.locationsService.getMarkers();
-    this.locationsService.getMarkers().subscribe(locations =>
+    this.locationsService.getLocations$().subscribe(locations =>
       this.locations = locations
     )
   }

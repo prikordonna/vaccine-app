@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Marker } from '../../../models/marker';
+import { Location } from '../../models/';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
-import { LocationsService } from '../../../services/locations.service';
-import { MapsService } from '../../../services/maps.service';
+import { LocationsService } from '../../services/locations.service';
+import { MapsService } from '../../services/maps.service';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -18,7 +18,7 @@ export class MapComponent implements OnInit {
 
   public openedWindow: number;
 
-  public markers: Marker[];
+  public markers: Location[];
 
   constructor(
     private locationService: LocationsService,
@@ -35,7 +35,7 @@ export class MapComponent implements OnInit {
     // this.locationsService.getMarkers().subscribe(locations => 
     //   this.locations = locations
     //   )
-    this.locationService.getMarkers().subscribe(markers =>
+    this.locationService.getLocations$().subscribe(markers =>
         this.markers = markers
       );
 

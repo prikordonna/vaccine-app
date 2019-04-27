@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Marker } from '../models/marker';
+import { Location } from '../models/location';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection  } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-
+import { of } from 'rxjs/internal/observable/of';
 import { map, share } from 'rxjs/operators/';
 
 @Injectable()
@@ -67,44 +67,43 @@ export class LocationsService {
   // updateMarker(marker: Marker) {
 
   // }
-  markersCollection: AngularFirestoreCollection<Marker>;
-  markers: Observable<Marker[]>;
-  markerDoc: AngularFirestoreDocument<Marker>;
+  markersCollection: AngularFirestoreCollection<Location>;
+  markers: Observable<Location[]>;
+  markerDoc: AngularFirestoreDocument<Location>;
   
   constructor(private smth: AngularFirestore) {
-    this.markersCollection = smth.collection<Marker>('locations', ref => ref.orderBy('id', 'asc'));
+    this.markersCollection = smth.collection<Location>('locations', ref => ref.orderBy('id', 'asc'));
     this.markers = this.markersCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
-        const data = a.payload.doc.data() as Marker;
+        const data = a.payload.doc.data() as Location;
         data.id = a.payload.doc.id;
         return data;
       })})
     )
   }
 
-  getMarkers() {
+  getLocations$(): Observable<Location[]> {
     //  return this.markers;
     return this.markersCollection.snapshotChanges()
       .pipe(
         map((changes) => changes.map((a) => {
-          const data = a.payload.doc.data() as Marker;
+          const data = a.payload.doc.data() as Location;
           data.id = a.payload.doc.id;
           return data;
-        })),
-        share(),
+        }))
       )
    }
-   addMarker(marker: Marker) {
+   addMarker(marker: Location) {
     this.markersCollection.add(marker);
     console.log(`Element was added`);
    }
 
-   deleteMarker(marker: Marker) {
+   deleteMarker(marker: Location) {
     this.markerDoc = this.smth.doc(`locations/${marker.id}`);
     console.log(`Element with id(${marker.id}) was deleted`);
     this.markerDoc.delete();
    }
-   updateMarker(marker: Marker) {
+   updateMarker(marker: Location) {
     this.markerDoc = this.smth.doc(`locations/${marker.id}`);
     console.log(`Element with id(${marker.id}) was edited`);
     this.markerDoc.update(marker);
