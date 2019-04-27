@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { } from 'googlemaps';
 import { MapsService } from '../../../services/maps.service';
 import { LocationsService } from '../../../services/locations.service';
 import { Marker } from '../../../models/marker';
