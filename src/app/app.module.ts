@@ -35,6 +35,7 @@ import { LocationsComponent } from './components/admin-page/locations/locations.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material';
 
+
 @NgModule({
   declarations: [
     AppComponent,

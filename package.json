@@ -30,8 +30,10 @@
     "core-js": "^2.5.4",
     "firebase": "^5.9.4",
     "firebaseui": "^3.6.0",
+    "i": "^0.3.6",
     "ngx-auth-firebaseui": "^2.6.0",
     "ngx-filter-pipe": "^2.1.2",
+    "npm": "^6.9.0",
     "rxjs": "^6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
