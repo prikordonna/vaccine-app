@@ -3,13 +3,14 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { InfoPageModule } from './components/info-page/info-page.module';
+
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ContactPageComponent } from './components/contact-page/contact-page.component';
-import { InfoPageComponent } from './components/info-page/info-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 
 import { VaccinesComponent } from './components/admin-page/vaccines/vaccines.component';
@@ -41,21 +42,20 @@ import { MapModule } from './map-page/map.module';
 import { EffectsModule } from '@ngrx/effects';
 
 import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
- 
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
     ContactPageComponent,
-    InfoPageComponent,
     MainPageComponent,
     VaccinesComponent,
     AddInfectionComponent,
     AdminPageComponent,
     UserProfileComponent,
     AddLocationComponent,
-    LocationsComponent
+    LocationsComponent,
     ],
   imports: [
     BrowserModule,
@@ -81,6 +81,7 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-b
     TabsModule.forRoot(),
     ModalModule.forRoot(),
     CollapseModule.forRoot(),
+    InfoPageModule,
   ],
   providers: [
     LocationsService,
