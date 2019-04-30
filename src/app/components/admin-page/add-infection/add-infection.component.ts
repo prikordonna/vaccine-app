@@ -7,18 +7,30 @@ import { Infection } from '../../../models/Infection';
 @Component({
   selector: 'app-add-infection',
   templateUrl: './add-infection.component.html',
-  styleUrls: ['./add-infection.component.css']
+  styleUrls: ['./add-infection.component.scss']
 })
 
 export class AddInfectionComponent implements OnInit {
   infection: Infection = {
     name: '',
     result: '',
-    simptoms: ''
+    simptoms: '',
+    day1: false,
+    day3: false,
+    month2: false,
+    month4: false,
+    month6: false,
+    month12: false,
+    month18: false,
+    year6: false,
+    year14: false,
+    year16: false,
+    adult: false,
   }
+
   modalRef: BsModalRef;
-  constructor(private infectionService: VaccineService, 
-              private modalService: BsModalService) { }
+  constructor(private infectionService: VaccineService,
+    private modalService: BsModalService) { }
 
   ngOnInit() {
   }
@@ -33,6 +45,17 @@ export class AddInfectionComponent implements OnInit {
       this.infection.name = '';
       this.infection.result = '';
       this.infection.simptoms = '';
+      this.infection.day1 = false;
+      this.infection.day3 = false;
+      this.infection.month2 = false;
+      this.infection.month4 = false;
+      this.infection.month6 = false;
+      this.infection.month12 = false;
+      this.infection.month18 = false;
+      this.infection.year6 = false;
+      this.infection.year14 = false;
+      this.infection.year16 = false;
+      this.infection.adult = false;
     }
   }
 
