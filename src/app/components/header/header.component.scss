@@ -1,57 +1,57 @@
-* {
-    padding: 0;
-    margin: 0;
-}
+// * {
+//     padding: 0;
+//     margin: 0;
+// }
 
-.header-box {
-    position: fixed;
-    top: 0;
-    z-index: 999;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    background: linear-gradient(0.50turn,#117BA3, #0693c7, #117BA3);
-    opacity: 0.8;
-    &-nav {
-        display: flex;
-        list-style: none;
-        &-item {
-            display: inline-block;
-            height: 1.3em;
-            padding: 1em;
-            text-decoration: none;
-            border-left: 1px dashed #0993A3;
-            color: #707070;
-            &-active {
-                color: #0993a3;
-                background: #fff;
-            }
-            &:hover {
-                background: #0993A3;
-                border-right: 1 px dashed#afc9fe;
-                color: #fff;
-                transition: 0.3s
-            }
-            &:not(:hover) {
-                transition: 0.3s;
-            }
-        }
-    }
-    &-clearfix {
-        height: 4em;
-    }
-    &-logo {
-        width: 3em;
-        height: 3em;
-        margin-left: 1em;
-        &:hover {
-            opacity: 0.7;
-            transition: 0.3s
-        }
-        &:not(:hover) {
-            transition: 0.3s;
-        }
-    }
-}
+// .header-box {
+//     position: fixed;
+//     top: 0;
+//     z-index: 999;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     width: 100%;
+//     background: linear-gradient(0.50turn,#117BA3, #0693c7, #117BA3);
+//     opacity: 0.8;
+//     &-nav {
+//         display: flex;
+//         list-style: none;
+//         &-item {
+//             display: inline-block;
+//             height: 1.3em;
+//             padding: 1em;
+//             text-decoration: none;
+//             border-left: 1px dashed #0993A3;
+//             color: #707070;
+//             &-active {
+//                 color: #0993a3;
+//                 background: #fff;
+//             }
+//             &:hover {
+//                 background: #0993A3;
+//                 border-right: 1 px dashed#afc9fe;
+//                 color: #fff;
+//                 transition: 0.3s
+//             }
+//             &:not(:hover) {
+//                 transition: 0.3s;
+//             }
+//         }
+//     }
+//     &-clearfix {
+//         height: 4em;
+//     }
+//     &-logo {
+//         width: 3em;
+//         height: 3em;
+//         margin-left: 1em;
+//         &:hover {
+//             opacity: 0.7;
+//             transition: 0.3s
+//         }
+//         &:not(:hover) {
+//             transition: 0.3s;
+//         }
+//     }
+// }
 

@@ -1,9 +1,9 @@
 export interface Location {
-    id: string;
+    id?:string;
     lat: number;
     lng: number;
     draggable: boolean;
-    title: string;  //id
+    title: string; 
     icon: string;
     clinic_name: string;
     address: string;

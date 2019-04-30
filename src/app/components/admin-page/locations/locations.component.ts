@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { LocationsService } from '../../../services/locations.service';
 import { Location } from '../../../models/location';
 import { Observable } from 'rxjs';
@@ -12,16 +14,21 @@ export class LocationsComponent implements OnInit {
   locations: Location[];
   editState: boolean = false;
   locationToEdit: Location;
+  modalRef: BsModalRef;
 
   constructor(
-    private locationsService: LocationsService
+    private locationsService: LocationsService,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit() {
-    // this.locations = this.locationsService.getMarkers();
     this.locationsService.getLocations$().subscribe(locations =>
       this.locations = locations
     )
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
   deleteLocation(location) {

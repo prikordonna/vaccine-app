@@ -72,7 +72,7 @@ export class LocationsService {
   markerDoc: AngularFirestoreDocument<Location>;
   
   constructor(private smth: AngularFirestore) {
-    this.markersCollection = smth.collection<Location>('locations', ref => ref.orderBy('id', 'asc'));
+    this.markersCollection = smth.collection<Location>('locations', ref => ref.orderBy('title', 'asc'));
     this.markers = this.markersCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Location;

@@ -39,6 +39,8 @@ import { StoreModule } from '@ngrx/store';
 import { appReducer } from './+store/index';
 import { MapModule } from './map-page/map.module';
 import { EffectsModule } from '@ngrx/effects';
+
+import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
  
 @NgModule({
   declarations: [
@@ -75,6 +77,10 @@ import { EffectsModule } from '@ngrx/effects';
     StoreModule.forRoot({ app: appReducer }),
     MapModule,
     EffectsModule.forRoot([]),
+    BsDropdownModule.forRoot(),
+    TabsModule.forRoot(),
+    ModalModule.forRoot(),
+    CollapseModule.forRoot(),
   ],
   providers: [
     LocationsService,
