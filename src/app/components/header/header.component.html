@@ -1,79 +1,48 @@
-<!-- <div class='header-box'>
-    <div class='header-box'>
-        <img src="/assets/images/logo.png" alt="Логотип" class='header-box-logo'>
-        <nav>
-            <ul class='header-box-nav'>
-                <li><a class='header-box-nav-item' routerLink='/' routerLinkActive='header-box-nav-item-active' [routerLinkActiveOptions]="{exact:true}">Головна</a></li>
-                <li><a class='header-box-nav-item' routerLink='/info' routerLinkActive='header-box-nav-item-active' [routerLinkActiveOptions]="{exact:true}">Про вакцини</a></li>
-                <li><a class='header-box-nav-item' routerLink='/map' routerLinkActive='header-box-nav-item-active' [routerLinkActiveOptions]="{exact:true}">Карта</a></li>
-                <li><a class='header-box-nav-item' routerLink='/contact' routerLinkActive='header-box-nav-item-active' [routerLinkActiveOptions]="{exact:true}">Наші контакти</a></li>
-                <li *ngIf='auth.user$ | async as user; else login'>
-                    <a class='header-box-nav-item' routerLink='/profile' routerLinkActive='header-box-nav-item-active' [routerLinkActiveOptions]="{exact:true}">Профіль</a></li>
-                <ng-template #login>
-                    <li><a class='header-box-nav-item ' (click)='auth.SignIn() '>Увійти</a></li>
-                </ng-template>
-            </ul>
-        </nav>
-    </div>
-</div>
-
-<div class="header-box-clearfix"></div> -->
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-        <img src="/assets/images/logo.png" alt="Логотип" width="50" height="50">
+<nav class="navbar navbar-expand-lg bg-primary navbar-dark">
+    <a class="navbar-brand" routerLink='/' routerLinkActive='active'
+        [routerLinkActiveOptions]="{exact:true}">
+        <img src="/assets/images/logo.png" alt="Логотип" width="100">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+    <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
         <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    
+    <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" routerLink='/' routerLinkActive='header-box-nav-item-active'
+            <li class="nav-item text-center">
+                <a class="nav-link" routerLink='/' routerLinkActive='active'
                     [routerLinkActiveOptions]="{exact:true}">Головна</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink='/info' routerLinkActive='header-box-nav-item-active'
+            <li class="nav-item text-center">
+                <a class="nav-link" routerLink='/info' routerLinkActive='active'
                     [routerLinkActiveOptions]="{exact:true}">Про вакцини</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink='/map' routerLinkActive='header-box-nav-item-active'
+            <li class="nav-item text-center">
+                <a class="nav-link" routerLink='/map' routerLinkActive='active'
                     [routerLinkActiveOptions]="{exact:true}">Карта</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink='/contact' routerLinkActive='header-box-nav-item-active'
+            <li class="nav-item text-center">
+                <a class="nav-link" routerLink='/contact' routerLinkActive='active'
                     [routerLinkActiveOptions]="{exact:true}">Наші контакти</a>
             </li>
+        </ul>
+        <ul class="my-2 my-lg-0 navbar-nav navbar-dark">
             <li class="nav-item">
                 <ng-template #login>
-                        <a class="nav-link" (click)='auth.SignIn()'>Увійти</a>  
+                    <a (click)='auth.SignIn()' class="nav-link text-center">Увійти</a>
                 </ng-template>
-                     
             </li>
-            <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li> -->
-            <li class="nav-item dropdown" *ngIf='auth.user$ | async as user; else login'>
-                <div class="btn-group" dropdown>
-                    <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
-                        aria-controls="dropdown-basic">
-                        {{user.displayName}} <span class="caret"></span>
-                    </button>
-                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
-                        aria-labelledby="button-basic">
-                        <li role="menuitem" *ngIf='auth.canEdit(user)'><a class="dropdown-item" routerLink='/settings'>Адмін панель</a></li>
-                        <li role="menuitem"><a class="dropdown-item" (click)='auth.SignOut()'>Вийти</a></li> 
+            <li class="nav-item dropdown text-center navbar-dark" *ngIf='auth.user$ | async as user; else login'>
+                <div class="navbar-dark" dropdown>
+                    <a dropdownToggle class="dropdown-toggle mr-4 nav-link">
+                        {{user.displayName}}
+                        <span class="caret"></span>
+                    </a>
+                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                        <li role="menuitem" *ngIf='auth.canEdit(user)'><a class="dropdown-item text-center"
+                                routerLink='/settings'>Адмін панель</a></li>
+                        <li role="menuitem"><a class="dropdown-item text-center" (click)='auth.SignOut()'>Вийти</a></li>
                     </ul>
                 </div>
             </li>
