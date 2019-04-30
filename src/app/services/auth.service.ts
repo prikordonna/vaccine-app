@@ -5,6 +5,7 @@ import { auth } from 'firebase/app';
 import { User } from '../models/user.model'
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router'
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
+    private router: Router,
   ) {
     this.user$ = this.afAuth.authState.pipe(
     switchMap( user => {
@@ -35,6 +37,7 @@ export class AuthService {
 
   async SignOut() {
     await this.afAuth.auth.signOut();
+    return this.router.navigate(['/']);
   }
 
   private updateUserData(user) {

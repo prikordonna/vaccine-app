@@ -8,7 +8,7 @@ import { Infection } from '../../../models/Infection';
 @Component({
   selector: 'app-vaccines',
   templateUrl: './vaccines.component.html',
-  styleUrls: ['./vaccines.component.css']
+  styleUrls: ['./vaccines.component.scss']
 })
 export class VaccinesComponent implements OnInit {
   infections: Infection[];

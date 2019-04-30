@@ -16,50 +16,51 @@
             <th scope="col">кожні 10 років</th>
         </tr>
     </thead>
-    <tr (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic" class='cursor'>
-        <th scope="row" colspan='1'>
-            Гепатит В
-        </th>
-        <td scope='col'>1 доза</td>
-        <td scope='col'> </td>
-        <td scope='col'>2 дози</td>
-        <td scope='col'> </td>
-        <td scope='col'>3 дози</td>
-        <td scope='col'> </td>
-        <td scope='col'> </td>
-        <td scope='col'> </td>
-        <td scope='col'> </td>
-        <td scope='col'> </td>
-        <td scope='col'> </td>
-    </tr>
-    <tr>
-        <td colspan='12'>
-            <div id="collapseBasic" [collapse]="!isCollapsed">
-                <div class="well well-lg card card-block card-header">Some content</div>
-            </div>
-        </td>
-    </tr>
-    <tr (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic" class='cursor'>
-        <th scope="row" colspan='1'>
-            Гепатит В
-        </th>
-        <td scope='col'>1 доза</td>
-        <td scope='col'> </td>
-        <td scope='col'>2 дози</td>
-        <td scope='col'> </td>
-        <td scope='col'>3 дози</td>
-        <td scope='col'> </td>
-        <td scope='col'> </td>
-        <td scope='col'> </td>
-        <td scope='col'> </td>
-        <td scope='col'> </td>
-        <td scope='col'> </td>
-    </tr>
-    <tr>
-        <td colspan='12'>
-            <div id="collapseBasic" [collapse]="!isCollapsed">
-                <div class="well well-lg card card-block card-header">Some content</div>
-            </div>
-        </td>
-    </tr>
+    <tbody *ngFor='let infection of infections; let i = index'>
+        <tr (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" data-target="i" aria-controls="i" class='cursor'>
+            <th scope="row" colspan='1'>
+                {{infection.name}}
+            </th>
+            <td scope='col'>
+                <div *ngIf='infection.day1'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.day3'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.month2'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.month4'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.month6'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.month12'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.month18'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.year6'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.year14'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.year16'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.adult'>1 доза</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan='12'>
+                <div id="{{i}}" [collapse]="!isCollapsed">
+                    <div class="well well-lg card card-block card-header">Some content</div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
 </table>
