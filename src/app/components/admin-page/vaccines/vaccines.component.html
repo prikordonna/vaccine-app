@@ -1,36 +1,56 @@
 <div *ngIf="infections?.length > 0;else noItems">
-    <ul *ngFor="let infection of infections">
-        <li><strong>{{infection.name}}</strong><br> Симптоми: {{infection.simptoms}} <br> Наслідки: {{infection.result}}
-            <a class="edit">
-                <i (click)="editInfection($event, infection)" class="material-icons">edit</i>
-                <i *ngIf="editState && infectionToEdit.id == infection.id" (click)="cancelEditing()" class="material-icons">cancel</i>
-            </a>
-            <div *ngIf="editState && infectionToEdit.id == infection.id">
-                <form (ngSubmit)="updateInfection(infection)">
-                    <div class="infection-block">
-                        <div class="input-field">
-                            <label>Name:</label>
-                            <input type="text" placeholder="Add Name" [(ngModel)]="infection.name" name="name">
+    <div class="container">
+        <table class="table">
+            <tbody>
+                <tr *ngFor="let infection of infections">
+                    <td>{{infection.name}}</td>
+                    <td>{{infection.simptoms}}</td>
+                    <td>{{infection.result}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary"
+                            (click)="openModal(template); editInfection($event, infection)">Редагувати</button>
+
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-primary"
+                            (click)="deleteInfection($event, infection)">Видалити</button>
+                    </td>
+
+                    <ng-template #template>
+                        <div class="modal-header">
+                            <h4 class="modal-title pull-left">Редагувати елемент</h4>
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <div class="input-field">
-                            <label>Result:</label>
-                            <input type="text" placeholder="Add Result" [(ngModel)]="infection.result" name="result">
+                        <div class="modal-body" *ngIf="editState && infectionToEdit.id == infection.id">
+                            <form (ngSubmit)="updateInfection(infection); modalRef.hide()">
+                                <div class="form-group">
+                                    <label for="name">Інфекція</label>
+                                    <input type="text" placeholder="Інфекція" [(ngModel)]="infection.name" name="name"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="simptoms">Симптоми</label>
+                                    <input type="text" placeholder="Симптоми" [(ngModel)]="infection.simptoms"
+                                        name="simptoms" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="result">Наслідки</label>
+                                    <input type="text" placeholder="Наслідки" [(ngModel)]="infection.result"
+                                        name="result" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Зберегти зміни</button>
+                            </form>
                         </div>
-                        <div class="input-field">
-                            <label>Simptoms:</label>
-                            <input type="text" placeholder="Add Simptoms" [(ngModel)]="infection.simptoms" name="simptoms">
-                        </div>
-                        <input type="submit" value="Save" class="button-save">
-                        <input (click)="deleteInfection($event, infection)" type="submit" value="Delete" class="button-delete">
-                    </div>
-                </form>
-            </div>
-        </li>
-    </ul>
+                    </ng-template>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <ng-template #noItems>
     <hr>
     <h5>Відсутній елемент списку!</h5>
-    <button (click)='getList()'>Get List</button>
 </ng-template>

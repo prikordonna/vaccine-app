@@ -1,22 +1,30 @@
-<div>
-  <div>
-    <span>Додати Елемент</span>
+  <div class="float-right my-2">
+      <button type="button" class="btn btn-primary" (click)="openModal(template)" >Додати елемент</button>
+  </div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Додати елемент</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
     <form (ngSubmit)="onSubmit()">
-      <div class="infection-block">
-        <div class="input-field">
-          <input type="text" placeholder="Add Nane" [(ngModel)]="infection.name" name="name">
-          <label>Name</label>
-        </div>
-        <div class="input-field">
-          <input type="text" placeholder="Add Result" [(ngModel)]="infection.result" name="result">
-          <label>Result</label>
-        </div>
-        <div class="input-field">
-          <input type="text" placeholder="Add Simptoms" [(ngModel)]="infection.simptoms" name="simptoms">
-          <label>Simptoms</label>
-        </div>
-        <input type="submit" value="Submit" class="button">
+      <div class="form-group">
+        <label for="name">Інфекція</label>
+        <input type="text" placeholder="Інфекція" [(ngModel)]="infection.name" id="name" class="form-control">
       </div>
+      <div class="form-group">
+        <label for="simptoms">Симптоми</label>
+        <input type="text" placeholder="Симптоми" [(ngModel)]="infection.simptoms" id="simptoms"
+          class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="result">Наслідки</label>
+        <input type="text" placeholder="Наслідки" [(ngModel)]="infection.result" id="result" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary float-right">Додати</button>
     </form>
   </div>
-</div>
+</ng-template>

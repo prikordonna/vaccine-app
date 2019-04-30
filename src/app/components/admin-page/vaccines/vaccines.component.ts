@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { VaccineService } from '../../../services/vaccine.service';
 import { Infection } from '../../../models/Infection';
 
@@ -12,15 +14,21 @@ export class VaccinesComponent implements OnInit {
   infections: Infection[];
   editState: boolean = false;
   infectionToEdit: Infection;
+  modalRef: BsModalRef;
+  
   constructor(
     private infectionService: VaccineService,
-    ) { }
+    private modalService: BsModalService) { }
 
   ngOnInit() {
     this.infectionService.getInfection().subscribe(infections =>
     this.infections = infections
     );
     console.log('ngOninit ran!!!');
+  }
+  
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
   deleteInfection(event, infection) {
@@ -41,10 +49,5 @@ export class VaccinesComponent implements OnInit {
   cancelEditing() {
     this.editState = false;
     this.infectionToEdit = null;
-  }
-  getList() {
-    this.infectionService.getInfection().subscribe(infections =>
-      this.infections = infections
-      );
   }
 }

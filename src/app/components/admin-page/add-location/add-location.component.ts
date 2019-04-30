@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Location } from '../../../models/location';
 import { LocationsService } from '../../../services/locations.service';
 
@@ -12,7 +14,6 @@ export class AddLocationComponent implements OnInit {
   location: Location = {
     lat: undefined,
     lng: undefined,
-    id: undefined,
     draggable: false,
     title: '',
     icon: '/assets/images/vaccine.png',
@@ -23,20 +24,25 @@ export class AddLocationComponent implements OnInit {
     vaccines: ''
   }
 
-  constructor(private locationService: LocationsService) { }
+  modalRef: BsModalRef;
+
+  constructor(private locationService: LocationsService, private modalService: BsModalService) { }
 
   ngOnInit() {
   }
 
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
   onSubmit() {
-    if (this.location.lat != undefined && this.location.lng != undefined && this.location.id != undefined
+    if (this.location.lat != undefined && this.location.lng != undefined
       && this.location.title != '' && this.location.clinic_name != '' && this.location.phone != ''
       && this.location.address != '' && this.location.website != '' && this.location.vaccines != '') {
       this.locationService.addMarker(this.location);
 
       this.location.lat = undefined;
       this.location.lng = undefined;
-      this.location.id = undefined;
       this.location.draggable = false;
       this.location.title = '';
       this.location.icon = '/assets/images/vaccine.png';
@@ -47,7 +53,5 @@ export class AddLocationComponent implements OnInit {
       this.location.vaccines = '';
       
     }
-    console.log(this.location);
-  }
-  
+  }  
 }
