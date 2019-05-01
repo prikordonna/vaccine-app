@@ -1,3 +1,52 @@
-<p>
-  contact-page works!
-</p>
+<div class="container">
+  <div class="contact-header">
+    <h2>Контакти</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi consequat et velit et pellentesque.</p>
+  </div>
+  
+  <div class="contact-donation">
+    <p>Estibulum iaculis ultricies massa a tristique. 
+      Sed sollicitudin in neque sed volutpat. 
+      Maecenas eleifend elit leo, ut placerat ante ultricies nec. 
+      Maecenas fermentum nulla ac semper tincidunt.
+    </p>
+    <div class="contact-donation--account">
+      <h4>Підтримай нас</h4>
+      <p>243753111566</p>
+    </div>
+  </div>
+
+  <form class="contact-form">
+    <div class="form-group">
+      <label for="fullName">Ваше ім'я</label>
+      <input [(ngModel)]="fullName" name="fullName" type="text" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="email">Електронна скринька</label>
+      <input [(ngModel)]="email" name="email" type="text" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="message">Повідомлення</label>
+      <textarea [(ngModel)]="message" name="message" cols="20" rows="10" class="form-control"></textarea>
+    </div>
+    <button class="btn btn-primary">Відправити</button>
+  </form>
+
+  <div class="contact-info">
+    <h5>Quick Contact</h5>
+    <div class="icon-section">
+      <img src="./../../../assets/images/location.jpg" alt="location icon">
+      <p>Площа Ринок, Львів, 79000, Україна</p>
+    </div>
+    <div class="icon-section">
+      <img src="./../../../assets/images/mail.png" alt="mail icon">
+      <p>companemail@gmail.com</p>
+    </div>
+    <div class="icon-section">
+      <img src="./../../../assets/images/phone.png" alt="phone icon">
+      <p>+38 (097) 255 55 55</p>
+    </div>
+  </div>
+</div>
+
+
