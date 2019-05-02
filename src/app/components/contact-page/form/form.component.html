@@ -1,0 +1,13 @@
+<form>
+  <h3>Відгуки та пропозиції:</h3>
+  <div class="form-group">
+    <input placeholder="Ваше ім'я" [(ngModel)]="fullName" name="fullName" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <input placeholder="Електронна скринька" [(ngModel)]="email" name="email" type="email" class="form-control">
+  </div>
+  <div class="form-group">
+    <textarea placeholder="Повідомлення" [(ngModel)]="message" name="message" cols="20" rows="10" class="form-control"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="processForm()">Відправити</button>
+</form>
