@@ -4,13 +4,13 @@ import { AppRoutingModule } from './app-routing.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { InfoPageModule } from './components/info-page/info-page.module';
+import { ContactPageModule } from './components/contact-page/contact-page.module';
 
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { ContactPageComponent } from './components/contact-page/contact-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 
 import { VaccinesComponent } from './components/admin-page/vaccines/vaccines.component';
@@ -48,7 +48,6 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-b
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ContactPageComponent,
     MainPageComponent,
     VaccinesComponent,
     AddInfectionComponent,
@@ -82,6 +81,7 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-b
     ModalModule.forRoot(),
     CollapseModule.forRoot(),
     InfoPageModule,
+    ContactPageModule,
   ],
   providers: [
     LocationsService,
