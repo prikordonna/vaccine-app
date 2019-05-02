@@ -1,6 +1,18 @@
 <div *ngIf="locations?.length > 0; else noItems">
   <div class="container">
-    <table class="table table-responsive">
+    <table class="table table-responsive table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Назва клініки</th>
+                <th class="text-center">lat</th>
+                <th class="text-center">lng</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Адреса</th>
+                <th class="text-center">Веб-сайт</th>
+                <th class="text-center">Присутні вакцини</th>
+                <th class="text-center">Дії</th>
+            </tr>
+        </thead>
       <tbody>
         <tr *ngFor="let location of locations">
           <td class="col-3">{{location.clinic_name}}</td>
@@ -14,7 +26,7 @@
             <button type="button" class="btn btn-primary btn-block"
               (click)="openModal(template); editLocation(location)">Редагувати</button>
             
-            <button type="submit" class="btn btn-primary btn-block mt-1" 
+            <button type="submit" class="btn btn-danger btn-block mt-1" 
             (click)="deleteLocation(location)">   Видалити</button>
 
           </td>

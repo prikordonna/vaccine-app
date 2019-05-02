@@ -1,3 +1,73 @@
-<div style="min-height: 2000px">
-    <h1>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus, nobis? lorem200</h1>
-</div>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Інфекція/Вік
+            </th>
+            <th scope="col">1 доба</th>
+            <th scope="col">3-5 діб</th>
+            <th scope="col">2 місяці</th>
+            <th scope="col">4 місяці</th>
+            <th scope="col">6 місяців</th>
+            <th scope="col">12 місяців</th>
+            <th scope="col">18 місяців</th>
+            <th scope="col">6 років</th>
+            <th scope="col">14 років</th>
+            <th scope="col">16 років</th>
+            <th scope="col">кожні 10 років</th>
+        </tr>
+    </thead>
+    <tbody *ngFor='let infection of infections; let i = index'>
+        <tr (click)="collapse.toggle()" aria-controls="i" class='cursor' aria-expanded="false">
+            <th scope="row" colspan='1'>
+                {{infection.name}}
+            </th>
+            <td scope='col'>
+                <div *ngIf='infection.day1'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.day3'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.month2'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.month4'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.month6'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.month12'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.month18'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.year6'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.year14'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.year16'>1 доза</div>
+            </td>
+            <td scope='col'>
+                <div *ngIf='infection.adult'>1 доза</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan='12' class="collapsed-td">
+                <div id="{{i}}" #collapse="bs-collapse" [collapse]="!isCollapsed">
+                    <div class="well well-lg card card-block card-header">
+                        <button type="button" class="close pull-right" (click)="collapse.hide()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <p>
+                            Симптоми: {{infection.simptoms}}
+                        </p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

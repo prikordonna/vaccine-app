@@ -3,17 +3,17 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { InfoPageModule } from './components/info-page/info-page.module';
+import { ContactPageModule } from './components/contact-page/contact-page.module';
+
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { ContactPageComponent } from './components/contact-page/contact-page.component';
-import { InfoPageComponent } from './components/info-page/info-page.component';
+
 import { MainPageModule} from './components/main-page/main-page.module';
 
 import { VaccinesComponent } from './components/admin-page/vaccines/vaccines.component';
-import { LocationsComponent } from './components/admin-page/locations/locations.component';
 import { AddInfectionComponent } from './components/admin-page/add-infection/add-infection.component';
 import { AddLocationComponent } from './components/admin-page/add-location/add-location.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
@@ -41,21 +41,18 @@ import { MapModule } from './map-page/map.module';
 import { EffectsModule } from '@ngrx/effects';
 
 import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
- 
+import { LocationsComponent } from './components/admin-page/locations/locations.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
-    ContactPageComponent,
-    InfoPageComponent,
     VaccinesComponent,
     AddInfectionComponent,
     AdminPageComponent,
     UserProfileComponent,
     AddLocationComponent,
-    LocationsComponent
+    LocationsComponent,
     ],
   imports: [
     BrowserModule,
@@ -69,8 +66,8 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-b
     AngularFireStorageModule,
     BrowserAnimationsModule,
     MatTabsModule,
-    MatIconModule, 
-    MatButtonModule, 
+    MatIconModule,
+    MatButtonModule,
     MatSidenavModule,
     MatToolbarModule,
     FlexLayoutModule,
@@ -82,6 +79,8 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-b
     ModalModule.forRoot(),
     CollapseModule.forRoot(),
     MainPageModule,
+    InfoPageModule,
+    ContactPageModule,
   ],
   providers: [
     LocationsService,

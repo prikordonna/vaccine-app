@@ -1,18 +1,12 @@
-<div class="clinic-panel">
-  <ul class="clinic-list">
-    <li *ngFor="let location of (locations$ | async).data , let i = index">
-        <div class="clinic" (click)="openWindow(location, i)">
-            <div class="title">{{ location.title }}</div>
-            <div class="clinic-name">
-              {{location.clinic_name}}
-            </div>
-            <div class="clinic-web">
-              <a href="{{location.website}}" target="_blank">Відвідати веб-сайт</a>
-            </div>           
-            <div class="clinic-address">{{location.address}}
-            </div>
-            <div class="vaccines"><b>Вакцини:</b> {{location.vaccines}}</div>           
-        </div>
-    </li>
-  </ul>
+<div class="container">
+  <div class="card border-primary mb-1" *ngFor="let location of (locations$ | async).data , let i = index">
+    <div class="card-body p-1" (click)="openWindow(location, i)">
+      <p class="card-title p-0 text-center">{{ location.title }}: {{location.clinic_name}}</p>
+      <div class="card-hide">
+        <p class="card-subtitle mb-2 text-muted">{{location.address}}</p>
+        <p class="card-text">Вакцини від: {{location.vaccines}}</p>
+        <a href="{{location.website}}" target="_blank" class="card-link">Відвідати веб-сайт</a>
+      </div>
+    </div>
+  </div>
 </div>
