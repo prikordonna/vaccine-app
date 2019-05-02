@@ -3,6 +3,7 @@ export interface Infection {
   name?: string;
   simptoms?: string;
   result?: string;
+  ways?: string;
   vaccinate?: number;
   day1?: boolean;
   day3?: boolean;
