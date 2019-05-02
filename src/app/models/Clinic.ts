@@ -1,4 +1,4 @@
-export interface Location {
+export interface Clinic {
     id?:string;
     lat: number;
     lng: number;

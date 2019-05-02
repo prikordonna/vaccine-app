@@ -4,6 +4,7 @@
             <thead>
                 <tr>
                     <th class="text-center">Інфекція</th>
+                    <th class="text-center">Способи зараження</th>
                     <th class="text-center">Симптоми</th>
                     <th class="text-center">Наслідки</th>
                     <th class="text-center">Клініки</th>
@@ -13,9 +14,10 @@
             <tbody>
                 <tr *ngFor="let infection of infections">
                     <td>{{infection.name}}</td>
+                    <td >{{infection.ways}}</td>
                     <td >{{infection.simptoms}}</td>
                     <td >{{infection.result}}</td>
-                    <td ></td>
+                    <td></td>
                     <td >
                         <button type="button" class="btn btn-primary btn-block"
                             (click)="openModal(template); editInfection($event, infection)">Редагувати</button>
@@ -36,6 +38,11 @@
                                     <input type="text" placeholder="Інфекція" [(ngModel)]="infection.name" name="name"
                                         class="form-control">
                                 </div>
+                                <div class="form-group">
+                                        <label for="name">Способи зараження</label>
+                                        <input type="text" placeholder="Інфекція" [(ngModel)]="infection.ways" name="ways"
+                                            class="form-control">
+                                    </div>
                                 <div class="form-group">
                                     <label for="simptoms">Симптоми</label>
                                     <input type="text" placeholder="Симптоми" [(ngModel)]="infection.simptoms"

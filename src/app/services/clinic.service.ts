@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Location } from '../models/location';
+import { Clinic } from '../models/Clinic';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection  } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { of } from 'rxjs/internal/observable/of';
 import { map, share } from 'rxjs/operators/';
 
 @Injectable()
-export class LocationsService {
+export class ClinicService {
 
   // markers: Marker[] = [
   //   {
@@ -67,46 +66,45 @@ export class LocationsService {
   // updateMarker(marker: Marker) {
 
   // }
-  markersCollection: AngularFirestoreCollection<Location>;
-  markers: Observable<Location[]>;
-  markerDoc: AngularFirestoreDocument<Location>;
+  clinicsCollection: AngularFirestoreCollection<Clinic>;
+  clinics: Observable<Clinic[]>;
+  clinicDoc: AngularFirestoreDocument<Clinic>;
   
   constructor(private smth: AngularFirestore) {
-    this.markersCollection = smth.collection<Location>('locations', ref => ref.orderBy('title', 'asc'));
-    this.markers = this.markersCollection.snapshotChanges().pipe(map(changes => {
+    this.clinicsCollection = smth.collection<Clinic>('clinics', ref => ref.orderBy('title', 'asc'));
+    this.clinics = this.clinicsCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
-        const data = a.payload.doc.data() as Location;
+        const data = a.payload.doc.data() as Clinic;
         data.id = a.payload.doc.id;
         return data;
       })})
     )
   }
 
-  getLocations$(): Observable<Location[]> {
-    //  return this.markers;
-    return this.markersCollection.snapshotChanges()
+  getClinics$(): Observable<Clinic[]> {
+    return this.clinicsCollection.snapshotChanges()
       .pipe(
         map((changes) => changes.map((a) => {
-          const data = a.payload.doc.data() as Location;
+          const data = a.payload.doc.data() as Clinic;
           data.id = a.payload.doc.id;
           return data;
         }))
       )
    }
-   addMarker(marker: Location) {
-    this.markersCollection.add(marker);
+   addClinic(clinic: Clinic) {
+    this.clinicsCollection.add(clinic);
     console.log(`Element was added`);
    }
 
-   deleteMarker(marker: Location) {
-    this.markerDoc = this.smth.doc(`locations/${marker.id}`);
-    console.log(`Element with id(${marker.id}) was deleted`);
-    this.markerDoc.delete();
+   deleteClinic(clinic: Clinic) {
+    this.clinicDoc = this.smth.doc(`clinics/${clinic.id}`);
+    console.log(`Element with id(${clinic.id}) was deleted`);
+    this.clinicDoc.delete();
    }
-   updateMarker(marker: Location) {
-    this.markerDoc = this.smth.doc(`locations/${marker.id}`);
-    console.log(`Element with id(${marker.id}) was edited`);
-    this.markerDoc.update(marker);
+   updateClinic(clinic: Clinic) {
+    this.clinicDoc = this.smth.doc(`clinics/${clinic.id}`);
+    console.log(`Element with id(${clinic.id}) was edited`);
+    this.clinicDoc.update(clinic);
    }
 
 }

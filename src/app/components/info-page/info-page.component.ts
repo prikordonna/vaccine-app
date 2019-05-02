@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { VaccineService } from '../../services/vaccine.service';
+import { InfectionService } from '../../services/infection.service';
 import { Infection } from 'src/app/models/Infection';
 
 @Component({
@@ -10,7 +10,7 @@ import { Infection } from 'src/app/models/Infection';
 export class InfoPageComponent implements OnInit {
 infections: Infection[];
   constructor(
-    public vaccineService: VaccineService
+    public vaccineService: InfectionService
   ) { }
 
   ngOnInit() {

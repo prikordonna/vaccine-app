@@ -4,7 +4,6 @@ export interface Infection {
   simptoms?: string;
   result?: string;
   ways?: string;
-  vaccinate?: number;
   day1?: boolean;
   day3?: boolean;
   month2?: boolean;

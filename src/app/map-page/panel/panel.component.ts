@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MapsService } from '../../services/maps.service';
-import { LocationsService } from '../../services/locations.service';
-import { Location } from '../../models/location';
+import { ClinicService } from '../../services/clinic.service';
+import { Clinic } from '../../models/Clinic';
 import { Observable, from } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../+store/index';
-import * as LocationsActions from '../../+store/location/location.actions';
+import * as LocationsActions from '../../+store/clinic/clinic.actions';
 
 @Component({
   selector: 'app-panel',
@@ -13,11 +13,11 @@ import * as LocationsActions from '../../+store/location/location.actions';
   styleUrls: ['./panel.component.scss']
 })
 export class PanelComponent implements OnInit {
-  public locations$: Observable<Location[]>;
+  public clinics$: Observable<Clinic[]>;
 
   constructor(
     private mapsService: MapsService,
-    private locationsService: LocationsService,
+    private locationsService: ClinicService,
     private store: Store<AppState>
   ) { }
 
@@ -25,14 +25,14 @@ export class PanelComponent implements OnInit {
     // this.locationsService.getMarkers().subscribe(locations => 
     //   this.locations$ = locations
     //   )
-    this.locations$ = this.store.pipe(select('locations'));
+    this.clinics$ = this.store.pipe(select('locations'));
 
-    this.store.dispatch(new LocationsActions.GetLocations());
+    this.store.dispatch(new LocationsActions.GetClinics());
   }
 
-  openWindow(location: Location, index: number) {
+  openWindow(clinic: Clinic, index: number) {
     this.mapsService.openWindow.next(index);
-    this.zoomToNewLocation(location.lat, location.lng);
+    this.zoomToNewLocation(clinic.lat, clinic.lng);
   }
 
   zoomToNewLocation(lat: number, lng: number) {

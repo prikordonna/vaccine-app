@@ -13,10 +13,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 
-import { VaccinesComponent } from './components/admin-page/vaccines/vaccines.component';
-import { LocationsComponent } from './components/admin-page/locations/locations.component';
+import { InfectionsComponent } from './components/admin-page/infections/infections.component';
+import { ClinicsComponent } from './components/admin-page/clinics/clinics.component';
 import { AddInfectionComponent } from './components/admin-page/add-infection/add-infection.component';
-import { AddLocationComponent } from './components/admin-page/add-location/add-location.component';
+import { AddClinicComponent } from './components/admin-page/add-clinic/add-clinic.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
@@ -27,9 +27,9 @@ import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/fi
 import { AngularFireModule } from '@angular/fire';
 
 //Service
-import { VaccineService } from './services/vaccine.service';
+import { InfectionService } from './services/infection.service';
 import { MapsService } from '../app/services/maps.service';
-import { LocationsService } from '../app/services/locations.service';
+import { ClinicService } from './services/clinic.service';
 
 //Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -49,12 +49,12 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-b
     HeaderComponent,
     FooterComponent,
     MainPageComponent,
-    VaccinesComponent,
+    InfectionsComponent,
     AddInfectionComponent,
     AdminPageComponent,
     UserProfileComponent,
-    AddLocationComponent,
-    LocationsComponent,
+    AddClinicComponent,
+    ClinicsComponent,
     ],
   imports: [
     BrowserModule,
@@ -84,8 +84,8 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-b
     ContactPageModule,
   ],
   providers: [
-    LocationsService,
-    VaccineService,
+    ClinicService,
+    InfectionService,
     MapsService,
     { provide: FirestoreSettingsToken, useValue: {} }
   ],

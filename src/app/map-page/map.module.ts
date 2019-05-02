@@ -4,7 +4,7 @@ import {MapComponent } from './map/map.component';
 import {MapPageComponent} from './map-page.component'
 import {PanelComponent} from './panel/panel.component';
 import { StoreModule } from '@ngrx/store';
-import { locationReducer, LocationsEffects } from '../+store';
+import { clinicReducer, ClinicsEffects } from '../+store';
 import { AgmCoreModule } from '@agm/core';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -16,11 +16,11 @@ import { EffectsModule } from '@ngrx/effects';
   ],
   imports: [
     CommonModule,
-    StoreModule.forFeature('locations', locationReducer),
+    StoreModule.forFeature('locations', clinicReducer),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB3a71eakX1ji_aFPmQpGf5gWD278RRl4o'
     }),
-    EffectsModule.forFeature([LocationsEffects]),
+    EffectsModule.forFeature([ClinicsEffects]),
   ],
   exports: [
     MapPageComponent,

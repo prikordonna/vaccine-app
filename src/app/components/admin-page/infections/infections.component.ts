@@ -1,23 +1,23 @@
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { VaccineService } from '../../../services/vaccine.service';
+import { InfectionService } from '../../../services/infection.service';
 import { Infection } from '../../../models/Infection';
 
 
 @Component({
-  selector: 'app-vaccines',
-  templateUrl: './vaccines.component.html',
-  styleUrls: ['./vaccines.component.scss']
+  selector: 'app-infections',
+  templateUrl: './infections.component.html',
+  styleUrls: ['./infections.component.scss']
 })
-export class VaccinesComponent implements OnInit {
+export class InfectionsComponent implements OnInit {
   infections: Infection[];
   editState: boolean = false;
   infectionToEdit: Infection;
   modalRef: BsModalRef;
   
   constructor(
-    private infectionService: VaccineService,
+    private infectionService: InfectionService,
     private modalService: BsModalService) { }
 
   ngOnInit() {

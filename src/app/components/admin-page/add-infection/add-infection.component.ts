@@ -1,7 +1,7 @@
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { VaccineService } from '../../../services/vaccine.service';
+import { InfectionService } from '../../../services/infection.service';
 import { Infection } from '../../../models/Infection';
 
 @Component({
@@ -29,7 +29,7 @@ export class AddInfectionComponent implements OnInit {
   }
 
   modalRef: BsModalRef;
-  constructor(private infectionService: VaccineService,
+  constructor(private infectionService: InfectionService,
     private modalService: BsModalService) { }
 
   ngOnInit() {

@@ -2,20 +2,18 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection  } from '@angular/fire/firestore';
 import { Infection } from '../models/Infection';
 import { Observable } from 'rxjs';
-
 import { map } from 'rxjs/operators/';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class VaccineService {
+export class InfectionService {
   infectionsCollection: AngularFirestoreCollection<Infection>;
   infections: Observable<Infection[]>;
   infectionDoc: AngularFirestoreDocument<Infection>;
   constructor(private smth: AngularFirestore) {
     this.infectionsCollection = smth.collection<Infection>('infections', ref => ref.orderBy('name', 'asc'));
-    // this.infections = this.infectionsCollection.valueChanges();
     this.infections = this.infectionsCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Infection;
@@ -24,7 +22,6 @@ export class VaccineService {
       })})
     )}
    getInfection() {
-     //return this.infections;
      return this.infectionsCollection.snapshotChanges()
       .pipe(
         map(changes => changes.map(a => {
