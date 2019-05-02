@@ -10,11 +10,10 @@ import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { MainPageComponent } from './components/main-page/main-page.component';
+
+import { MainPageModule} from './components/main-page/main-page.module';
 
 import { VaccinesComponent } from './components/admin-page/vaccines/vaccines.component';
-import { LocationsComponent } from './components/admin-page/locations/locations.component';
 import { AddInfectionComponent } from './components/admin-page/add-infection/add-infection.component';
 import { AddLocationComponent } from './components/admin-page/add-location/add-location.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
@@ -42,13 +41,12 @@ import { MapModule } from './map-page/map.module';
 import { EffectsModule } from '@ngrx/effects';
 
 import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
+import { LocationsComponent } from './components/admin-page/locations/locations.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
-    MainPageComponent,
     VaccinesComponent,
     AddInfectionComponent,
     AdminPageComponent,
@@ -80,6 +78,7 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-b
     TabsModule.forRoot(),
     ModalModule.forRoot(),
     CollapseModule.forRoot(),
+    MainPageModule,
     InfoPageModule,
     ContactPageModule,
   ],
