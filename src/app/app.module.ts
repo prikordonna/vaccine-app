@@ -10,11 +10,12 @@ import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { MainPageComponent } from './components/main-page/main-page.component';
+
+import { MainPageModule} from './components/main-page/main-page.module';
 
 import { InfectionsComponent } from './components/admin-page/infections/infections.component';
 import { ClinicsComponent } from './components/admin-page/clinics/clinics.component';
+
 import { AddInfectionComponent } from './components/admin-page/add-infection/add-infection.component';
 import { AddClinicComponent } from './components/admin-page/add-clinic/add-clinic.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
@@ -47,8 +48,6 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-b
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
-    MainPageComponent,
     InfectionsComponent,
     AddInfectionComponent,
     AdminPageComponent,
@@ -80,6 +79,7 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-b
     TabsModule.forRoot(),
     ModalModule.forRoot(),
     CollapseModule.forRoot(),
+    MainPageModule,
     InfoPageModule,
     ContactPageModule,
   ],

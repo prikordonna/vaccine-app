@@ -2,8 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MainPageComponent } from './main-page.component';
 
-// import { CarouselComponent, CarouselItemElement } from './carousel.component';
-// import { CarouselItemDirective } from './carousel-item.directive';
 
 describe('MainPageComponent', () => {
   let component: MainPageComponent;

@@ -1,33 +1,40 @@
 <div class="main-box">
   <div class="main-box-top">
-    <!-- <img src="/assets/images/doctor.png" alt="doctor" class="main-box-top-img"> -->
-    <h1 class='main-box-top-text'>Lorem ipsum dolor sit amet,<br> consectetur adipiscing elit</h1>
-    <button class='main-box-top-button'>про ВАКЦИНИ</button>
+    <h3 class='main-box-top-text'>Вакцинація захищає дитину від інфекцій,<br> які можуть призвести до ускладнень, інвалідності і смерті.<br> Альтернатив вакцинації немає.</h3>
+    <a class='main-box-top-button' routerLink='/info' routerLinkActive='header-box-nav-item-active' [routerLinkActiveOptions]="{exact:true}"><p class='main-box-top-button-p'>ПРО ВАКЦИНИ</p></a>
   </div>
 
   <div class='main-box-footer'>
-      <!-- <img src="/assets/images/bactery.png" alt="bactery" class="main-box-footer-img"> -->
-      <h1 class="main-box-footer-text">Про Вакцинацію</h1>
+    <h1 class="main-box-footer-text">А знаєте ВИ?</h1>
+    <carousel>
+      <div class="main-box-footer-carousel-container">
+        <slide>
+          <div>
+            <h2>Вакцинація -</h2>
+            <h4>Ваш єдиний захист від хвороб</h4>
+            <p> Загартовування, повноцінне харчування та сон - важливі для здоровя вашої дитини й зміцнюють її. Але це не захист від інфекцій, про яких проводиться вакцінація</p>
+          </div>
+        </slide>
+        <slide>
+          <div>
+            <h2>95/100</h2>
+            <h2>не захворіють</h2>
+            <p> навіть при прямому контакті з інфекцією, якщо вони будуть вчасно вакциновані за календарем вакцинації в Україні </p>
+          </div>
+        </slide>
+        <slide>
+          <div>
+            <h2>ВАКЦИНАЦІЮ</h2>
+            <h4>Треба робити вчасно</h4>
+            <p>Малюк починає контактувати зі світом з перших днів життя: у пологовому будинку, на вулиці, у лікарні, та навіть вдома з родичами. Чим раніше ви вакцинуєте дитину, тим менше вона наражатиметься на небезпеку захворіти </p>
+          </div>
+        </slide>
+      </div>
+    </carousel>
   </div>
 </div>
 
 
-<!-- <div style="margin: 2em" class="container">
 
-    <carousel>
-      <ng-container *ngFor="let item of items;">
-        <ng-container *carouselItem>
-          <div class="item">{{item.title}}</div>
-        </ng-container>
-      </ng-container>
-    </carousel>
-  
-    <!--<div style="margin-top: 1em;"> 
-      <a (click)="carousel.next()" class="btn btn-success">Next</a>
-      <a (click)="carousel.prev()" class="btn btn-success">Prev</a>
-    </div>-->
-  
-    <!--<button (click)="addSlide()">Add Slide</button>--> 
-<!--   
-  </div> --> -->
-  
+
+
