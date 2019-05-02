@@ -59,7 +59,6 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-b
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),

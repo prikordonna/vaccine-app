@@ -1,21 +1,23 @@
-<div *ngIf='auth.user$ | async as user; else login'>
-    <div class="admin-example" *ngIf='auth.canEdit(user) else notAdmin'>
-        <tabset>
-            <tab heading="Інфекції">
-                <app-add-infection></app-add-infection>
-                <app-vaccines></app-vaccines>
-            </tab>
-            <tab heading="Клініки">
-                <app-add-location></app-add-location>
-                <app-locations></app-locations>
-            </tab>
-        </tabset>
+<div class="mx-5">
+    <div *ngIf='auth.user$ | async as user; else login'>
+        <div class="admin-example" *ngIf='auth.canEdit(user) else notAdmin'>
+            <tabset>
+                <tab heading="Інфекції">
+                    <app-add-infection></app-add-infection>
+                    <app-vaccines></app-vaccines>
+                </tab>
+                <tab heading="Клініки">
+                    <app-add-location></app-add-location>
+                    <app-locations></app-locations>
+                </tab>
+            </tabset>
+        </div>
     </div>
-</div>
 
-<ng-template #login>
-    <h1>Увійдіть, щоб отримати доступ</h1>
-</ng-template>
-<ng-template #notAdmin>
-    <h1>Ви не адмін</h1>
-</ng-template>
+    <ng-template #login>
+        <h1>Увійдіть, щоб отримати доступ</h1>
+    </ng-template>
+    <ng-template #notAdmin>
+        <h1>Ви не адмін</h1>
+    </ng-template>
+</div>

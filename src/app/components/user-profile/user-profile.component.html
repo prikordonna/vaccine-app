@@ -3,8 +3,6 @@
     <div *ngIf='auth.canEdit(user)'>
         <a routerLink='/settings'>Адмін панель</a>
     </div>
+    <img src="{{user.photoURL}}">
     <button (click)='auth.SignOut()'>Вийти</button>
 </div>
-<ng-template #login>
-
-</ng-template>
