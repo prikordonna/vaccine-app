@@ -2,36 +2,52 @@
     text-align: center;
     margin: 15px 0;
 }
+
 .contact-donation {
+    justify-content: space-evenly;
     text-align: center;
-    margin: 25px 0;
-    p:only-of-type {
-        background-color: #1d6086ce;
-        color: #fff;
-        padding: 12%;
+    margin: 40px 0;
+    .row {
+        justify-content: center;
     }
     p {
-        margin: 40px 0;
+        padding: 20px;
+    }
+    .contact-donation--text, .contact-donation--account p {
+        background-color: #1d6086ce;
+        color: #fff;
+    }
+    .contact-donation--text, .contact-donation--account {
+        padding: 20px;
+        margin: 10px;
     }
     .contact-donation--account {
-        margin: 20px 0;
-        padding: 3%;
         border-top: 2px solid #1d6086ce;
         border-bottom: 2px solid #1d6086ce;
         p {
             font-weight: 600;
+            font-size: 20px;
+            letter-spacing: 2px;
             display: inline-block;
-            width: 50%;
-            padding: 5%;
         }
     }
 }
+
+.contact-form {
+    justify-content: space-evenly;
+    margin: 20px 0;
+}
 .contact-info {
-    margin: 30px 0;
-    padding: 20px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: 100%;
+    margin: 50px 10px 30px 0;
+    padding: 0 5px 5px 5px;
+    justify-items: center;
+    background-color: #056daa0a;
+    border: 1px solid #0581c913;
+    h5{
+        text-align: center;
+        margin: 20px 0;
+    }
     img{
         width: 35px;
         height: 35px;
@@ -39,7 +55,6 @@
     }
     .icon-section {
         display: flex;
-        width: 330px;
         margin: 5px;
     }
 }
