@@ -10,7 +10,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ContactPageComponent } from './components/contact-page/contact-page.component';
 import { InfoPageComponent } from './components/info-page/info-page.component';
-import { MainPageComponent } from './components/main-page/main-page.component';
+import { MainPageModule} from './components/main-page/main-page.module';
 
 import { VaccinesComponent } from './components/admin-page/vaccines/vaccines.component';
 import { LocationsComponent } from './components/admin-page/locations/locations.component';
@@ -42,6 +42,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
  
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +50,6 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-b
     FooterComponent,
     ContactPageComponent,
     InfoPageComponent,
-    MainPageComponent,
     VaccinesComponent,
     AddInfectionComponent,
     AdminPageComponent,
@@ -81,6 +81,7 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-b
     TabsModule.forRoot(),
     ModalModule.forRoot(),
     CollapseModule.forRoot(),
+    MainPageModule,
   ],
   providers: [
     LocationsService,
