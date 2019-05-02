@@ -17,7 +17,7 @@
         </tr>
     </thead>
     <tbody *ngFor='let infection of infections; let i = index'>
-        <tr (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" data-target="i" aria-controls="i" class='cursor'>
+        <tr (click)="collapse.toggle()" aria-controls="i" class='cursor' aria-expanded="false">
             <th scope="row" colspan='1'>
                 {{infection.name}}
             </th>
@@ -56,9 +56,16 @@
             </td>
         </tr>
         <tr>
-            <td colspan='12'>
-                <div id="{{i}}" [collapse]="!isCollapsed">
-                    <div class="well well-lg card card-block card-header">Some content</div>
+            <td colspan='12' class="collapsed-td">
+                <div id="{{i}}" #collapse="bs-collapse" [collapse]="!isCollapsed">
+                    <div class="well well-lg card card-block card-header">
+                        <button type="button" class="close pull-right" (click)="collapse.hide()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <p>
+                            Симптоми: {{infection.simptoms}}
+                        </p>
+                    </div>
                 </div>
             </td>
         </tr>
