@@ -1,52 +1,49 @@
 <div class="float-right my-2">
-  <button type="button" class="btn btn-primary" (click)="openModal(template)">Додати елемент</button>
+    <button type="button" class="btn btn-primary" (click)="openModal(add)">Додати елемент</button>
 </div>
 
-<ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Додати елемент</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+<ng-template #add>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Додати елемент</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
-  </div>
-  <div class="modal-body">
-    <form (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label>LAT: </label>
-        <input type="text" placeholder="Add  LAT" [(ngModel)]="clinic.lat" name="lat" class="form-control">
-      </div>
-      <div class="form-group">
-        <label>LNG: </label>
-        <input type="text" placeholder="Add  LNG" [(ngModel)]="clinic.lng" name="lng" class="form-control">
-      </div>
-      <div class="form-group">
-        <label>Title: </label>
-        <input type="text" placeholder="Add  Title" [(ngModel)]="clinic.title" name="title" class="form-control">
-      </div>
-      <div class="form-group">
-        <label>Назва клініки: </label>
-        <input type="text" placeholder="Назва клініки" [(ngModel)]="clinic.clinic_name" name="clinic_name"
-          class="form-control">
-      </div>
-      <div class="form-group">
-        <label>Адреса: </label>
-        <input type="text" placeholder="Адреса" [(ngModel)]="clinic.address" name="address" class="form-control">
-      </div>
-      <div class="form-group">
-        <label>Веб-сайт: </label>
-        <input type="text" placeholder="Веб-сайт" [(ngModel)]="clinic.website" name="website"
-          class="form-control">
-      </div>
-      <div class="form-group">
-        <label>Контактний телефон: </label>
-        <input type="text" placeholder="Контактний телефон" [(ngModel)]="clinic.phone" name="phone" class="form-control">
-      </div>
-      <div class="form-group">
-        <label>Присутні вакцини від інфекцій: </label>
-        <input type="text" placeholder="Присутні вакцини від інфекцій" [(ngModel)]="clinic.vaccines" name="vaccines"
-          class="form-control">
-      </div>
-      <button type="submit" class="btn btn-primary float-right">Додати</button>
-    </form>
-  </div>
+    </div>
+    <div class="modal-body">
+        <form (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>LAT: </label>
+                <input type="text" placeholder="Add  LAT" [(ngModel)]="clinic.lat" name="lat" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>LNG: </label>
+                <input type="text" placeholder="Add  LNG" [(ngModel)]="clinic.lng" name="lng" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Title: </label>
+                <input type="text" placeholder="Add  Title" [(ngModel)]="clinic.title" name="title" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Назва клініки: </label>
+                <input type="text" placeholder="Назва клініки" [(ngModel)]="clinic.clinic_name" name="clinic_name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Адреса: </label>
+                <input type="text" placeholder="Адреса" [(ngModel)]="clinic.address" name="address" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Веб-сайт: </label>
+                <input type="text" placeholder="Веб-сайт" [(ngModel)]="clinic.website" name="website" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Контактний телефон: </label>
+                <input type="text" placeholder="Контактний телефон" [(ngModel)]="clinic.phone" name="phone" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Присутні вакцини від інфекцій: </label>
+                <input type="text" placeholder="Присутні вакцини від інфекцій" [(ngModel)]="clinic.vaccines" name="vaccines" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary float-right" (click)="modalRef.hide()">Додати</button>
+        </form>
+    </div>
 </ng-template>

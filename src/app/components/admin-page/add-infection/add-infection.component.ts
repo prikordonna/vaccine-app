@@ -3,6 +3,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { InfectionService } from '../../../services/infection.service';
 import { Infection } from '../../../models/Infection';
+import { ClinicService } from '../../../services/clinic.service';
 
 @Component({
   selector: 'app-add-infection',
@@ -26,11 +27,14 @@ export class AddInfectionComponent implements OnInit {
     year14: false,
     year16: false,
     adult: false,
+    clinics: [],
   }
 
   modalRef: BsModalRef;
   constructor(private infectionService: InfectionService,
-    private modalService: BsModalService) { }
+    private modalService: BsModalService,
+    private clinicService: ClinicService
+    ) { }
 
   ngOnInit() {
   }
