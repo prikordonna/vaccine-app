@@ -17,11 +17,11 @@
         </tr>
     </thead>
     <tbody *ngFor='let infection of infections; let i = index'>
-        <tr (click)="collapse.toggle()" aria-controls="i" class='cursor' aria-expanded="false">
+        <tr (click)="infection.isCollapse = !infection.isCollapse" aria-controls="i" class='cursor' aria-expanded="false">
             <th scope="row" colspan='1'>
                 {{infection.name}}
             </th>
-            <td scope='col'>
+            <td scope='col' clas>
                 <div *ngIf='infection.day1'>1 доза</div>
             </td>
             <td scope='col'>
@@ -57,7 +57,7 @@
         </tr>
         <tr>
             <td colspan='12' class="collapsed-td">
-                <div id="{{i}}" #collapse="bs-collapse" [collapse]="!isCollapsed">
+                <div id="{{i}}" #collapse="bs-collapse" [collapse]="!infection.isCollapse">
                     <div class="well well-lg card card-block card-header">
                         <button type="button" class="close pull-right" (click)="collapse.hide()">
                             <span aria-hidden="true">&times;</span>

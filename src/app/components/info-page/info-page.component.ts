@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { InfectionService } from '../../services/infection.service';
 import { Infection } from 'src/app/models/Infection';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-info-page',
@@ -10,11 +11,17 @@ import { Infection } from 'src/app/models/Infection';
 export class InfoPageComponent implements OnInit {
 infections: Infection[];
   constructor(
-    public vaccineService: InfectionService
+    public infectionService: InfectionService
   ) { }
 
   ngOnInit() {
-    this.vaccineService.getInfection()
+    this.infectionService.getInfection()
+    .pipe(
+      map(infection => {
+        infection['isCollapsed'] = false;
+        return infection
+      })
+    )
     .subscribe(
       (infections) => {
         this.infections = infections;

@@ -1,3 +1,5 @@
+import { Clinic } from './Clinic';
+
 export interface Infection {
   id?: string;
   name?: string;
@@ -14,5 +16,6 @@ export interface Infection {
   year6?: boolean;
   year14?: boolean;
   year16?: boolean;
-  adult?: boolean
+  adult?: boolean;
+  clinics?: Clinic[];
 }
