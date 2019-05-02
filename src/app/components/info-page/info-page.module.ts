@@ -5,18 +5,20 @@ import { CommonModule } from '@angular/common';
 import { InfoPageComponent } from './info-page.component';
 
 //ngx-bootstrap
-import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { CollapseModule } from './collapse/collapse.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    CollapseModule.forRoot(),
-  ],
-  exports: [
-    InfoPageComponent,
-  ],
-  declarations: [
-    InfoPageComponent,
-  ]
+   imports: [
+      CommonModule,
+      CollapseModule,
+      BrowserAnimationsModule,
+   ],
+   exports: [
+      InfoPageComponent
+   ],
+   declarations: [
+      InfoPageComponent,
+   ]
 })
 export class InfoPageModule { }

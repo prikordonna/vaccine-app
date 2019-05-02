@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { VaccineService } from '../../services/vaccine.service';
 import { Infection } from 'src/app/models/Infection';
 
@@ -21,5 +21,6 @@ infections: Infection[];
       }
     )
   }
+
 
 }
