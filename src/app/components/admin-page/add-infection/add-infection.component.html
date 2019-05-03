@@ -10,22 +10,22 @@
     </button>
     </div>
     <div class="modal-body">
-        <form (ngSubmit)="onSubmit()">
+        <form (ngSubmit)="addInfectionForm.form.valid && onSubmit()" #addInfectionForm="ngForm" novalidate>
             <div class="form-group">
                 <label for="name">Інфекція</label>
-                <input type="text" placeholder="Інфекція" [(ngModel)]="infection.name" id="name" class="form-control" name='name'>
+                <input type="text" placeholder="Інфекція" [(ngModel)]="infection.name" id="name" class="form-control" name='name' #name="ngModel" required [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched)}">
             </div>
             <div class="form-group">
                 <label for="result">Способи зараження</label>
-                <input type="text" placeholder="Наслідки" [(ngModel)]="infection.ways" id="result" class="form-control" name='result'>
+                <input type="text" placeholder="Наслідки" [(ngModel)]="infection.ways" id="ways" class="form-control" name='ways' #ways="ngModel" required [ngClass]="{'is-invalid': ways.invalid && (ways.dirty || ways.touched)}">
             </div>
             <div class="form-group">
                 <label for="simptoms">Симптоми</label>
-                <input type="text" placeholder="Симптоми" [(ngModel)]="infection.simptoms" id="simptoms" class="form-control" name='simptoms'>
+                <input type="text" placeholder="Симптоми" [(ngModel)]="infection.simptoms" id="simptoms" class="form-control" name='simptoms' #simptoms="ngModel" required [ngClass]="{'is-invalid': simptoms.invalid && (simptoms.dirty || simptoms.touched)}">
             </div>
             <div class="form-group">
                 <label for="result">Наслідки</label>
-                <input type="text" placeholder="Наслідки" [(ngModel)]="infection.result" id="result" class="form-control" name='result'>
+                <input type="text" placeholder="Наслідки" [(ngModel)]="infection.result" id="result" class="form-control" name='result' #result="ngModel" required [ngClass]="{'is-invalid': result.invalid && (result.dirty || result.touched)}">
             </div>
             <div class="form-group">
                 <label for="result">Клініки</label>
@@ -76,7 +76,7 @@
                     <label class="form-check-label" for="adult">Дорослі</label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary float-right" (click)="modalRef.hide()">Додати</button>
+            <button type="submit" class="btn btn-primary float-right" (click)="modalRef.hide()" [disabled]="addInfectionForm.form.pristine || addInfectionForm.form.invalid">Додати</button>
         </form>
     </div>
 </ng-template>
