@@ -65,6 +65,13 @@
                         <p>
                             Симптоми: {{infection.simptoms}}
                         </p>
+                        <p>
+                            Клініки:
+                        </p>
+                        <ul>
+                            <li *ngFor="let clinic of infection.clinics">{{clinic.clinic_name}}</li>
+                        </ul>
+
                     </div>
                 </div>
             </td>

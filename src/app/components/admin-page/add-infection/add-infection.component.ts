@@ -4,6 +4,9 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { InfectionService } from '../../../services/infection.service';
 import { Infection } from '../../../models/Infection';
 import { ClinicService } from '../../../services/clinic.service';
+import { map } from 'rxjs/operators';
+import { Clinic } from 'src/app/models';
+
 
 @Component({
   selector: 'app-add-infection',
@@ -29,22 +32,62 @@ export class AddInfectionComponent implements OnInit {
     adult: false,
     clinics: [],
   }
+  clinicList = [];
+  selectedClinics = [];
 
   modalRef: BsModalRef;
+  config = {
+    ignoreBackdropClick: true,
+    keyboard: false
+  };
   constructor(private infectionService: InfectionService,
     private modalService: BsModalService,
     private clinicService: ClinicService
-    ) { }
+  ) { }
 
   ngOnInit() {
+    this.clinicService.getClinics$()
+      .pipe(
+        map(clinic => {
+          clinic['isSelected'] = false;
+          return clinic
+        })
+      )
+      .subscribe(
+        (clinics) => {
+          this.clinicList = clinics;
+        }
+      )
+  }
+
+  selectClinic(clinic) {
+    if (clinic.isSelected) {
+      clinic.isSelected = !clinic.isSelected;
+      let cliIndex = this.selectedClinics.findIndex((el: Clinic) => el == clinic);
+      this.selectedClinics.splice(cliIndex, 1);
+      console.log(this.selectedClinics)
+    } else {
+      clinic.isSelected = !clinic.isSelected;
+      this.selectedClinics.push(clinic)
+      console.log(this.selectedClinics)
+    }
+  }
+
+  clearSelected() {
+    this.clinicList.forEach(el => {
+      el.isSelected = false;
+    })
+    this.selectedClinics= [];
+    console.log(this.selectedClinics)
   }
 
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+    this.modalRef = this.modalService.show(template, this.config);
   }
 
   onSubmit() {
     if (this.infection.name != '' && this.infection.result != '' && this.infection.simptoms != '') {
+      this.infection.clinics = this.selectedClinics;
       this.infectionService.addInfection(this.infection);
       this.infection.name = '';
       this.infection.result = '';
@@ -60,6 +103,7 @@ export class AddInfectionComponent implements OnInit {
       this.infection.year14 = false;
       this.infection.year16 = false;
       this.infection.adult = false;
+      this.clearSelected();
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { InfectionService } from '../../services/infection.service';
 import { Infection } from 'src/app/models/Infection';
 import { map } from 'rxjs/operators';

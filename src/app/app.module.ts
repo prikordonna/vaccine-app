@@ -1,24 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
 import { AppRoutingModule } from './app-routing.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+//environment
+import { environment } from '../environments/environment';
+
+//page_modules
+import { MainPageModule} from './components/main-page/main-page.module';
+import { AdminPageModule } from './components/admin-page/admin-page.module';
 import { InfoPageModule } from './components/info-page/info-page.module';
 import { ContactPageModule } from './components/contact-page/contact-page.module';
 
-import { environment } from '../environments/environment';
-
+//components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-
-import { MainPageModule} from './components/main-page/main-page.module';
-
-import { InfectionsComponent } from './components/admin-page/infections/infections.component';
-import { ClinicsComponent } from './components/admin-page/clinics/clinics.component';
-
-import { AddInfectionComponent } from './components/admin-page/add-infection/add-infection.component';
-import { AddClinicComponent } from './components/admin-page/add-clinic/add-clinic.component';
-import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 //FireStore
@@ -27,7 +24,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 
-//Service
+//Services
 import { InfectionService } from './services/infection.service';
 import { MapsService } from '../app/services/maps.service';
 import { ClinicService } from './services/clinic.service';
@@ -37,23 +34,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule, MatIconModule, MatButtonModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 import {FlexLayoutModule} from "@angular/flex-layout";
 
+//ngrx
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from './+store/index';
 import { MapModule } from './map-page/map.module';
 import { EffectsModule } from '@ngrx/effects';
 
+//bootstrap
 import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    InfectionsComponent,
-    AddInfectionComponent,
-    AdminPageComponent,
     UserProfileComponent,
-    AddClinicComponent,
-    ClinicsComponent,
     ],
   imports: [
     BrowserModule,
@@ -82,6 +76,7 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-b
     MainPageModule,
     InfoPageModule,
     ContactPageModule,
+    AdminPageModule,
   ],
   providers: [
     ClinicService,

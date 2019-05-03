@@ -5,7 +5,7 @@
 <ng-template #add>
     <div class="modal-header">
         <h4 class="modal-title pull-left">Додати елемент</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide(); clearSelected()">
       <span aria-hidden="true">&times;</span>
     </button>
     </div>
@@ -28,7 +28,13 @@
                 <input type="text" placeholder="Наслідки" [(ngModel)]="infection.result" id="result" class="form-control" name='result'>
             </div>
             <div class="form-group">
-                <label for="result">Клініки</label>
+                <label for="clinicsList">Клініки</label>
+                <div class="form-check">
+                    <div *ngFor="let clinic of clinicList" class="form-check-item">
+                        <input type="checkbox" class="form-check-input" (click)="selectClinic(clinic)" id="{{clinic.clinic_name}}" name='{{clinic.clinic_name}}'>
+                        <label class="form-check-label" for="{{clinic.clinic_name}}">{{clinic.clinic_name}}</label>
+                    </div>
+                </div>
             </div>
             <div class="form-check">
                 <div class="form-check-item">

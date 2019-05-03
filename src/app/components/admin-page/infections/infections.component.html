@@ -17,7 +17,11 @@
                     <td>{{infection.ways}}</td>
                     <td>{{infection.simptoms}}</td>
                     <td>{{infection.result}}</td>
-                    <td></td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let clinic of infection.clinics">{{clinic.clinic_name}}</li>
+                        </ul>
+                    </td>
                     <td>
                         <button type="button" class="btn btn-primary btn-block" (click)="openModal(edit); editInfection($event, infection)">Редагувати</button>
                         <button type="submit" class="btn btn-danger btn-block mt-1" (click)="openModal(del)">Видалити</button>
@@ -46,6 +50,24 @@
                                 <div class="form-group">
                                     <label for="result">Наслідки</label>
                                     <input type="text" placeholder="Наслідки" [(ngModel)]="infection.result" name="result" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="clinicsList">Клініки</label>
+                                    <div class="form-check">
+                                        <ul>
+                                            <li *ngFor="let clinic of infection.clinics">
+                                                {{clinic.clinic_name}}
+                                                <button type="button" class="pull-right" (click)="deleteClinicFromInfection(infection, clinic)">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                        <div class="form-check">
+                                            <button type="button" (click)="filterClinics(infection); openModal2(addClinics)">
+                                            Додати клініки
+                                        </button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-check">
                                     <div class="form-check-item">
@@ -97,6 +119,28 @@
                             </form>
                         </div>
                     </ng-template>
+
+                    <ng-template #addClinics>
+                        <div class="modal-header">
+                            <h4 class="modal-title pull-left">Додати клініки</h4>
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef2.hide()">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                        </div>
+                        <form (ngSubmit)="sendClinics(infection); modalRef.hide()">
+                            <div class="modal-body">
+                                <h3>Список клінік</h3>
+                                <div class="form-check">
+                                    <div *ngFor="let clinic of unselectedClinics" class="form-check-item">
+                                        <input type="checkbox" class="form-check-input" (click)="selectClinic(clinic)" id="{{clinic.clinic_name}}" name='{{clinic.clinic_name}}'>
+                                        <label class="form-check-label" for="{{clinic.clinic_name}}">{{clinic.clinic_name}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary float-right" (click)="modalRef2.hide()">Додати клініки</button>
+                        </form>
+                    </ng-template>
+
                     <ng-template #del>
                         <div class="modal-header">
                             <h4 class="modal-title pull-left">Видалити елемент</h4>
