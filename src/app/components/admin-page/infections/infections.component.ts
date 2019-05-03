@@ -3,7 +3,8 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { InfectionService } from '../../../services/infection.service';
 import { Infection } from '../../../models/Infection';
-
+import { Clinic } from 'src/app/models/Clinic';
+import { ClinicService } from 'src/app/services/clinic.service';
 
 @Component({
   selector: 'app-infections',
@@ -14,36 +15,100 @@ export class InfectionsComponent implements OnInit {
   infections: Infection[];
   editState: boolean = false;
   infectionToEdit: Infection;
-  modalRef: BsModalRef;
-  
+  modalRef: BsModalRef | null;
+  modalRef2: BsModalRef;
+  clinics: Clinic[];
+  unselectedClinics: Clinic[];
+  selectedClinics = [];
+
   constructor(
     private infectionService: InfectionService,
-    private modalService: BsModalService) { }
+    private modalService: BsModalService,
+    private clinicService: ClinicService
+  ) { }
 
   ngOnInit() {
+    this.clinicService.getClinics$()
+      .subscribe(
+        (clinics) => {
+          this.clinics = clinics;
+        }
+      )
+
     this.infectionService.getInfection().subscribe(infections =>
-    this.infections = infections
+      this.infections = infections
     );
     console.log('ngOninit ran!!!');
   }
-  
+
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+  openModal2(template: TemplateRef<any>) {
+    this.modalRef2 = this.modalService.show(template);
+  }
+  closeFirstModal() {
+    if (!this.modalRef) {
+      return;
+    }
+    this.modalRef.hide();
+    this.modalRef = null;
   }
 
   deleteInfection(event, infection) {
     this.cancelEditing();
     this.infectionService.deleteInfection(infection);
   }
-  
+
+  filterClinics(infection: Infection) {
+    this.unselectedClinics = this.clinics;
+    if (infection.clinics.length > 0) {
+      for (let selectedClinic of infection.clinics) {
+        for (let i = 0; i < this.unselectedClinics.length; i++) {
+          if (selectedClinic.clinic_name == this.unselectedClinics[i].clinic_name) {
+            this.unselectedClinics.splice(i, 1);
+          }
+        }
+      }
+    }
+  }
+
+  selectClinic(clinic) {
+    if (clinic.isSelected) {
+      clinic.isSelected = !clinic.isSelected;
+      let cliIndex = this.selectedClinics.findIndex((el: Clinic) => el == clinic);
+      this.selectedClinics.splice(cliIndex, 1);
+      console.log(this.selectedClinics)
+    } else {
+      clinic.isSelected = !clinic.isSelected;
+      this.selectedClinics.push(clinic)
+      console.log(this.selectedClinics)
+    }
+  }
+
+  sendClinics(infection) {
+    this.selectedClinics.forEach(el => {
+      infection.clinics.push(el);
+    })
+    this.infectionService.updateInfection(infection);
+    this.selectedClinics = [];
+    this.cancelEditing();
+  }
+
+  deleteClinicFromInfection(infection, clinic) {
+    let cliIndex = infection.clinics.findIndex(el => el.clinic_name == clinic.clinic_name);
+    infection.clinics.splice(cliIndex, 1);
+    this.infectionService.updateInfection(infection);
+  }
+
   editInfection(event, infection) {
     this.editState = true;
     this.infectionToEdit = infection;
   }
-  
+
   updateInfection(infection) {
-  this.infectionService.updateInfection(infection);
-  this.cancelEditing();
+    this.infectionService.updateInfection(infection);
+    this.cancelEditing();
   }
 
   cancelEditing() {
