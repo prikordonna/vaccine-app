@@ -23,8 +23,10 @@
                         </ul>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary btn-block" (click)="openModal(edit); editInfection($event, infection)">Редагувати</button>
-                        <button type="submit" class="btn btn-danger btn-block mt-1" (click)="openModal(del)">Видалити</button>
+                        <button type="button" class="btn btn-primary btn-block"
+                            (click)="openModal(edit); editInfection($event, infection)">Редагувати</button>
+                        <button type="submit" class="btn btn-danger btn-block mt-1"
+                            (click)="openModal(del)">Видалити</button>
                     </td>
                     <ng-template #edit>
                         <div class="modal-header">
@@ -34,110 +36,148 @@
                             </button>
                         </div>
                         <div class="modal-body" *ngIf="editState && infectionToEdit.id == infection.id">
-                            <form (ngSubmit)="updateInfection(infection); modalRef.hide()">
+                            <form (ngSubmit)="editInfectionForm.form.valid &&  updateInfection(infection); modalRef.hide()" #editInfectionForm="ngForm" novalidate>
                                 <div class="form-group">
                                     <label for="name">Інфекція</label>
-                                    <input type="text" placeholder="Інфекція" [(ngModel)]="infection.name" name="name" class="form-control">
+                                    <input type="text" placeholder="Інфекція" [(ngModel)]="infection.name" name="name"
+                                        class="form-control" #name="ngModel" required
+                                        [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched)}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Способи зараження</label>
-                                    <input type="text" placeholder="Інфекція" [(ngModel)]="infection.ways" name="ways" class="form-control">
+                                    <label for="name">Способи зараження:</label>
+                                    <input type="text" placeholder="Способи зараження" [(ngModel)]="infection.ways" name="ways"
+                                        class="form-control"  #ways="ngModel" required
+                                        [ngClass]="{'is-invalid': ways.invalid && (ways.dirty || ways.touched)}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="simptoms">Симптоми</label>
-                                    <input type="text" placeholder="Симптоми" [(ngModel)]="infection.simptoms" name="simptoms" class="form-control">
+                                    <label for="simptoms">Симптоми:</label>
+                                    <input type="text" placeholder="Симптоми" [(ngModel)]="infection.simptoms"
+                                        name="simptoms" class="form-control" #simptoms="ngModel" required
+                                        [ngClass]="{'is-invalid': simptoms.invalid && (simptoms.dirty || simptoms.touched)}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="result">Наслідки</label>
-                                    <input type="text" placeholder="Наслідки" [(ngModel)]="infection.result" name="result" class="form-control">
+                                    <label for="result">Наслідки:</label>
+                                    <input type="text" placeholder="Наслідки" [(ngModel)]="infection.result"
+                                        name="result" class="form-control" #result="ngModel" required
+                                        [ngClass]="{'is-invalid': result.invalid && (result.dirty || result.touched)}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="clinicsList">Клініки</label>
-                                    <div class="form-check">
-                                        <ul>
-                                            <li *ngFor="let clinic of infection.clinics">
-                                                {{clinic.clinic_name}}
-                                                <button type="button" class="pull-right" (click)="deleteClinicFromInfection(infection, clinic)">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </li>
-                                        </ul>
-                                        <div class="form-check">
-                                            <button type="button" (click)="filterClinics(infection); openModal2(addClinics)">
+                                    <label for="clinicsList">Клініки, у яких присутня вакцина: </label>
+                                    <div>
+                                        <table class="table table-borderless">
+                                            <tbody>
+                                                <tr *ngFor="let clinic of infection.clinics">
+                                                    <td>{{clinic.clinic_name}}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-danger"
+                                                            (click)="deleteClinicFromInfection(infection, clinic)">
+                                                            Видалити
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <button type="button" class="btn btn-primary btn-block"
+                                            (click)="filterClinics(infection); openModal2(addClinics)">
                                             Додати клініки
                                         </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="agesList">Вік вакцинації:</label>
+                                    <div class="row ml-1" id="agesList">
+                                        <div class="col-4">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    [(ngModel)]="infection.day1" id="day1" name='day1'>
+                                                <label class="custom-control-label" for="day1">1 день</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    [(ngModel)]="infection.day3" id="day3" name='day3'>
+                                                <label class="custom-control-label" for="day3">3-5 дні</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    [(ngModel)]="infection.month2" id="month2" name='month2'>
+                                                <label class="custom-control-label" for="month2">2 місяці</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    [(ngModel)]="infection.month4" id="month4" name='month4'>
+                                                <label class="custom-control-label" for="month4">4 місяці</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    [(ngModel)]="infection.month6" id="month6" name='month6'>
+                                                <label class="custom-control-label" for="month6">6 місяців</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    [(ngModel)]="infection.month12" id="month12" name='month12'>
+                                                <label class="custom-control-label" for="month12">12 місяців</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    [(ngModel)]="infection.month18" id="month18" name='month18'>
+                                                <label class="custom-control-label" for="month18">18 місяців</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    [(ngModel)]="infection.year6" id="year6" name='year6'>
+                                                <label class="custom-control-label" for="year6">6 років</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    [(ngModel)]="infection.year14" id="year14" name='year14'>
+                                                <label class="custom-control-label" for="year14">14 років</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    [(ngModel)]="infection.year16" id="year16" name='year16'>
+                                                <label class="custom-control-label" for="year16">16 років</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    [(ngModel)]="infection.adult" id="adult" name='adult'>
+                                                <label class="custom-control-label" for="adult">Дорослі</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-check">
-                                    <div class="form-check-item">
-                                        <input type="checkbox" class="form-check-input" [(ngModel)]="infection.day1" id="day1" name='day1'>
-                                        <label class="form-check-label" for="day1">1 день</label>
-                                    </div>
-                                    <div class="form-check-item">
-                                        <input type="checkbox" class="form-check-input" [(ngModel)]="infection.day3" id="day3" name='day3'>
-                                        <label class="form-check-label" for="day3">3-5 дні</label>
-                                    </div>
-                                    <div class="form-check-item">
-                                        <input type="checkbox" class="form-check-input" [(ngModel)]="infection.month2" id="month2" name='month2'>
-                                        <label class="form-check-label" for="month2">2 місяці</label>
-                                    </div>
-                                    <div class="form-check-item">
-                                        <input type="checkbox" class="form-check-input" [(ngModel)]="infection.month4" id="month4" name='month4'>
-                                        <label class="form-check-label" for="month4">4 місяці</label>
-                                    </div>
-                                    <div class="form-check-item">
-                                        <input type="checkbox" class="form-check-input" [(ngModel)]="infection.month6" id="month6" name='month6'>
-                                        <label class="form-check-label" for="month6">6 місяців</label>
-                                    </div>
-                                    <div class="form-check-item">
-                                        <input type="checkbox" class="form-check-input" [(ngModel)]="infection.month12" id="month12" name='month12'>
-                                        <label class="form-check-label" for="month12">12 місяців</label>
-                                    </div>
-                                    <div class="form-check-item">
-                                        <input type="checkbox" class="form-check-input" [(ngModel)]="infection.month18" id="month18" name='month18'>
-                                        <label class="form-check-label" for="month18">18 місяців</label>
-                                    </div>
-                                    <div class="form-check-item">
-                                        <input type="checkbox" class="form-check-input" [(ngModel)]="infection.year6" id="year6" name='year6'>
-                                        <label class="form-check-label" for="year6">6 років</label>
-                                    </div>
-                                    <div class="form-check-item">
-                                        <input type="checkbox" class="form-check-input" [(ngModel)]="infection.year14" id="year14" name='year14'>
-                                        <label class="form-check-label" for="year14">14 років</label>
-                                    </div>
-                                    <div class="form-check-item">
-                                        <input type="checkbox" class="form-check-input" [(ngModel)]="infection.year16" id="year16" name='year16'>
-                                        <label class="form-check-label" for="year16">16 років</label>
-                                    </div>
-                                    <div class="form-check-item">
-                                        <input type="checkbox" class="form-check-input" [(ngModel)]="infection.adult" id="adult" name='adult'>
-                                        <label class="form-check-label" for="adult">Дорослі</label>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary float-right" (click)="modalRef.hide()">Зберегти зміни</button>
+                                <button type="submit" class="btn btn-primary float-right"
+                                    (click)="modalRef.hide()" [disabled]="editInfectionForm.form.pristine || editInfectionForm.form.invalid">Зберегти зміни</button>
                             </form>
                         </div>
                     </ng-template>
 
                     <ng-template #addClinics>
                         <div class="modal-header">
-                            <h4 class="modal-title pull-left">Додати клініки</h4>
-                            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef2.hide()">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
+                            <h4 class="modal-title pull-left">Список клінік</h4>
+                            <button type="button" class="close pull-right" aria-label="Close"
+                                (click)="modalRef2.hide()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <form (ngSubmit)="sendClinics(infection); modalRef.hide()">
                             <div class="modal-body">
-                                <h3>Список клінік</h3>
                                 <div class="form-check">
-                                    <div *ngFor="let clinic of unselectedClinics" class="form-check-item">
-                                        <input type="checkbox" class="form-check-input" (click)="selectClinic(clinic)" id="{{clinic.clinic_name}}" name='{{clinic.clinic_name}}'>
-                                        <label class="form-check-label" for="{{clinic.clinic_name}}">{{clinic.clinic_name}}</label>
+                                    <div *ngFor="let clinic of unselectedClinics"
+                                        class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input"
+                                            (click)="selectClinic(clinic)" id="{{clinic.clinic_name}}"
+                                            name='{{clinic.clinic_name}}'>
+                                        <label class="custom-control-label"
+                                            for="{{clinic.clinic_name}}">{{clinic.clinic_name}}</label>
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary float-right" (click)="modalRef2.hide()">Додати клініки</button>
+                            <button type="submit" class="btn btn-primary float-right mb-3 mr-3"
+                                (click)="modalRef2.hide()">Додати</button>
                         </form>
                     </ng-template>
 
@@ -145,13 +185,15 @@
                         <div class="modal-header">
                             <h4 class="modal-title pull-left">Видалити елемент</h4>
                             <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                              <span aria-hidden="true">&times;</span>
+                                <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <h3>Ви впевнені?</h3>
-                            <button type="submit" class="btn btn-danger btn-block mt-1" (click)="deleteInfection($event, infection); modalRef.hide()">Видалити</button>
-                            <button type="button" class="btn btn-primary btn-block" (click)="modalRef.hide()">Відмінити</button>
+                            <button type="submit" class="btn btn-danger btn-block mt-1"
+                                (click)="deleteInfection($event, infection); modalRef.hide()">Видалити</button>
+                            <button type="button" class="btn btn-primary btn-block"
+                                (click)="modalRef.hide()">Відмінити</button>
                         </div>
                     </ng-template>
                 </tr>
@@ -164,4 +206,3 @@
     <hr>
     <h5>Відсутній елемент списку!</h5>
 </ng-template>
-
