@@ -41,7 +41,7 @@ import { MapModule } from './map-page/map.module';
 import { EffectsModule } from '@ngrx/effects';
 
 //bootstrap
-import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
+import { TabsModule, ModalModule, CollapseModule, BsDropdownModule, CarouselModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -73,6 +73,7 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-b
     TabsModule.forRoot(),
     ModalModule.forRoot(),
     CollapseModule.forRoot(),
+    CarouselModule.forRoot(),
     MainPageModule,
     InfoPageModule,
     ContactPageModule,
