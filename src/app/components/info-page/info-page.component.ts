@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { InfectionService } from '../../services/infection.service';
-import { Infection } from 'src/app/models/Infection';
-import { map } from 'rxjs/operators';
+
+import { Observable } from 'rxjs';
+
+import { Store, select } from '@ngrx/store';
+import { AppState, InfectionsState } from './../../+store';
+import * as InfectionsActions from '../../+store/infections/infections.action';
 
 @Component({
   selector: 'app-info-page',
@@ -9,25 +12,14 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./info-page.component.scss']
 })
 export class InfoPageComponent implements OnInit {
-infections: Infection[];
+  infectionsState$: Observable<InfectionsState>;
   constructor(
-    public infectionService: InfectionService
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
-    this.infectionService.getInfection()
-    .pipe(
-      map(infection => {
-        infection['isCollapsed'] = false;
-        return infection
-      })
-    )
-    .subscribe(
-      (infections) => {
-        this.infections = infections;
-      }
-    )
+    console.log('we have the store', this.store);
+    this.infectionsState$ = this.store.pipe(select('infections'));
+    this.store.dispatch(new InfectionsActions.GetInfections());
   }
-
-
 }

@@ -16,7 +16,7 @@
             <th scope="col">кожні 10 років</th>
         </tr>
     </thead>
-    <tbody *ngFor='let infection of infections; let i = index'>
+    <tbody *ngFor='let infection of (infectionsState$ | async).data; let i = index'>
         <tr (click)="infection.isCollapse = !infection.isCollapse" aria-controls="i" class='cursor' aria-expanded="false">
             <th scope="row" colspan='1'>
                 {{infection.name}}
