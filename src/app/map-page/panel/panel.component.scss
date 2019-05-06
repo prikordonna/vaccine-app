@@ -1,18 +1,17 @@
 .card {
     overflow: hidden;
-    height: 90px;
     transition: 2s;
     &:hover {
         cursor: pointer;
         transition: 2s;
         .card-hide {
-            display: block; 
-            transition: 2s;          
+            display: block;
+            transition: 2s;
         }
     }
 }
 
-// .card-hide {
-//     display: none;
-//     transition: 2s;
-// }
+.card-hide {
+    display: none;
+    transition: 2s;
+}

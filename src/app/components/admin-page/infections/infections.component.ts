@@ -6,13 +6,18 @@ import { Infection } from '../../../models/Infection';
 import { Clinic } from 'src/app/models/Clinic';
 import { ClinicService } from 'src/app/services/clinic.service';
 
+import { Store, select } from '@ngrx/store';
+import { AppState, InfectionsState } from './../../../+store';
+import * as InfectionsActions from '../../../+store/infections/infections.action';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-infections',
   templateUrl: './infections.component.html',
   styleUrls: ['./infections.component.scss']
 })
 export class InfectionsComponent implements OnInit {
-  infections: Infection[];
+  infectionsState$: Observable<InfectionsState>;
   editState: boolean = false;
   infectionToEdit: Infection;
   modalRef: BsModalRef | null;
@@ -24,7 +29,8 @@ export class InfectionsComponent implements OnInit {
   constructor(
     private infectionService: InfectionService,
     private modalService: BsModalService,
-    private clinicService: ClinicService
+    private clinicService: ClinicService,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
@@ -34,11 +40,11 @@ export class InfectionsComponent implements OnInit {
           this.clinics = clinics;
         }
       )
-
-    this.infectionService.getInfection().subscribe(infections =>
-      this.infections = infections
-    );
-    console.log('ngOninit ran!!!');
+    this.infectionsState$ = this.store.pipe(select('infections'));
+    this.store.dispatch(new InfectionsActions.GetInfections());
+    // this.infectionService.getInfection().subscribe(infections =>
+    //   this.infections = infections
+    // );
   }
 
   openModal(template: TemplateRef<any>) {
