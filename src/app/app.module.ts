@@ -32,7 +32,7 @@ import { ClinicService } from './services/clinic.service';
 //Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule, MatIconModule, MatButtonModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
-import {FlexLayoutModule} from "@angular/flex-layout";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 //ngrx
 import { StoreModule } from '@ngrx/store';
@@ -43,6 +43,8 @@ import { EffectsModule } from '@ngrx/effects';
 //bootstrap
 import { TabsModule, ModalModule, CollapseModule, BsDropdownModule, CarouselModule } from 'ngx-bootstrap';
 
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +54,6 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule, CarouselModu
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -60,6 +61,7 @@ import { TabsModule, ModalModule, CollapseModule, BsDropdownModule, CarouselModu
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     MatTabsModule,
     MatIconModule,
     MatButtonModule,
