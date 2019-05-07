@@ -43,6 +43,6 @@ export class InfectionService {
    updateInfection(infection: Infection) {
     this.infectionDoc = this.smth.doc(`infections/${infection.id}`);
     console.log(`Element with id(${infection.id}) was edited`);
-    this.infectionDoc.update(infection);
+    return this.infectionDoc.update(infection);
    }
 }

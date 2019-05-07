@@ -7,6 +7,10 @@ import { ClinicService } from '../../../services/clinic.service';
 import { map } from 'rxjs/operators';
 import { Clinic } from 'src/app/models';
 
+import { Store, select } from '@ngrx/store';
+import { AppState, InfectionsState } from './../../../+store';
+import * as InfectionsActions from '../../../+store/infections/infections.action';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-infection',
@@ -42,7 +46,8 @@ export class AddInfectionComponent implements OnInit {
   };
   constructor(private infectionService: InfectionService,
     private modalService: BsModalService,
-    private clinicService: ClinicService
+    private clinicService: ClinicService,
+    private store: Store<AppState>,
   ) { }
 
   ngOnInit() {
@@ -88,9 +93,11 @@ export class AddInfectionComponent implements OnInit {
   onSubmit() {
     if (this.infection.name != '' && this.infection.result != '' && this.infection.simptoms != '') {
       this.infection.clinics = this.selectedClinics;
+      // this.store.dispatch(new InfectionsActions.AddInfection(this.infection));
       this.infectionService.addInfection(this.infection);
       this.infection.name = '';
       this.infection.result = '';
+      this.infection.ways = '';
       this.infection.simptoms = '';
       this.infection.day1 = false;
       this.infection.day3 = false;

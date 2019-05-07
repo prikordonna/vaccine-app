@@ -9,7 +9,7 @@ import { ClinicService } from 'src/app/services/clinic.service';
 import { Store, select } from '@ngrx/store';
 import { AppState, InfectionsState } from './../../../+store';
 import * as InfectionsActions from '../../../+store/infections/infections.action';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-infections',
@@ -25,6 +25,7 @@ export class InfectionsComponent implements OnInit {
   clinics: Clinic[];
   unselectedClinics: Clinic[];
   selectedClinics = [];
+  private sub: Subscription;
 
   constructor(
     private infectionService: InfectionService,
@@ -64,6 +65,7 @@ export class InfectionsComponent implements OnInit {
   deleteInfection(event, infection) {
     this.cancelEditing();
     this.infectionService.deleteInfection(infection);
+    // this.store.dispatch(new InfectionsActions.DelInfection(infection));
   }
 
   filterClinics(infection: Infection) {
@@ -104,7 +106,7 @@ export class InfectionsComponent implements OnInit {
   deleteClinicFromInfection(infection, clinic) {
     let cliIndex = infection.clinics.findIndex(el => el.clinic_name == clinic.clinic_name);
     infection.clinics.splice(cliIndex, 1);
-    this.infectionService.updateInfection(infection);
+    this.store.dispatch(new InfectionsActions.UpdateInfection(infection))
   }
 
   editInfection(event, infection) {
@@ -113,7 +115,7 @@ export class InfectionsComponent implements OnInit {
   }
 
   updateInfection(infection) {
-    this.infectionService.updateInfection(infection);
+    this.store.dispatch(new InfectionsActions.UpdateInfection(infection))
     this.cancelEditing();
   }
 
