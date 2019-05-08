@@ -79,6 +79,7 @@ export function InfectionsReducer(
                 return {
                     ...state,
                     error,
+                    infectionToEdit: null,
                 };
             }
         case InfectionsActionsType.ADD_INFECTION:
@@ -94,6 +95,7 @@ export function InfectionsReducer(
                 return {
                     ...state,
                     data,
+                    infectionToEdit: null,
                 };
             }
         case InfectionsActionsType.ADD_INFECTION_ERROR:

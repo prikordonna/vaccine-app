@@ -51,6 +51,7 @@ export class InfectionsEffects {
                         .pipe(
                             map(
                                 (response: Infection) => {
+                                    response.id = payload['id'];
                                     return new InfectionsActions.GetInfectionSuccess(response);
                                 }),
                             catchError(
@@ -67,7 +68,8 @@ export class InfectionsEffects {
         .pipe(
             ofType<InfectionsActions.UpdateInfection>(InfectionsActions.InfectionsActionsType.UPDATE_INFECTION),
             pluck('payload'),
-            concatMap((payload) => {
+            concatMap((payload: Infection) => {
+                console.log(payload)
                 return this.infectionService
                     .updateInfection(payload)
                     .then(() => {

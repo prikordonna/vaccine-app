@@ -28,13 +28,12 @@ export class InfectionService {
       .pipe(
         map(changes => changes.map(a => {
           const data = a.payload.doc.data() as Infection;
-          data.id = a.payload.doc.id;
-          return data;
+          const id = a.payload.doc.id;
+          return { id, ...data };
         })))
   }
 
   getInfection(infection) {
-    console.log(infection);
     return this.db.doc(`infections/${infection.id}`).valueChanges();
   }
 
@@ -48,8 +47,7 @@ export class InfectionService {
     console.log(`Element with id(${infection.id}) was deleted`);
     return this.infectionDoc.delete();
   }
-  updateInfection(infection: Infection): Promise<void> {
-    console.log(infection)
+  updateInfection(infection): Promise<void> {
     this.infectionDoc = this.db.doc(`infections/${infection.id}`);
     console.log(`Element with id(${infection.id}) was edited`);
     return this.infectionDoc.update(infection);
