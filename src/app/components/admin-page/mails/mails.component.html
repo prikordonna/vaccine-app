@@ -1,0 +1,43 @@
+<div *ngIf="mails?.length > 0; else noItems">
+  <div class="container">
+      <table class="table table-responsive table-hover">
+          <thead>
+              <tr>
+                  <th class="text-center">Повідомлення</th>
+                  <th class="text-center">Імейл</th>
+                  <th class="text-center">Iм'я</th>
+                  <th class="text-center">Дії</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let mail of mails">
+                  <td class="col-5">{{mail.message}}</td>
+                  <td class="col-3">{{mail.email}}</td>
+                  <td class="col-3">{{mail.name}}</td>
+                  <td class="col-1">
+                      <button type="button" class="btn btn-primary btn-block">Прочитано</button>
+                      <button type="submit" class="btn btn-danger btn-block mt-1" (click)="openModal(del)">Видалити</button>
+                  </td>
+                  <ng-template #del>
+                      <div class="modal-header">
+                          <h4 class="modal-title pull-left">Видалити елемент</h4>
+                          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <h3>Ви впевнені?</h3>
+                          <button type="submit" class="btn btn-danger btn-block mt-1" (click)="deleteMail(mail); modalRef.hide()">Видалити</button>
+                          <button type="button" class="btn btn-primary btn-block" (click)="modalRef.hide()">Відмінити</button>
+                      </div>
+                  </ng-template>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
+
+<ng-template #noItems>
+  <hr>
+  <h5>Відсутній елемент списку!</h5>
+</ng-template>

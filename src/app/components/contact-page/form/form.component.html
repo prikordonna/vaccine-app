@@ -16,5 +16,5 @@
     <textarea required placeholder="Повідомлення" [(ngModel)]="mail.message" name="message" id="message" class="form-control" #message="ngModel" [ngClass]="{'is-invalid': message.invalid && (message.dirty || message.touched), 'is-valid': message.valid}" cols="10" rows="7"></textarea>
   </div>
 
-  <button type="submit" class="btn btn-primary" (click)="showSuccess()" [disabled]="addMailForm.form.pristine">Відправити</button>
+  <button type="submit" class="btn btn-primary" [disabled]="addMailForm.form.pristine">Відправити</button>
 </form>
