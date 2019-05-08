@@ -4,6 +4,7 @@
     padding-top: 15%;
     background-image: url(/assets/images/doctor.png);
     background-size: cover;
+    width: 100%;
     height: -webkit-fill-available;
 
 }
@@ -20,10 +21,6 @@
     color: firebrick;
 }
 
-.main {
-    margin-left: 15%;
-    margin-right: 15%;
-}
 
 #donate {
     margin-left: 5%;
