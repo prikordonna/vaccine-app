@@ -7,27 +7,38 @@ import { Clinic } from 'src/app/models/Clinic';
 import { ClinicService } from 'src/app/services/clinic.service';
 
 import { Store, select } from '@ngrx/store';
-import { AppState, InfectionsState } from './../../../+store';
+import { AppState, InfectionsState, getInfectionsState, getInfectionToEdit, getInfectionData } from './../../../+store';
 import * as InfectionsActions from '../../../+store/infections/infections.action';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-infections',
   templateUrl: './infections.component.html',
   styleUrls: ['./infections.component.scss']
 })
+
 export class InfectionsComponent implements OnInit {
-  infectionsState$: Observable<InfectionsState>;
-  editState: boolean = false;
+  infections$: Observable<Infection[]>;
+  infectionsError$: Observable<string | any>;
+  infectionToEdit$: Observable<Infection>;
+
+  private sub: Subscription;
+
   infectionToEdit: Infection;
+
+
   modalRef: BsModalRef | null;
   modalRef2: BsModalRef;
+  config = {
+    ignoreBackdropClick: true,
+    keyboard: false
+  };
+
   clinics: Clinic[];
   unselectedClinics: Clinic[];
   selectedClinics = [];
 
   constructor(
-    private infectionService: InfectionService,
     private modalService: BsModalService,
     private clinicService: ClinicService,
     private store: Store<AppState>
@@ -40,18 +51,29 @@ export class InfectionsComponent implements OnInit {
           this.clinics = clinics;
         }
       )
-    this.infectionsState$ = this.store.pipe(select('infections'));
+    this.infections$ = this.store.pipe(select(getInfectionData));
+    this.infectionToEdit$ = this.store.pipe(select(getInfectionToEdit));
+    this.sub = this.infectionToEdit$.subscribe(
+      (infection) => {
+        if (infection) {
+          this.infectionToEdit = infection;
+        } else {
+          this.infectionToEdit = null;
+        }
+      }
+    )
     this.store.dispatch(new InfectionsActions.GetInfections());
-    // this.infectionService.getInfection().subscribe(infections =>
-    //   this.infections = infections
-    // );
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();;
   }
 
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+    this.modalRef = this.modalService.show(template, this.config);
   }
   openModal2(template: TemplateRef<any>) {
-    this.modalRef2 = this.modalService.show(template);
+    this.modalRef2 = this.modalService.show(template, this.config);
   }
   closeFirstModal() {
     if (!this.modalRef) {
@@ -62,9 +84,17 @@ export class InfectionsComponent implements OnInit {
   }
 
   deleteInfection(event, infection) {
-    this.cancelEditing();
-    this.infectionService.deleteInfection(infection);
+    this.store.dispatch(new InfectionsActions.DelInfection(infection));
   }
+
+  editInfection(event, infection) {
+    this.store.dispatch(new InfectionsActions.GetInfection(infection));
+  }
+
+  updateInfection(infection) {
+    this.store.dispatch(new InfectionsActions.UpdateInfection(infection))
+  }
+
 
   filterClinics(infection: Infection) {
     this.unselectedClinics = this.clinics;
@@ -82,13 +112,15 @@ export class InfectionsComponent implements OnInit {
   selectClinic(clinic) {
     if (clinic.isSelected) {
       clinic.isSelected = !clinic.isSelected;
-      let cliIndex = this.selectedClinics.findIndex((el: Clinic) => el == clinic);
+      let cliIndex = this.selectedClinics
+        .findIndex(
+          (el: Clinic) => {
+            return el == clinic
+          });
       this.selectedClinics.splice(cliIndex, 1);
-      console.log(this.selectedClinics)
     } else {
       clinic.isSelected = !clinic.isSelected;
       this.selectedClinics.push(clinic)
-      console.log(this.selectedClinics)
     }
   }
 
@@ -96,29 +128,13 @@ export class InfectionsComponent implements OnInit {
     this.selectedClinics.forEach(el => {
       infection.clinics.push(el);
     })
-    this.infectionService.updateInfection(infection);
+    this.updateInfection(infection);
     this.selectedClinics = [];
-    this.cancelEditing();
   }
 
   deleteClinicFromInfection(infection, clinic) {
     let cliIndex = infection.clinics.findIndex(el => el.clinic_name == clinic.clinic_name);
     infection.clinics.splice(cliIndex, 1);
-    this.infectionService.updateInfection(infection);
-  }
-
-  editInfection(event, infection) {
-    this.editState = true;
-    this.infectionToEdit = infection;
-  }
-
-  updateInfection(infection) {
-    this.infectionService.updateInfection(infection);
-    this.cancelEditing();
-  }
-
-  cancelEditing() {
-    this.editState = false;
-    this.infectionToEdit = null;
+    this.store.dispatch(new InfectionsActions.UpdateInfection(infection))
   }
 }

@@ -12,6 +12,8 @@ import { MailsComponent } from './mails/mails.component';
 
 //bootstrap
 import { TabsModule } from 'ngx-bootstrap';
+import { CollapseModule } from '../info-page/collapse/collapse.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //ngrx
 import { StoreModule } from '@ngrx/store';
@@ -28,6 +30,8 @@ import { MailEffects } from 'src/app/+store/mail/mail.effects';
     CommonModule,
     TabsModule.forRoot(),
     FormsModule,
+    CollapseModule,
+    BrowserAnimationsModule,
     StoreModule.forFeature('infections', InfectionsReducer),
     EffectsModule.forFeature([InfectionsEffects]),
     StoreModule.forFeature('clinics', clinicReducer),

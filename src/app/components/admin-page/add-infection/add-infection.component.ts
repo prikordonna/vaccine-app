@@ -7,6 +7,10 @@ import { ClinicService } from '../../../services/clinic.service';
 import { map } from 'rxjs/operators';
 import { Clinic } from 'src/app/models';
 
+import { Store, select } from '@ngrx/store';
+import { AppState, InfectionsState, getInfectionsState } from './../../../+store';
+import * as InfectionsActions from '../../../+store/infections/infections.action';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-infection',
@@ -15,6 +19,9 @@ import { Clinic } from 'src/app/models';
 })
 
 export class AddInfectionComponent implements OnInit {
+  infectionState$: Observable<InfectionsState>;
+  private sub: Subscription;
+
   infection: Infection = {
     name: '',
     result: '',
@@ -32,6 +39,7 @@ export class AddInfectionComponent implements OnInit {
     adult: false,
     clinics: [],
   }
+
   clinicList = [];
   selectedClinics = [];
 
@@ -40,9 +48,11 @@ export class AddInfectionComponent implements OnInit {
     ignoreBackdropClick: true,
     keyboard: false
   };
-  constructor(private infectionService: InfectionService,
+
+  constructor(
     private modalService: BsModalService,
-    private clinicService: ClinicService
+    private clinicService: ClinicService,
+    private store: Store<AppState>,
   ) { }
 
   ngOnInit() {
@@ -58,6 +68,8 @@ export class AddInfectionComponent implements OnInit {
           this.clinicList = clinics;
         }
       )
+    this.infectionState$ = this.store.pipe(select(getInfectionsState));
+
   }
 
   selectClinic(clinic) {
@@ -77,8 +89,7 @@ export class AddInfectionComponent implements OnInit {
     this.clinicList.forEach(el => {
       el.isSelected = false;
     })
-    this.selectedClinics= [];
-    console.log(this.selectedClinics)
+    this.selectedClinics = [];
   }
 
   openModal(template: TemplateRef<any>) {
@@ -86,25 +97,28 @@ export class AddInfectionComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.infection.name != '' && this.infection.result != '' && this.infection.simptoms != '') {
-      this.infection.clinics = this.selectedClinics;
-      this.infectionService.addInfection(this.infection);
-      this.infection.name = '';
-      this.infection.result = '';
-      this.infection.simptoms = '';
-      this.infection.day1 = false;
-      this.infection.day3 = false;
-      this.infection.month2 = false;
-      this.infection.month4 = false;
-      this.infection.month6 = false;
-      this.infection.month12 = false;
-      this.infection.month18 = false;
-      this.infection.year6 = false;
-      this.infection.year14 = false;
-      this.infection.year16 = false;
-      this.infection.adult = false;
-      this.clearSelected();
-    }
+    this.infection.clinics = this.selectedClinics;
+    this.store.dispatch(new InfectionsActions.AddInfection(this.infection));
+    this.clearSelected();
+    this.clearInfection();
+  }
+
+  clearInfection() {
+    this.infection.name = '';
+    this.infection.result = '';
+    this.infection.ways = '';
+    this.infection.simptoms = '';
+    this.infection.day1 = false;
+    this.infection.day3 = false;
+    this.infection.month2 = false;
+    this.infection.month4 = false;
+    this.infection.month6 = false;
+    this.infection.month12 = false;
+    this.infection.month18 = false;
+    this.infection.year6 = false;
+    this.infection.year14 = false;
+    this.infection.year16 = false;
+    this.infection.adult = false;
   }
 
 }
