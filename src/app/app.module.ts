@@ -44,7 +44,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { TabsModule, ModalModule, CollapseModule, BsDropdownModule, CarouselModule } from 'ngx-bootstrap';
 
 import { ToastrModule } from 'ngx-toastr';
-import { MailsComponent } from './admin-page/mails/mails.component';
 
 @NgModule({
   declarations: [

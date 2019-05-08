@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Mail } from '../../../models/mail';
 import { MailService } from '../../../services/mail.service';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrsService } from '../../../services/toastrs.service';
+
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -18,16 +19,10 @@ export class FormComponent implements OnInit {
     message: ''
   }
 
-  constructor(private mailService: MailService, private toastr: ToastrService) { }
+  constructor(private mailService: MailService, private notification: ToastrsService) { }
 
   ngOnInit() {
   }
-  
-  showSuccess(){
-    this.toastr.success('Дякуємо за звернення!', 'Ваша заявка відправлена',{
-      positionClass: 'toast-bottom-center'
-    });
-  } 
 
   onSubmit(): void {
     if (this.mail.name != '' && this.mail.email != ''
@@ -40,6 +35,7 @@ export class FormComponent implements OnInit {
       
     }
     this.addMailForm.reset();
+    this.notification.success();
   }  
 
   processForm() {
