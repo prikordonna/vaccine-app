@@ -84,18 +84,19 @@ export function InfectionsReducer(
             }
         case InfectionsActionsType.ADD_INFECTION:
             {
-                return {
-                    ...state
-                };
-            }
-        case InfectionsActionsType.ADD_INFECTION_SUCCESS:
-            {
+
                 const infection = { ...<Infection>action.payload };
                 const data = [...state.data, infection];
                 return {
                     ...state,
                     data,
                     infectionToEdit: null,
+                };
+            }
+        case InfectionsActionsType.ADD_INFECTION_SUCCESS:
+            {
+                return {
+                    ...state
                 };
             }
         case InfectionsActionsType.ADD_INFECTION_ERROR:

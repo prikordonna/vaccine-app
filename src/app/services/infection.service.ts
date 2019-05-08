@@ -42,14 +42,11 @@ export class InfectionService {
   }
 
   deleteInfection(infection: Infection) {
-    console.log(infection);
     this.infectionDoc = this.db.doc(`infections/${infection.id}`);
-    console.log(`Element with id(${infection.id}) was deleted`);
     return this.infectionDoc.delete();
   }
   updateInfection(infection): Promise<void> {
     this.infectionDoc = this.db.doc(`infections/${infection.id}`);
-    console.log(`Element with id(${infection.id}) was edited`);
     return this.infectionDoc.update(infection);
   }
 }

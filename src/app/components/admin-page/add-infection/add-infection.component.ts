@@ -70,12 +70,6 @@ export class AddInfectionComponent implements OnInit {
       )
     this.infectionState$ = this.store.pipe(select(getInfectionsState));
 
-    this.sub = this.infectionState$
-      .subscribe((infectionState) => {
-        if (infectionState.infectionToEdit) {
-          this.infection = infectionState.infectionToEdit;
-        }
-      })
   }
 
   selectClinic(clinic) {

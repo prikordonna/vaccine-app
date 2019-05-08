@@ -65,11 +65,15 @@ export class InfectionsComponent implements OnInit {
     this.store.dispatch(new InfectionsActions.GetInfections());
   }
 
+  ngOnDestroy() {
+    this.sub.unsubscribe();;
+  }
+
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, this.config);
   }
   openModal2(template: TemplateRef<any>) {
-    this.modalRef2 = this.modalService.show(template);
+    this.modalRef2 = this.modalService.show(template, this.config);
   }
   closeFirstModal() {
     if (!this.modalRef) {
@@ -114,11 +118,9 @@ export class InfectionsComponent implements OnInit {
             return el == clinic
           });
       this.selectedClinics.splice(cliIndex, 1);
-      console.log(this.selectedClinics)
     } else {
       clinic.isSelected = !clinic.isSelected;
       this.selectedClinics.push(clinic)
-      console.log(this.selectedClinics)
     }
   }
 
@@ -126,7 +128,7 @@ export class InfectionsComponent implements OnInit {
     this.selectedClinics.forEach(el => {
       infection.clinics.push(el);
     })
-    this.store.dispatch(new InfectionsActions.UpdateInfection(infection))
+    this.updateInfection(infection);
     this.selectedClinics = [];
   }
 
@@ -135,5 +137,4 @@ export class InfectionsComponent implements OnInit {
     infection.clinics.splice(cliIndex, 1);
     this.store.dispatch(new InfectionsActions.UpdateInfection(infection))
   }
-
 }
