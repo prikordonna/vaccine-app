@@ -12,8 +12,8 @@ export class MailService {
     mails: Observable<Mail[]>;
     mailDoc: AngularFirestoreDocument<Mail>;
   
-  constructor(private smth: AngularFirestore) {
-    this.mailsCollection = smth.collection<Mail>('mails', ref => ref.orderBy('title', 'asc'));
+  constructor(private store: AngularFirestore) {
+    this.mailsCollection = store.collection<Mail>('mails');
     this.mails = this.mailsCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Mail;
@@ -36,12 +36,10 @@ export class MailService {
 
    addMail(mail: Mail) {
     this.mailsCollection.add(mail);
-    console.log(`Element was added`);
    }
 
    deleteMail(mail: Mail) {
-    this.mailDoc = this.smth.doc(`mails/${mail.id}`);
-    console.log(`Element with id(${mail.id}) was deleted`);
+    this.mailDoc = this.store.doc(`mails/${mail.id}`);
     this.mailDoc.delete();
    }
 

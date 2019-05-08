@@ -1,40 +1,44 @@
-<div class="main-box">
-  <div class="main-box-top">
-    <h3 class='main-box-top-text'>Вакцинація захищає дитину від інфекцій,<br> які можуть призвести до ускладнень, інвалідності і смерті.<br> Альтернатив вакцинації немає.</h3>
-    <a class='main-box-top-button' routerLink='/info' routerLinkActive='header-box-nav-item-active' [routerLinkActiveOptions]="{exact:true}"><p class='main-box-top-button-p'>ПРО ВАКЦИНИ</p></a>
-  </div>
-
-  <div class='main-box-footer'>
-    <h1 class="main-box-footer-text">А знаєте ВИ?</h1>
-    <carousel>
-      <div class="main-box-footer-carousel-container">
-        <slide>
-          <div>
-            <h2>Вакцинація -</h2>
-            <h4>Ваш єдиний захист від хвороб</h4>
-            <p> Загартовування, повноцінне харчування та сон - важливі для здоровя вашої дитини й зміцнюють її. Але це не захист від інфекцій, про яких проводиться вакцінація</p>
-          </div>
-        </slide>
-        <slide>
-          <div>
-            <h2>95/100</h2>
-            <h2>не захворіють</h2>
-            <p> навіть при прямому контакті з інфекцією, якщо вони будуть вчасно вакциновані за календарем вакцинації в Україні </p>
-          </div>
-        </slide>
-        <slide>
-          <div>
-            <h2>ВАКЦИНАЦІЮ</h2>
-            <h4>Треба робити вчасно</h4>
-            <p>Малюк починає контактувати зі світом з перших днів життя: у пологовому будинку, на вулиці, у лікарні, та навіть вдома з родичами. Чим раніше ви вакцинуєте дитину, тим менше вона наражатиметься на небезпеку захворіти </p>
-          </div>
-        </slide>
+<div class="container-fluid bg">
+  <carousel>
+    <slide>
+      <div class="text-center py-5 text-white">
+        <h2>Вакцинація</h2>
+        <div class="lead">
+          <h3>Ваш єдиний захист від хвороб</h3>
+          <p>Загартовування, повноцінне харчування та сон - важливі для здоровя вашої дитини. <br>Але це не захист від інфекцій, про яких проводиться вакцінація.</p>
+        </div>
       </div>
-    </carousel>
+    </slide>
+    <slide>
+      <div class="text-center py-5 text-white">
+        <h2>95/100</h2>
+        <div class="lead">
+          <p>Дітей не захворіють навіть при прямому контакті з інфекцією, якщо <br>вони будуть вчасно вакциновані за календарем вакцинації в Україні</p>
+        </div>
+      </div>
+    </slide>
+    <slide>
+      <div class="text-center py-5 text-white">
+        <h2>ВАКЦИНАЦІЮ</h2>
+        <div class="lead">
+          <h3>Треба робити вчасно</h3>
+          <p>Малюк починає контактувати зі світом з перших днів житт. <br>Чим раніше ви вакцинуєте дитину, тим менше вона наражатиметься на небезпеку захворіти.</p>
+        </div>
+      </div>
+    </slide>
+  </carousel>
+
+  <div class="row justify-content-center">
+    <button class="btn btn-primary btn-lg" routerLink='/info' routerLinkActive='header-box-nav-item-active' [routerLinkActiveOptions]="{exact:true}">ПРО ВАКЦИНИ</button>
   </div>
 </div>
 
-
-
-
-
+<div class="bg2">
+  <div class="row justify-content-center">
+    <p id='donate'>Мета <span id="vaccinum">VACCINIUM</span> допомогти населенню швидко віднайти клініку де можна зробити вакцинацію, відповідно до потреб людини. Легкості в пошуку надає синхронізована таблиця щодо хронологічності щеплень відповідно до віку та інфекцій та геолокаційні мітки клінік з вибраними параметрами. Як і усі соціальні проекти <span id="vaccinum">VACCINIUM</span> немає комерційного підгрунтя, тому бедемо вдячні за Вашу підтримку</p>
+    <button type="button" class="btn btn-primary btn-lg" id='rotate' placement="left"
+      popover="Для допомоги у розвитку проекту 2437 5311 1566 0025">
+      ДОПОМОГА ПРОЕКТУ
+    </button>
+  </div>
+</div>
