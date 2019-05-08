@@ -6,6 +6,10 @@ export enum InfectionsActionsType {
     GET_INFECTIONS_SUCCESS = '[INFECTIONS] GET_INFECTIONS_SUCCESS',
     GET_INFECTIONS_ERROR = '[INFECTIONS] GET_INFECTIONS_ERROR',
 
+    GET_INFECTION = '[INFECTIONS] GET_INFECTION',
+    GET_INFECTION_SUCCESS = '[INFECTIONS] GET_INFECTION_SUCCESS',
+    GET_INFECTION_ERROR = '[INFECTIONS] GET_INFECTION_ERROR',
+
     UPDATE_INFECTION = '[INFECTIONS] UPDATE_INFECTION',
     UPDATE_INFECTION_SUCCESS = '[INFECTIONS] UPDATE_INFECTION_SUCCESS',
     UPDATE_INFECTION_ERROR = '[INFECTIONS] UPDATE_INFECTION_ERROR',
@@ -14,7 +18,7 @@ export enum InfectionsActionsType {
     ADD_INFECTION_SUCCESS = '[INFECTIONS] ADD_INFECTION_SUCCESS',
     ADD_INFECTION_ERROR = '[INFECTIONS] ADD_INFECTION_ERROR',
 
-    DEL_INFECTION = '[INFECTIONS] DEL_INFECTION',
+        DEL_INFECTION = '[INFECTIONS] DEL_INFECTION',
     DEL_INFECTION_SUCCESS = '[INFECTIONS] DEL_INFECTION_SUCCESS',
     DEL_INFECTION_ERROR = '[INFECTIONS] DEL_INFECTION_ERROR',
 }
@@ -32,6 +36,24 @@ export class GetInfectionsSuccess implements Action {
 
 export class GetInfectionsError implements Action {
     public readonly type = InfectionsActionsType.GET_INFECTIONS_ERROR;
+    constructor(public payload: any | string) {
+    }
+}
+
+export class GetInfection implements Action {
+    public readonly type = InfectionsActionsType.GET_INFECTION;
+    constructor(public payload: Infection) {
+    }
+}
+
+export class GetInfectionSuccess implements Action {
+    public readonly type = InfectionsActionsType.GET_INFECTION_SUCCESS;
+    constructor(public payload: Infection) {
+    }
+}
+
+export class GetInfectionError implements Action {
+    public readonly type = InfectionsActionsType.GET_INFECTION_ERROR;
     constructor(public payload: any | string) {
     }
 }
@@ -94,6 +116,9 @@ export type InfectionsActions =
     | GetInfections
     | GetInfectionsSuccess
     | GetInfectionsError
+    | GetInfection
+    | GetInfectionSuccess
+    | GetInfectionError
     | UpdateInfection
     | UpdateInfectionSuccess
     | UpdateInfectionError

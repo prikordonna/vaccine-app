@@ -39,6 +39,7 @@ import { StoreModule } from '@ngrx/store';
 import { appReducer } from './+store/index';
 import { MapModule } from './map-page/map.module';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 //bootstrap
 import { TabsModule, ModalModule, CollapseModule, BsDropdownModule, CarouselModule } from 'ngx-bootstrap';
@@ -80,6 +81,7 @@ import { ToastrModule } from 'ngx-toastr';
     InfoPageModule,
     ContactPageModule,
     AdminPageModule,
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [
     ClinicService,

@@ -16,19 +16,24 @@ import { Observable, Subscription } from 'rxjs';
   templateUrl: './infections.component.html',
   styleUrls: ['./infections.component.scss']
 })
+
 export class InfectionsComponent implements OnInit {
   infectionsState$: Observable<InfectionsState>;
-  editState: boolean = false;
   infectionToEdit: Infection;
   modalRef: BsModalRef | null;
   modalRef2: BsModalRef;
+  config = {
+    ignoreBackdropClick: true,
+    keyboard: false
+  };
+
+  private getInfectionSubscription: Subscription;
+
   clinics: Clinic[];
   unselectedClinics: Clinic[];
   selectedClinics = [];
-  private sub: Subscription;
 
   constructor(
-    private infectionService: InfectionService,
     private modalService: BsModalService,
     private clinicService: ClinicService,
     private store: Store<AppState>
@@ -43,13 +48,15 @@ export class InfectionsComponent implements OnInit {
       )
     this.infectionsState$ = this.store.pipe(select('infections'));
     this.store.dispatch(new InfectionsActions.GetInfections());
-    // this.infectionService.getInfection().subscribe(infections =>
-    //   this.infections = infections
-    // );
+    this.getInfectionSubscription = this.infectionsState$
+    .subscribe(
+      (infectionsState) => {
+        this.infectionToEdit = infectionsState.infectionToEdit;
+      });
   }
 
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+    this.modalRef = this.modalService.show(template, this.config);
   }
   openModal2(template: TemplateRef<any>) {
     this.modalRef2 = this.modalService.show(template);
@@ -63,10 +70,18 @@ export class InfectionsComponent implements OnInit {
   }
 
   deleteInfection(event, infection) {
-    this.cancelEditing();
-    this.infectionService.deleteInfection(infection);
-    // this.store.dispatch(new InfectionsActions.DelInfection(infection));
+    console.log('delete')
+    this.store.dispatch(new InfectionsActions.DelInfection(infection));
   }
+
+  editInfection(event, infection) {
+    this.store.dispatch(new InfectionsActions.GetInfection(infection))
+  }
+
+  updateInfection(infection) {
+    this.store.dispatch(new InfectionsActions.UpdateInfection(infection))
+  }
+
 
   filterClinics(infection: Infection) {
     this.unselectedClinics = this.clinics;
@@ -98,9 +113,8 @@ export class InfectionsComponent implements OnInit {
     this.selectedClinics.forEach(el => {
       infection.clinics.push(el);
     })
-    this.infectionService.updateInfection(infection);
+    this.store.dispatch(new InfectionsActions.UpdateInfection(infection))
     this.selectedClinics = [];
-    this.cancelEditing();
   }
 
   deleteClinicFromInfection(infection, clinic) {
@@ -109,18 +123,4 @@ export class InfectionsComponent implements OnInit {
     this.store.dispatch(new InfectionsActions.UpdateInfection(infection))
   }
 
-  editInfection(event, infection) {
-    this.editState = true;
-    this.infectionToEdit = infection;
-  }
-
-  updateInfection(infection) {
-    this.store.dispatch(new InfectionsActions.UpdateInfection(infection))
-    this.cancelEditing();
-  }
-
-  cancelEditing() {
-    this.editState = false;
-    this.infectionToEdit = null;
-  }
 }

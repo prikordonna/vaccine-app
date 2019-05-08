@@ -44,6 +44,7 @@ export class AddInfectionComponent implements OnInit {
     ignoreBackdropClick: true,
     keyboard: false
   };
+
   constructor(private infectionService: InfectionService,
     private modalService: BsModalService,
     private clinicService: ClinicService,
@@ -90,11 +91,10 @@ export class AddInfectionComponent implements OnInit {
     this.modalRef = this.modalService.show(template, this.config);
   }
 
-  onSubmit() {
+  onSubmit(infection) {
     if (this.infection.name != '' && this.infection.result != '' && this.infection.simptoms != '') {
       this.infection.clinics = this.selectedClinics;
-      // this.store.dispatch(new InfectionsActions.AddInfection(this.infection));
-      this.infectionService.addInfection(this.infection);
+      this.store.dispatch(new InfectionsActions.AddInfection(this.infection));
       this.infection.name = '';
       this.infection.result = '';
       this.infection.ways = '';

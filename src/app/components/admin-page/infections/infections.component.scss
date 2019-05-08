@@ -1,7 +1,12 @@
 .form-check {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 1em;
     &-item {
         width: 33%;
     }
+}
+
+#clinics {
+    min-height: 100%;
 }

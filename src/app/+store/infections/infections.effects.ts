@@ -25,11 +25,33 @@ export class InfectionsEffects {
             ofType<InfectionsActions.GetInfections>(InfectionsActions.InfectionsActionsType.GET_INFECTIONS),
             switchMap(
                 (action: InfectionsActions.GetInfections) => {
-                    return this.infectionService.getInfection()
+                    return this.infectionService.getInfections()
                         .pipe(
                             map(
                                 (response: Infection[]) => {
                                     return new InfectionsActions.GetInfectionsSuccess(response);
+                                }),
+                            catchError(
+                                (error: Error) => {
+                                    return of(new InfectionsActions.GetInfectionsError(error));
+                                }
+                            )
+                        )
+                })
+        )
+
+    @Effect()
+    getInfection$: Observable<Action> = this.actions$
+        .pipe(
+            ofType<InfectionsActions.GetInfection>(InfectionsActions.InfectionsActionsType.GET_INFECTION),
+            pluck('payload'),
+            switchMap(
+                (payload) => {
+                    return this.infectionService.getInfection(payload)
+                        .pipe(
+                            map(
+                                (response: Infection) => {
+                                    return new InfectionsActions.GetInfectionSuccess(response);
                                 }),
                             catchError(
                                 (error: Error) => {
@@ -48,18 +70,12 @@ export class InfectionsEffects {
             concatMap((payload) => {
                 return this.infectionService
                     .updateInfection(payload)
-                    .pipe(
-                        map(
-                            (response: Infection) => {
-                                return of(new InfectionsActions.UpdateInfectionSuccess(response));
-                            }
-                        ),
-                        catchError(
-                            (error: any) => {
-                                return of(new InfectionsActions.UpdateInfectionError(error));
-                            }
-                        )
-                    )
+                    .then(() => {
+                        return new InfectionsActions.UpdateInfectionSuccess(payload);
+                    })
+                    .catch((error) => {
+                        return new InfectionsActions.UpdateInfectionError(error);
+                    })
             })
         )
 
@@ -71,42 +87,30 @@ export class InfectionsEffects {
             concatMap((payload: Infection) => {
                 return this.infectionService
                     .addInfection(payload)
-                    .pipe(
-                        map(
-                            (response: Infection) => {
-                                return of(new InfectionsActions.AddInfectionSuccess(response));
-                            }
-                        ),
-                        catchError(
-                            (error: any) => {
-                                return of(new InfectionsActions.AddInfectionError(error));
-                            }
-                        )
-                    )
+                    .then(() => {
+                        return new InfectionsActions.AddInfectionSuccess(payload);
+                    })
+                    .catch((error) => {
+                        return new InfectionsActions.AddInfectionError(error);
+                    })
             })
         )
 
-        @Effect()
-        delInfection$: Observable<Action> = this.actions$
-            .pipe(
-                ofType<InfectionsActions.DelInfection>(InfectionsActions.InfectionsActionsType.DEL_INFECTION),
-                pluck('payload'),
-                concatMap((payload: Infection) => {
-                    return this.infectionService
-                        .deleteInfection(payload)
-                        .pipe(
-                            map(
-                                (response: Infection) => {
-                                    return of(new InfectionsActions.DelInfectionSuccess(payload));
-                                }
-                            ),
-                            catchError(
-                                (error: any) => {
-                                    return of(new InfectionsActions.DelInfectionError(error));
-                                }
-                            )
-                        )
-                })
-            )
+    @Effect()
+    delInfection$: Observable<Action> = this.actions$
+        .pipe(
+            ofType<InfectionsActions.DelInfection>(InfectionsActions.InfectionsActionsType.DEL_INFECTION),
+            pluck('payload'),
+            concatMap((payload: Infection) => {
+                return this.infectionService
+                    .deleteInfection(payload)
+                    .then(() => {
+                        return new InfectionsActions.DelInfectionSuccess(payload);
+                    })
+                    .catch((error) => {
+                        return new InfectionsActions.DelInfectionError(error);
+                    })
+            })
+        )
 }
 

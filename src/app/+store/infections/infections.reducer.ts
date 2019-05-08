@@ -32,6 +32,28 @@ export function InfectionsReducer(
                     error,
                 };
             }
+        case InfectionsActionsType.GET_INFECTION:
+            {
+                return {
+                    ...state
+                }
+            }
+        case InfectionsActionsType.GET_INFECTION_SUCCESS:
+            {
+                const infectionToEdit = { ...(<Infection>action.payload) };
+                return {
+                    ...state,
+                    infectionToEdit,
+                };
+            }
+        case InfectionsActionsType.GET_INFECTION_ERROR:
+            {
+                const error = action.payload;
+                return {
+                    ...state,
+                    error,
+                };
+            }
         case InfectionsActionsType.UPDATE_INFECTION:
             {
                 return {
@@ -41,14 +63,14 @@ export function InfectionsReducer(
         case InfectionsActionsType.UPDATE_INFECTION_SUCCESS:
             {
                 const infection = { ...<Infection>action.payload };
-                const data = { ...state.data };
+                const data = [...state.data];
                 const index = data.findIndex(el => el.id === infection.id);
                 data[index] = infection;
                 console.log('update infection');
-
                 return {
                     ...state,
                     data,
+                    infectionToEdit: null,
                 };
             }
         case InfectionsActionsType.UPDATE_INFECTION_ERROR:
@@ -68,7 +90,7 @@ export function InfectionsReducer(
         case InfectionsActionsType.ADD_INFECTION_SUCCESS:
             {
                 const infection = { ...<Infection>action.payload };
-                const data = { ...state.data, infection };
+                const data = [...state.data, infection];
                 return {
                     ...state,
                     data,
@@ -82,7 +104,7 @@ export function InfectionsReducer(
                     error,
                 };
             }
-            case InfectionsActionsType.DEL_INFECTION:
+        case InfectionsActionsType.DEL_INFECTION:
             {
                 return {
                     ...state
