@@ -19,12 +19,8 @@ import { Observable } from 'rxjs';
 export class MailsComponent implements OnInit {
   mailState$: Observable<MailState>;
   modalRef: BsModalRef | null;
-  modalRef2: BsModalRef;
   mails: Mail[];
-  unselectedMails: Mail[];
-  selectedMails = [];
-  editState: boolean = false;
-  mailToEdit: Mail;
+  mailReaded: boolean = false;
 
   constructor(
     private mailService: MailService,
@@ -48,11 +44,15 @@ export class MailsComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  deleteMail( mail) {
+  deleteMail( mail ) {
     this.mailService.deleteMail(mail);
     this.notification.warning();
   }
-
+  
+  markAsRead( mail ) {
+    this.mailReaded = true;
+    console.log(`item with ${mail.name} is picked`);
+  }
 
 }
 
