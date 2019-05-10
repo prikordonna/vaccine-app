@@ -1,4 +1,3 @@
-
 .bg {
     margin-top: -5em;
     padding-top: 15%;
@@ -16,11 +15,18 @@
 }
 
 #vaccinum {
-    font-family: italic;
+    font-style: italic;
     font-size: 1em;
     color: firebrick;
 }
 
+.main {
+    margin-top: -5em;
+    padding-top: 15%;
+    background-image: url(/assets/images/doctor.png);
+    background-size: cover;
+    height: -webkit-fill-available;
+}
 
 #donate {
     margin-left: 5%;
