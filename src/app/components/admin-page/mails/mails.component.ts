@@ -19,12 +19,8 @@ import { Observable } from 'rxjs';
 export class MailsComponent implements OnInit {
   mailState$: Observable<MailState>;
   modalRef: BsModalRef | null;
-  modalRef2: BsModalRef;
   mails: Mail[];
-  unselectedMails: Mail[];
-  selectedMails = [];
-  editState: boolean = false;
-  mailToEdit: Mail;
+  mailRead: boolean = false;
 
   constructor(
     private mailService: MailService,
@@ -52,7 +48,10 @@ export class MailsComponent implements OnInit {
     this.mailService.deleteMail(mail);
     this.notification.warning();
   }
+  
+  markAsRead() {
 
+  }
 
 }
 

@@ -28,7 +28,10 @@
                     <a (click)='auth.SignIn()' class="nav-link text-center cursor">Увійти</a>
                 </ng-template>
             </li>
-            <li class="nav-item dropdown text-center navbar-dark" *ngIf='auth.user$ | async as user; else login'>
+            <li class="d-flex nav-item dropdown text-center navbar-dark" *ngIf='auth.user$ | async as user; else login'>
+                <div class="notification nav-link" routerLink='/settings'>
+                    <a><img src="./../../../assets/images/notification.png" alt="Notification icon"></a>
+                </div>
                 <div class="navbar-dark" dropdown>
                     <a dropdownToggle class="dropdown-toggle mr-4 nav-link  cursor">
                         {{user.displayName}}

@@ -1,9 +1,10 @@
 <div *ngIf="mails?.length > 0; else noItems">
     <div class="container">
-        <table class="table table-responsive table-hover">
+        <table>
             <thead>
                 <tr>
                     <th class="text-center">Повідомлення</th>
+                    <th class="text-center">Час</th>
                     <th class="text-center">Імейл</th>
                     <th class="text-center">Iм'я</th>
                     <th class="text-center">Дії</th>
@@ -12,6 +13,7 @@
             <tbody>
                 <tr *ngFor="let mail of mails">
                     <td class="col-5">{{mail.message}}</td>
+                    <td class="col-5">{{getDate}}</td>
                     <td class="col-3">{{mail.email}}</td>
                     <td class="col-3">{{mail.name}}</td>
                     <td class="col-1">
