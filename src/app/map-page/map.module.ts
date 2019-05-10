@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MapComponent } from './map/map.component';
-import {MapPageComponent} from './map-page.component'
-import {PanelComponent} from './panel/panel.component';
+import { MapComponent } from './map/map.component';
+import { MapPageComponent } from './map-page.component'
+import { PanelComponent } from './panel/panel.component';
 import { StoreModule } from '@ngrx/store';
-import { locationReducer, LocationsEffects } from '../+store';
+import { clinicsReducer, ClinicsEffects } from '../+store';
 import { AgmCoreModule } from '@agm/core';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -16,11 +16,11 @@ import { EffectsModule } from '@ngrx/effects';
   ],
   imports: [
     CommonModule,
-    StoreModule.forFeature('locations', locationReducer),
+    StoreModule.forFeature('clinics', clinicsReducer),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB3a71eakX1ji_aFPmQpGf5gWD278RRl4o'
+      apiKey: 'AIzaSyAfJTVKnpLl0ULuuwDuix-9ANpyQhP6mfc'
     }),
-    EffectsModule.forFeature([LocationsEffects]),
+    EffectsModule.forFeature([ClinicsEffects]),
   ],
   exports: [
     MapPageComponent,

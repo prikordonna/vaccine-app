@@ -1,3 +1,19 @@
+.bg {
+    margin-top: -5em;
+    padding-top: 15%;
+    background-image: url(/assets/images/doctor.png);
+    background-size: cover;
+    width: 100%;
+    height: -webkit-fill-available;
+
+}
+
+.bg2 {
+   background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url(/assets/images/vaccine3.png);
+   background-size: cover;
+   height: 24em;
+}
+
 #vaccinum {
     font-style: italic;
     font-size: 1em;

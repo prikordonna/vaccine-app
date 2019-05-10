@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '../../models/';
+import { Clinic } from '../../models/';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
-import { LocationsService } from '../../services/locations.service';
+import { ClinicService } from '../../services/clinic.service';
 import { MapsService } from '../../services/maps.service';
 import {Observable} from 'rxjs';
 
@@ -18,10 +18,10 @@ export class MapComponent implements OnInit {
 
   public openedWindow: number;
 
-  public markers: Location[];
+  public markers: Clinic[];
 
   constructor(
-    private locationService: LocationsService,
+    private ClinicService: ClinicService,
     private mapApiLoader: MapsAPILoader,
     private mapsService: MapsService
   ) { }
@@ -35,7 +35,7 @@ export class MapComponent implements OnInit {
     // this.locationsService.getMarkers().subscribe(locations => 
     //   this.locations = locations
     //   )
-    this.locationService.getLocations$().subscribe(markers =>
+    this.ClinicService.getClinics$().subscribe(markers =>
         this.markers = markers
       );
 

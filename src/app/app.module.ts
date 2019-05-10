@@ -1,22 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
 import { AppRoutingModule } from './app-routing.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { InfoPageModule } from './components/info-page/info-page.module';
-import { ContactPageModule } from './components/contact-page/contact-page.module';
-
+//environment
 import { environment } from '../environments/environment';
 
+//page_modules
+import { MainPageModule} from './components/main-page/main-page.module';
+import { AdminPageModule } from './components/admin-page/admin-page.module';
+import { InfoPageModule } from './info-page/info-page.module';
+import { ContactPageModule } from './components/contact-page/contact-page.module';
+
+//components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-
-import { MainPageModule} from './components/main-page/main-page.module';
-
-import { VaccinesComponent } from './components/admin-page/vaccines/vaccines.component';
-import { AddInfectionComponent } from './components/admin-page/add-infection/add-infection.component';
-import { AddLocationComponent } from './components/admin-page/add-location/add-location.component';
-import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 //FireStore
@@ -25,39 +24,37 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 
-//Service
-import { VaccineService } from './services/vaccine.service';
+//Services
+import { InfectionService } from './services/infection.service';
 import { MapsService } from '../app/services/maps.service';
-import { LocationsService } from '../app/services/locations.service';
+import { ClinicService } from './services/clinic.service';
 
 //Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule, MatIconModule, MatButtonModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
-import {FlexLayoutModule} from "@angular/flex-layout";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
+//ngrx
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from './+store/index';
 import { MapModule } from './map-page/map.module';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { TabsModule, ModalModule, CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
-import { LocationsComponent } from './components/admin-page/locations/locations.component';
+//bootstrap
+import { TabsModule, ModalModule, CollapseModule, BsDropdownModule, CarouselModule } from 'ngx-bootstrap';
+
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    VaccinesComponent,
-    AddInfectionComponent,
-    AdminPageComponent,
     UserProfileComponent,
-    AddLocationComponent,
-    LocationsComponent,
     ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -65,6 +62,7 @@ import { LocationsComponent } from './components/admin-page/locations/locations.
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     MatTabsModule,
     MatIconModule,
     MatButtonModule,
@@ -78,13 +76,16 @@ import { LocationsComponent } from './components/admin-page/locations/locations.
     TabsModule.forRoot(),
     ModalModule.forRoot(),
     CollapseModule.forRoot(),
+    CarouselModule.forRoot(),
     MainPageModule,
     InfoPageModule,
     ContactPageModule,
+    AdminPageModule,
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [
-    LocationsService,
-    VaccineService,
+    ClinicService,
+    InfectionService,
     MapsService,
     { provide: FirestoreSettingsToken, useValue: {} }
   ],

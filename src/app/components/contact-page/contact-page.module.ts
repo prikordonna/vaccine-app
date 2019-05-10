@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { ContactPageComponent } from './contact-page.component';
 import { FormComponent } from './form/form.component';
@@ -7,6 +8,8 @@ import { FormComponent } from './form/form.component';
 @NgModule({
     imports: [
       FormsModule,
+      CommonModule,
+      ReactiveFormsModule,
     ],
     exports: [
       ContactPageComponent,

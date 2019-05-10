@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { Mail } from '../../../models/mail';
+import { MailService } from '../../../services/mail.service';
+import { ToastrsService } from '../../../services/toastrs.service';
+
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -6,17 +12,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  fullName: string;
-  email: string;
-  message: string;
+  @ViewChild('addMailForm') public addMailForm: NgForm;
+  mail: Mail = {
+    name: '',
+    email: '',
+    message: '',
+    readed: false
+  }
 
-  constructor() { }
+  constructor(private mailService: MailService, private notification: ToastrsService) { }
 
   ngOnInit() {
   }
 
-  processForm() {
-    const allInfo = `My name is ${this.fullName}. My email is ${this.email}. My message is ${this.message}`;
-    alert(allInfo);
-  }
+  onSubmit(): void {
+    if (this.mail.name != '' && this.mail.email != ''
+      && this.mail.message != '') {
+      this.mailService.addMail(this.mail);
+
+      this.mail.name = '';
+      this.mail.email = '';
+      this.mail.message = '';
+      this.mail.readed = false
+      
+    }
+    this.addMailForm.reset();
+    this.notification.success();
+  }  
 }
