@@ -10,7 +10,7 @@ import { environment } from '../environments/environment';
 //page_modules
 import { MainPageModule} from './components/main-page/main-page.module';
 import { AdminPageModule } from './components/admin-page/admin-page.module';
-import { InfoPageModule } from './components/info-page/info-page.module';
+import { InfoPageModule } from './info-page/info-page.module';
 import { ContactPageModule } from './components/contact-page/contact-page.module';
 
 //components

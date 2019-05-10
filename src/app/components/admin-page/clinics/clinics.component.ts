@@ -1,15 +1,18 @@
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ClinicService } from '../../../services/clinic.service';
+
+import { Observable, Subscription } from 'rxjs';
 
 //ngrx
 import { Store, select } from '@ngrx/store';
-import { AppState, getClinicData, getClinicToEdit } from './../../../+store';
+import { AppState, getClinicData, getClinicToEdit, getInfectionData } from './../../../+store';
+
 import * as ClinicsActions from '../../../+store/clinics/clinics.actions';
+import * as InfectionsActions from '../../../+store/infections/infections.action';
 
 import { Clinic } from '../../../models/Clinic';
-import { Observable, Subscription } from 'rxjs';
+import { Infection } from 'src/app/models/Infection';
 
 @Component({
   selector: 'app-clinics',
@@ -19,14 +22,17 @@ import { Observable, Subscription } from 'rxjs';
 export class ClinicsComponent implements OnInit {
   clinics$: Observable<Clinic[]>;
   clinicToEdit$: Observable<Clinic>;
+  infections$: Observable<Infection[]>;
+
   modalRef: BsModalRef;
 
   clinicToEdit: Clinic;
+  infections: Infection[];
 
   private clinicToEditSub: Subscription;
+  private infectionsDataSub: Subscription;
 
   constructor(
-    private clinicService: ClinicService,
     private modalService: BsModalService,
     private store: Store<AppState>,
   ) { }
@@ -34,6 +40,7 @@ export class ClinicsComponent implements OnInit {
   ngOnInit() {
     this.clinics$ = this.store.pipe(select(getClinicData));
     this.clinicToEdit$ = this.store.pipe(select(getClinicToEdit));
+    this.infections$ = this.store.pipe(select(getInfectionData));
 
     this.clinicToEditSub = this.clinicToEdit$
       .subscribe(
@@ -45,7 +52,19 @@ export class ClinicsComponent implements OnInit {
           }
         }
       )
+
+    this.infectionsDataSub = this.infections$
+      .subscribe(
+        (infections) => {
+          this.infections = infections;
+        }
+      )
     this.store.dispatch(new ClinicsActions.GetClinics());
+  }
+
+  ngOnDestroy() {
+    this.clinicToEditSub.unsubscribe();
+    this.infectionsDataSub.unsubscribe();
   }
 
   openModal(template: TemplateRef<any>) {
@@ -54,12 +73,23 @@ export class ClinicsComponent implements OnInit {
 
   deleteClinic(clinic) {
     this.store.dispatch(new ClinicsActions.DelClinic(clinic));
+    this.deleteClinicFromInfection(clinic);
   }
-  
-  editClinic(clinic) {
-    this.store.dispatch(new ClinicsActions.GetClinic(clinic));
+
+  deleteClinicFromInfection(clinic) {
+    this.store.dispatch(new InfectionsActions.GetInfections());
+    this.infections.forEach(infection => {
+      let index = infection.clinics.findIndex(el => el.id == clinic.id);
+      infection.clinics.splice(index, 1);
+      this.store.dispatch(new InfectionsActions.UpdateInfection(infection));
+    })
 
   }
+
+  editClinic(clinic) {
+    this.store.dispatch(new ClinicsActions.GetClinic(clinic));
+  }
+
   updateClinic(clinic) {
     this.store.dispatch(new ClinicsActions.UpdateClinic(clinic));
   }

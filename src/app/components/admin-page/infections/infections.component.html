@@ -79,9 +79,25 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <button type="button" class="btn btn-primary btn-block" (click)="filterClinics(infectionToEdit); openModal2(addClinics)">
+                                        <button type="button" class="btn btn-primary btn-block" (click)="isCollapsed = !isCollapsed" aria-controls="addClinics" aria-expanded="false" [attr.aria-expanded]="!isCollapsed">
                                             Додати клініки
                                         </button>
+                                    </div>
+                                    <div id="addClinics" #collapse="bs-collapse" [collapse]="!isCollapsed" *ngIf="unselectedClinics">
+                                        <div class="form-group" *ngFor="let clinic of unselectedClinics">
+                                            <table class="table table-borderless">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{clinic.clinic_name}}</td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-primary" (click)="selectClinic(clinic)">
+                                                                Додати
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                     <ng-template #addClinics>
                                         <div class="modal-header">

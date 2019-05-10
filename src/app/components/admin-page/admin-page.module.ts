@@ -12,7 +12,7 @@ import { MailsComponent } from './mails/mails.component';
 
 //bootstrap
 import { TabsModule } from 'ngx-bootstrap';
-import { CollapseModule } from '../info-page/collapse/collapse.module';
+import { CollapseModule } from '../../directives/collapse/collapse.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //ngrx

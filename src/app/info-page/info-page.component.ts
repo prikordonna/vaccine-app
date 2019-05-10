@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
+//ngrx
 import { Store, select } from '@ngrx/store';
-import { AppState, InfectionsState, getInfectionData } from './../../+store';
-import * as InfectionsActions from '../../+store/infections/infections.action';
+import { AppState, getInfectionData } from '../+store';
+import * as InfectionsActions from '../+store/infections/infections.action';
+
 import { Infection } from 'src/app/models/Infection';
 
 @Component({
@@ -12,6 +14,7 @@ import { Infection } from 'src/app/models/Infection';
   templateUrl: './info-page.component.html',
   styleUrls: ['./info-page.component.scss']
 })
+
 export class InfoPageComponent implements OnInit {
   infections$: Observable<Infection[]>;
   constructor(
