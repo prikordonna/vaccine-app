@@ -15,9 +15,7 @@ export class InfectionsEffects {
     constructor(
         private actions$: Actions,
         private infectionService: InfectionService,
-    ) {
-        console.log('[INFECTIONS EFFECTS]')
-    }
+    ) {   }
 
     @Effect()
     getInfections$: Observable<Action> = this.actions$
