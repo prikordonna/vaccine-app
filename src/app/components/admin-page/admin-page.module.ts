@@ -20,8 +20,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { InfectionsReducer } from '../../+store/infections/infections.reducer';
 import { InfectionsEffects } from '../../+store/infections/infections.effects';
-import { clinicReducer } from 'src/app/+store/clinic/clinic.reducer';
-import { ClinicsEffects } from 'src/app/+store/clinic/clinic.effects';
+import { clinicsReducer } from 'src/app/+store/clinics/clinics.reducer';
+import { ClinicsEffects } from 'src/app/+store/clinics/clinics.effects';
 import { mailReducer } from 'src/app/+store/mail/mail.reducer';
 import { MailEffects } from 'src/app/+store/mail/mail.effects';
 
@@ -34,7 +34,7 @@ import { MailEffects } from 'src/app/+store/mail/mail.effects';
     BrowserAnimationsModule,
     StoreModule.forFeature('infections', InfectionsReducer),
     EffectsModule.forFeature([InfectionsEffects]),
-    StoreModule.forFeature('clinics', clinicReducer),
+    StoreModule.forFeature('clinics', clinicsReducer),
     EffectsModule.forFeature([ClinicsEffects]),
     StoreModule.forFeature('mails', mailReducer),
     EffectsModule.forFeature([MailEffects]),

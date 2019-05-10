@@ -55,7 +55,8 @@ export function InfectionsReducer(
         case InfectionsActionsType.UPDATE_INFECTION:
             {
                 return {
-                    ...state
+                    ...state,
+                    infectionToEdit: null,
                 };
             }
         case InfectionsActionsType.UPDATE_INFECTION_SUCCESS:

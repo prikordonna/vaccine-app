@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Clinic } from '../models/Clinic';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection  } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, share } from 'rxjs/operators/';
 
@@ -69,42 +69,49 @@ export class ClinicService {
   clinicsCollection: AngularFirestoreCollection<Clinic>;
   clinics: Observable<Clinic[]>;
   clinicDoc: AngularFirestoreDocument<Clinic>;
-  
-  constructor(private smth: AngularFirestore) {
-    this.clinicsCollection = smth.collection<Clinic>('clinics', ref => ref.orderBy('title', 'asc'));
-    this.clinics = this.clinicsCollection.snapshotChanges().pipe(map(changes => {
-      return changes.map(a => {
-        const data = a.payload.doc.data() as Clinic;
-        data.id = a.payload.doc.id;
-        return data;
-      })})
-    )
+
+  constructor(private db: AngularFirestore) {
+    this.clinicsCollection = db.collection<Clinic>('clinics', ref => ref.orderBy('title', 'asc'));
+    this.clinics = this.clinicsCollection.snapshotChanges()
+      .pipe(
+        map(
+          (changes) => {
+            return changes.map(a => {
+              const data = a.payload.doc.data() as Clinic;
+              data.id = a.payload.doc.id;
+              return data;
+            })
+          })
+      )
   }
 
   getClinics$(): Observable<Clinic[]> {
     return this.clinicsCollection.snapshotChanges()
       .pipe(
-        map((changes) => changes.map((a) => {
-          const data = a.payload.doc.data() as Clinic;
-          data.id = a.payload.doc.id;
-          return data;
-        }))
+        map(
+          (changes) => changes.map((a) => {
+            const data = a.payload.doc.data() as Clinic;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          }))
       )
-   }
-   addClinic(clinic: Clinic) {
-    this.clinicsCollection.add(clinic);
-    console.log(`Element was added`);
-   }
+  }
 
-   deleteClinic(clinic: Clinic) {
-    this.clinicDoc = this.smth.doc(`clinics/${clinic.id}`);
-    console.log(`Element with id(${clinic.id}) was deleted`);
-    this.clinicDoc.delete();
-   }
-   updateClinic(clinic: Clinic) {
-    this.clinicDoc = this.smth.doc(`clinics/${clinic.id}`);
-    console.log(`Element with id(${clinic.id}) was edited`);
-    this.clinicDoc.update(clinic);
-   }
+  getClinic(clinic) {
+    return this.db.doc(`clinics/${clinic.id}`).valueChanges();
+  }
+
+  addClinic(clinic: Clinic) {
+    return this.clinicsCollection.add(clinic);
+  }
+
+  deleteClinic(clinic: Clinic) {
+    this.clinicDoc = this.db.doc(`clinics/${clinic.id}`);
+    return this.clinicDoc.delete();
+  }
+  updateClinic(clinic: Clinic) {
+    this.clinicDoc = this.db.doc(`clinics/${clinic.id}`);
+    return this.clinicDoc.update(clinic);
+  }
 
 }
