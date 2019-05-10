@@ -16,7 +16,8 @@ export class FormComponent implements OnInit {
   mail: Mail = {
     name: '',
     email: '',
-    message: ''
+    message: '',
+    readed: false
   }
 
   constructor(private mailService: MailService, private notification: ToastrsService) { }
@@ -32,14 +33,10 @@ export class FormComponent implements OnInit {
       this.mail.name = '';
       this.mail.email = '';
       this.mail.message = '';
+      this.mail.readed = false
       
     }
     this.addMailForm.reset();
     this.notification.success();
   }  
-
-  processForm() {
-    const allInfo = `My name is ${this.mail.name}. My email is ${this.mail.email}. My message is ${this.mail.message}`;
-    alert(allInfo);
-  }
 }

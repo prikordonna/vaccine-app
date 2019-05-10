@@ -6,21 +6,18 @@ export function mailReducer(state: MailState = initialMailState, action: MailsAc
     switch (action.type) {
         case MailActionsType.GET_MAILS:
             {
-                console.log('get mails action');
                 return {
                     ...state
                 }
             }
         case MailActionsType.GET_MAILS_SUCCESS:
             {
-                console.log('get mails success')
                 const data = [...(<Mail[]>action.payload)];
                 return {
                     ...state, data
                 };
             }
         default: {
-            console.log('mails unknown task')
             return state;
         }
     }

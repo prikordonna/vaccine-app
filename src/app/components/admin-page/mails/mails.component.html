@@ -11,13 +11,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let mail of mails">
+                <tr *ngFor="let mail of mails" [ngStyle]="{'background-color': mailReaded? 'green' : '#07679f33'}">
                     <td class="col-5">{{mail.message}}</td>
                     <td class="col-5">{{getDate}}</td>
                     <td class="col-3">{{mail.email}}</td>
                     <td class="col-3">{{mail.name}}</td>
                     <td class="col-1">
-                        <button type="button" class="btn btn-primary btn-block">Прочитано</button>
+                        <button type="button" class="btn btn-primary btn-block" (click)="markAsRead(mail)">Прочитано</button>
                         <button type="submit" class="btn btn-danger btn-block mt-1" (click)="openModal(del)">Видалити</button>
                     </td>
                     <ng-template #del>
