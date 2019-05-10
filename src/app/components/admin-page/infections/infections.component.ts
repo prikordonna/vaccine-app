@@ -1,14 +1,13 @@
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { InfectionService } from '../../../services/infection.service';
 import { Infection } from '../../../models/Infection';
 import { Clinic } from 'src/app/models/Clinic';
-import { ClinicService } from 'src/app/services/clinic.service';
 
 import { Store, select } from '@ngrx/store';
-import { AppState, InfectionsState, getInfectionsState, getInfectionToEdit, getInfectionData } from './../../../+store';
+import { AppState, getClinicData, getInfectionToEdit, getInfectionData } from './../../../+store';
 import * as InfectionsActions from '../../../+store/infections/infections.action';
+import * as ClinicActions from '../../../+store/clinics/clinics.actions';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -21,8 +20,12 @@ export class InfectionsComponent implements OnInit {
   infections$: Observable<Infection[]>;
   infectionsError$: Observable<string | any>;
   infectionToEdit$: Observable<Infection>;
+  clinics: Clinic[];
 
-  private sub: Subscription;
+  clinics$: Observable<Clinic[]>;
+
+  private infectionToEditSub: Subscription;
+  private clinicDataSub: Subscription;
 
   infectionToEdit: Infection;
 
@@ -34,26 +37,20 @@ export class InfectionsComponent implements OnInit {
     keyboard: false
   };
 
-  clinics: Clinic[];
   unselectedClinics: Clinic[];
   selectedClinics = [];
 
   constructor(
     private modalService: BsModalService,
-    private clinicService: ClinicService,
     private store: Store<AppState>
   ) { }
 
   ngOnInit() {
-    this.clinicService.getClinics$()
-      .subscribe(
-        (clinics) => {
-          this.clinics = clinics;
-        }
-      )
+    this.clinics$ = this.store.pipe(select(getClinicData));
     this.infections$ = this.store.pipe(select(getInfectionData));
     this.infectionToEdit$ = this.store.pipe(select(getInfectionToEdit));
-    this.sub = this.infectionToEdit$.subscribe(
+
+    this.infectionToEditSub = this.infectionToEdit$.subscribe(
       (infection) => {
         if (infection) {
           this.infectionToEdit = infection;
@@ -63,11 +60,18 @@ export class InfectionsComponent implements OnInit {
         }
       }
     )
+    this.clinicDataSub = this.clinics$
+    .subscribe(
+      (clinic) => {
+        this.clinics = clinic;
+      }
+      )
     this.store.dispatch(new InfectionsActions.GetInfections());
+    this.store.dispatch(new ClinicActions.GetClinics());
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.infectionToEditSub.unsubscribe();
   }
 
   openModal(template: TemplateRef<any>) {
@@ -109,7 +113,6 @@ export class InfectionsComponent implements OnInit {
         }
       }
     }
-    console.log(this.unselectedClinics);
   }
 
   selectClinic(clinic) {
@@ -120,11 +123,6 @@ export class InfectionsComponent implements OnInit {
         (el) => {
           clinic != el;
         })
-      //   .findIndex(
-      //     (el: Clinic) => {
-      //       return el == clinic
-      //     });
-      // this.selectedClinics.splice(cliIndex, 1);
     } else {
       clinic.isSelected = !clinic.isSelected;
       this.selectedClinics.push(clinic)

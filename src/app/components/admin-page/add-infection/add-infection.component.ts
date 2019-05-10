@@ -1,7 +1,6 @@
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { InfectionService } from '../../../services/infection.service';
 import { Infection } from '../../../models/Infection';
 import { ClinicService } from '../../../services/clinic.service';
 import { map } from 'rxjs/operators';
@@ -10,7 +9,7 @@ import { Clinic } from 'src/app/models';
 import { Store, select } from '@ngrx/store';
 import { AppState, InfectionsState, getInfectionsState } from './../../../+store';
 import * as InfectionsActions from '../../../+store/infections/infections.action';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-infection',
@@ -20,7 +19,6 @@ import { Observable, Subscription } from 'rxjs';
 
 export class AddInfectionComponent implements OnInit {
   infectionState$: Observable<InfectionsState>;
-  private sub: Subscription;
 
   infection: Infection = {
     name: '',

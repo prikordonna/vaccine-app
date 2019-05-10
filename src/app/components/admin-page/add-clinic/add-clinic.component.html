@@ -13,46 +13,37 @@
         <form (ngSubmit)="addClinicForm.form.valid && onSubmit()" #addClinicForm="ngForm" novalidate>
             <div class="form-group">
                 <label>LAT: </label>
-                <input type="text" placeholder="Add  LAT" [(ngModel)]="clinic.lat" name="lat" class="form-control"
-                #lat="ngModel" required [ngClass]="{'is-invalid': lat.invalid && (lat.dirty || lat.touched)}">
+                <input type="text" placeholder="Add  LAT" [(ngModel)]="clinic.lat" name="lat" class="form-control" #lat="ngModel" required [ngClass]="{'is-invalid': lat.invalid && (lat.dirty || lat.touched)}">
             </div>
             <div class="form-group">
                 <label>LNG: </label>
-                <input type="text" placeholder="Add  LNG" [(ngModel)]="clinic.lng" name="lng" class="form-control"
-                #lng="ngModel" required [ngClass]="{'is-invalid': lng.invalid && (lng.dirty || lng.touched)}">
+                <input type="text" placeholder="Add  LNG" [(ngModel)]="clinic.lng" name="lng" class="form-control" #lng="ngModel" required [ngClass]="{'is-invalid': lng.invalid && (lng.dirty || lng.touched)}">
             </div>
             <div class="form-group">
                 <label>Title: </label>
-                <input type="text" placeholder="Add  Title" [(ngModel)]="clinic.title" name="title" class="form-control"
-                #title="ngModel" required [ngClass]="{'is-invalid': title.invalid && (title.dirty || title.touched)}">
+                <input type="text" placeholder="Add  Title" [(ngModel)]="clinic.title" name="title" class="form-control" #title="ngModel" required [ngClass]="{'is-invalid': title.invalid && (title.dirty || title.touched)}">
             </div>
             <div class="form-group">
                 <label>Назва клініки: </label>
-                <input type="text" placeholder="Назва клініки" [(ngModel)]="clinic.clinic_name" name="clinic_name" class="form-control"
-                #clinic_name="ngModel" required [ngClass]="{'is-invalid': clinic_name.invalid && (clinic_name.dirty || clinic_name.touched)}">
+                <input type="text" placeholder="Назва клініки" [(ngModel)]="clinic.clinic_name" name="clinic_name" class="form-control" #clinic_name="ngModel" required [ngClass]="{'is-invalid': clinic_name.invalid && (clinic_name.dirty || clinic_name.touched)}">
             </div>
             <div class="form-group">
                 <label>Адреса: </label>
-                <input type="text" placeholder="Адреса" [(ngModel)]="clinic.address" name="address" class="form-control"
-                #address="ngModel" required [ngClass]="{'is-invalid': address.invalid && (address.dirty || address.touched)}">
+                <input type="text" placeholder="Адреса" [(ngModel)]="clinic.address" name="address" class="form-control" #address="ngModel" required [ngClass]="{'is-invalid': address.invalid && (address.dirty || address.touched)}">
             </div>
             <div class="form-group">
                 <label>Веб-сайт: </label>
-                <input type="text" placeholder="Веб-сайт" [(ngModel)]="clinic.website" name="website" class="form-control"
-                #website="ngModel" required [ngClass]="{'is-invalid': website.invalid && (website.dirty || website.touched)}">
+                <input type="text" placeholder="Веб-сайт" [(ngModel)]="clinic.website" name="website" class="form-control" #website="ngModel" required [ngClass]="{'is-invalid': website.invalid && (website.dirty || website.touched)}">
             </div>
             <div class="form-group">
                 <label>Контактний телефон: </label>
-                <input type="text" placeholder="Контактний телефон" [(ngModel)]="clinic.phone" name="phone" class="form-control"
-                #phone="ngModel" required [ngClass]="{'is-invalid': phone.invalid && (phone.dirty || phone.touched)}">
+                <input type="text" placeholder="Контактний телефон" [(ngModel)]="clinic.phone" name="phone" class="form-control" #phone="ngModel" required [ngClass]="{'is-invalid': phone.invalid && (phone.dirty || phone.touched)}">
             </div>
             <div class="form-group">
                 <label>Присутні вакцини від інфекцій: </label>
-                <input type="text" placeholder="Присутні вакцини від інфекцій" [(ngModel)]="clinic.vaccines" name="vaccines" class="form-control"
-                #vaccines="ngModel" required [ngClass]="{'is-invalid': vaccines.invalid && (vaccines.dirty || vaccines.touched)}">
+                <input type="text" placeholder="Присутні вакцини від інфекцій" [(ngModel)]="clinic.vaccines" name="vaccines" class="form-control" #vaccines="ngModel" required [ngClass]="{'is-invalid': vaccines.invalid && (vaccines.dirty || vaccines.touched)}">
             </div>
-            <button type="submit" class="btn btn-primary float-right" (click)="modalRef.hide()"
-            [disabled]="addClinicForm.form.pristine || addClinicForm.form.invalid">Додати</button>
+            <button type="submit" class="btn btn-primary float-right" (click)="modalRef.hide()" [disabled]="addClinicForm.form.pristine || addClinicForm.form.invalid">Додати</button>
         </form>
     </div>
 </ng-template>

@@ -2,8 +2,14 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ClinicService } from '../../../services/clinic.service';
+
+//ngrx
+import { Store, select } from '@ngrx/store';
+import { AppState, getClinicData, getClinicToEdit } from './../../../+store';
+import * as ClinicsActions from '../../../+store/clinics/clinics.actions';
+
 import { Clinic } from '../../../models/Clinic';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-clinics',
@@ -11,20 +17,35 @@ import { Observable } from 'rxjs';
   styleUrls: ['./clinics.component.scss']
 })
 export class ClinicsComponent implements OnInit {
-  clinics: Clinic[];
-  editState: boolean = false;
-  clinicToEdit: Clinic;
+  clinics$: Observable<Clinic[]>;
+  clinicToEdit$: Observable<Clinic>;
   modalRef: BsModalRef;
+
+  clinicToEdit: Clinic;
+
+  private clinicToEditSub: Subscription;
 
   constructor(
     private clinicService: ClinicService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private store: Store<AppState>,
   ) { }
 
   ngOnInit() {
-    this.clinicService.getClinics$().subscribe(clinics =>
-      this.clinics = clinics
-    )
+    this.clinics$ = this.store.pipe(select(getClinicData));
+    this.clinicToEdit$ = this.store.pipe(select(getClinicToEdit));
+
+    this.clinicToEditSub = this.clinicToEdit$
+      .subscribe(
+        (clinic) => {
+          if (clinic) {
+            this.clinicToEdit = clinic;
+          } else {
+            this.clinicToEdit = null;
+          }
+        }
+      )
+    this.store.dispatch(new ClinicsActions.GetClinics());
   }
 
   openModal(template: TemplateRef<any>) {
@@ -32,21 +53,14 @@ export class ClinicsComponent implements OnInit {
   }
 
   deleteClinic(clinic) {
-    this.cancelEditing();
-    this.clinicService.deleteClinic(clinic);
-
+    this.store.dispatch(new ClinicsActions.DelClinic(clinic));
   }
+  
   editClinic(clinic) {
-    this.editState = true;
-    this.clinicToEdit = clinic;
+    this.store.dispatch(new ClinicsActions.GetClinic(clinic));
 
   }
   updateClinic(clinic) {
-    this.clinicService.updateClinic(clinic);
-    this.cancelEditing();
-  }
-  cancelEditing() {
-    this.editState = false;
-    this.clinicToEdit = null;
+    this.store.dispatch(new ClinicsActions.UpdateClinic(clinic));
   }
 }
