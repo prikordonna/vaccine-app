@@ -1,6 +1,6 @@
 <div *ngIf="(infections$ | async).length > 0; else noItems">
     <div class="container">
-        <table class="table table-responsive table-hover">
+        <table class="table table-responsive-md table-hover">
             <thead>
                 <tr>
                     <th class="text-center">Інфекція</th>
@@ -72,7 +72,7 @@
                                                 <tr *ngFor="let clinic of infectionToEdit.clinics">
                                                     <td>{{clinic.clinic_name}}</td>
                                                     <td>
-                                                        <button type="button" class="btn btn-danger" (click)="deleteClinicFromInfection(infectionToEdit, clinic); modalRef.hide()">
+                                                        <button type="button" class="btn btn-danger" (click)="deleteClinicFromInfection(infectionToEdit, clinic);">
                                                             Видалити
                                                         </button>
                                                     </td>
@@ -86,11 +86,11 @@
                                     <ng-template #addClinics>
                                         <div class="modal-header">
                                             <h4 class="modal-title pull-left">Список клінік</h4>
-                                            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef2.hide(); closeFirstModal()">
+                                            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef2.hide();">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                         </div>
-                                        <div class="modal-body" *ngIf="infectionToEdit">
+                                        <div class="modal-body">
                                             <div class="form-check">
                                                 <div *ngFor="let clinic of unselectedClinics" class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input" (click)="selectClinic(clinic)" id="{{clinic.clinic_name}}" name='{{clinic.clinic_name}}'>

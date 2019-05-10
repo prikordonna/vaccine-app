@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-responsive">
     <thead class="thead-light">
         <tr>
             <th scope="col">Інфекція/Вік
@@ -58,20 +58,21 @@
         <tr>
             <td colspan='12' class="collapsed-td">
                 <div id="{{i}}" #collapse="bs-collapse" [collapse]="!infection.isCollapse">
-                    <div class="well well-lg card card-block card-header">
-                        <button type="button" class="close pull-right" (click)="collapse.hide()">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <p>
-                            Симптоми: {{infection.simptoms}}
-                        </p>
-                        <p>
-                            Клініки:
-                        </p>
-                        <ul>
-                            <li *ngFor="let clinic of infection.clinics">{{clinic.clinic_name}}</li>
-                        </ul>
-
+                    <div class="card">
+                        <button type="button" class="close pull-right" (click)="infection.isCollapse = !infection.isCollapse">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                        <div class="card-body">
+                            <p>
+                                Симптоми: {{infection.simptoms}}
+                            </p>
+                            <p>
+                                Клініки:
+                            </p>
+                            <ul>
+                                <li *ngFor="let clinic of infection.clinics">{{clinic.clinic_name}}</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </td>
