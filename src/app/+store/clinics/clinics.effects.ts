@@ -25,12 +25,12 @@ export class ClinicsEffects {
                         .pipe(
                             map(
                                 (response: Clinic[]) => {
-                                    console.log(response)
                                     return new ClinicsActions.GetClinicsSuccess(response);
                                 }),
-                            catchError((error: any) => {
-                                return of(new ClinicsActions.GetClinicsError(error));
-                            })
+                            catchError(
+                                (error: any) => {
+                                    return of(new ClinicsActions.GetClinicsError(error));
+                                })
                         )
                 }
             )

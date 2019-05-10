@@ -67,7 +67,6 @@ export class InfectionsEffects {
             ofType<InfectionsActions.UpdateInfection>(InfectionsActions.InfectionsActionsType.UPDATE_INFECTION),
             pluck('payload'),
             concatMap((payload: Infection) => {
-                console.log(payload)
                 return this.infectionService
                     .updateInfection(payload)
                     .then(() => {
