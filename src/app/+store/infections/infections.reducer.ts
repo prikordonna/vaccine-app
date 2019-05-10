@@ -9,23 +9,21 @@ export function InfectionsReducer(
     switch (action.type) {
         case InfectionsActionsType.GET_INFECTIONS:
             {
-                console.log('get infections action');
                 return {
                     ...state
                 }
             }
         case InfectionsActionsType.GET_INFECTIONS_SUCCESS:
             {
-                console.log('get infections success');
                 const data = [...(<Infection[]>action.payload)];
                 return {
                     ...state,
                     data,
+                    infectionToEdit: null,
                 };
             }
         case InfectionsActionsType.GET_INFECTIONS_ERROR:
             {
-                console.log('get infections success');
                 const error = action.payload;
                 return {
                     ...state,
@@ -66,11 +64,9 @@ export function InfectionsReducer(
                 const data = [...state.data];
                 const index = data.findIndex(el => el.id === infection.id);
                 data[index] = infection;
-                console.log('update infection');
                 return {
                     ...state,
                     data,
-                    infectionToEdit: null,
                 };
             }
         case InfectionsActionsType.UPDATE_INFECTION_ERROR:
@@ -84,7 +80,6 @@ export function InfectionsReducer(
             }
         case InfectionsActionsType.ADD_INFECTION:
             {
-
                 const infection = { ...<Infection>action.payload };
                 const data = [...state.data, infection];
                 return {
@@ -117,7 +112,6 @@ export function InfectionsReducer(
             {
                 const infection = { ...<Infection>action.payload };
                 const data = state.data.filter(el => el.id != infection.id);
-                console.log('delete infection');
                 return {
                     ...state,
                     data,
@@ -132,7 +126,6 @@ export function InfectionsReducer(
                 };
             }
         default: {
-            console.log('unknown task');
             return state;
         }
     }

@@ -57,6 +57,7 @@ export class InfectionsComponent implements OnInit {
       (infection) => {
         if (infection) {
           this.infectionToEdit = infection;
+          this.filterClinics(this.infectionToEdit);
         } else {
           this.infectionToEdit = null;
         }
@@ -66,7 +67,7 @@ export class InfectionsComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();;
+    this.sub.unsubscribe();
   }
 
   openModal(template: TemplateRef<any>) {
@@ -95,9 +96,10 @@ export class InfectionsComponent implements OnInit {
     this.store.dispatch(new InfectionsActions.UpdateInfection(infection))
   }
 
-
   filterClinics(infection: Infection) {
     this.unselectedClinics = this.clinics;
+    // console.log(this.unselectedClinics);
+    console.log(this.clinics);
     if (infection.clinics.length > 0) {
       for (let selectedClinic of infection.clinics) {
         for (let i = 0; i < this.unselectedClinics.length; i++) {
@@ -107,17 +109,22 @@ export class InfectionsComponent implements OnInit {
         }
       }
     }
+    console.log(this.unselectedClinics);
   }
 
   selectClinic(clinic) {
     if (clinic.isSelected) {
       clinic.isSelected = !clinic.isSelected;
-      let cliIndex = this.selectedClinics
-        .findIndex(
-          (el: Clinic) => {
-            return el == clinic
-          });
-      this.selectedClinics.splice(cliIndex, 1);
+      this.selectedClinics
+      .filter(
+        (el) => {
+          clinic != el;
+        })
+      //   .findIndex(
+      //     (el: Clinic) => {
+      //       return el == clinic
+      //     });
+      // this.selectedClinics.splice(cliIndex, 1);
     } else {
       clinic.isSelected = !clinic.isSelected;
       this.selectedClinics.push(clinic)
@@ -130,11 +137,13 @@ export class InfectionsComponent implements OnInit {
     })
     this.updateInfection(infection);
     this.selectedClinics = [];
+    this.filterClinics(infection)
   }
 
   deleteClinicFromInfection(infection, clinic) {
     let cliIndex = infection.clinics.findIndex(el => el.clinic_name == clinic.clinic_name);
     infection.clinics.splice(cliIndex, 1);
-    this.store.dispatch(new InfectionsActions.UpdateInfection(infection))
+    this.store.dispatch(new InfectionsActions.UpdateInfection(infection));
+    this.filterClinics(infection);
   }
 }
