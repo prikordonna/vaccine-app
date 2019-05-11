@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { AppRoutingModule } from '../app-routing.module'
+
 //components
 import { InfoPageComponent } from './info-page.component';
 
@@ -22,6 +24,7 @@ import { InfectionsEffects } from '../+store/infections/infections.effects';
       BrowserAnimationsModule,
       StoreModule.forFeature('infections', InfectionsReducer),
       EffectsModule.forFeature([InfectionsEffects]),
+      AppRoutingModule,
    ],
    exports: [
       InfoPageComponent

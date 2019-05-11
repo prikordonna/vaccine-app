@@ -18,7 +18,7 @@ import { EffectsModule } from '@ngrx/effects';
     CommonModule,
     StoreModule.forFeature('clinics', clinicsReducer),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAfJTVKnpLl0ULuuwDuix-9ANpyQhP6mfc'
+      apiKey: 'AIzaSyAqsHdhcMve4rullhtpYL4a5TtVb9Y8TrY'
     }),
     EffectsModule.forFeature([ClinicsEffects]),
   ],

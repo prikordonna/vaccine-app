@@ -29,11 +29,11 @@
                 </ng-template>
             </li>
             <li class="d-flex justify-content-center nav-item dropdown text-center navbar-dark" *ngIf='auth.user$ | async as user; else login'>
-                <div class="notification nav-link mr-4" routerLink='/settings'>
+                <div class="notification nav-link mr-2" routerLink='/settings'>
                     <a><img src="./../../../assets/images/notification.png" alt="Notification icon"></a>
                 </div>
                 <div class="navbar-dark" dropdown>
-                    <a dropdownToggle class="dropdown-toggle mr-4 nav-link  cursor">
+                    <a dropdownToggle class="dropdown-toggle nav-link  cursor">
                         {{user.displayName}}
                         <span class="caret"></span>
                     </a>

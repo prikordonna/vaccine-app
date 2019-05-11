@@ -1,77 +1,95 @@
 <table class="table table-responsive">
-    <thead class="thead-light">
+    <thead>
         <tr>
-            <th scope="col">Інфекція/Вік
-            </th>
-            <th scope="col">1 доба</th>
-            <th scope="col">3-5 діб</th>
-            <th scope="col">2 місяці</th>
-            <th scope="col">4 місяці</th>
-            <th scope="col">6 місяців</th>
-            <th scope="col">12 місяців</th>
-            <th scope="col">18 місяців</th>
-            <th scope="col">6 років</th>
-            <th scope="col">14 років</th>
-            <th scope="col">16 років</th>
-            <th scope="col">кожні 10 років</th>
+            <th scope="col" class="border-right border-top-0">Вік/ <br> Інфекція</th>
+            <th scope="col" class="align-middle border-top-0">3-5 діб</th>
+            <th scope="col" class="align-middle border-top-0">1 доба</th>
+            <th scope="col" class="align-middle border-top-0">2 місяці</th>
+            <th scope="col" class="align-middle border-top-0">4 місяці</th>
+            <th scope="col" class="align-middle border-top-0">6 місяців</th>
+            <th scope="col" class="align-middle border-top-0">12 місяців</th>
+            <th scope="col" class="align-middle border-top-0">18 місяців</th>
+            <th scope="col" class="align-middle border-top-0">6 років</th>
+            <th scope="col" class="align-middle border-top-0">14 років</th>
+            <th scope="col" class="align-middle border-top-0">16 років</th>
+            <th scope="col" class="align-middle border-top-0">кожні 10 років</th>
         </tr>
     </thead>
     <tbody *ngFor='let infection of (infections$ | async); let i = index'>
-        <tr (click)="infection.isCollapse = !infection.isCollapse" aria-controls="i" class='cursor' aria-expanded="false">
-            <th scope="row" colspan='1'>
-                {{infection.name}}
+        <tr (click)="infection.isCollapse = !infection.isCollapse"  aria-controls="i" class='cursor'
+            aria-expanded="false">
+            <th scope="row" colspan='1' class="border-right align-middle text-center">
+                <img src="../../assets/images/bacteria_{{infection.img}}.png" alt="">
+                <p class="mb-0">{{infection.name}}</p>
+                <img src="../../assets/images/caret-down.png" alt="">
             </th>
-            <td scope='col' clas>
-                <div *ngIf='infection.day1'>1 доза</div>
+            <td scope='col' class="align-middle text-center">
+                <div *ngIf='infection.day1'><img src="../../assets/images/vaccine.png" alt=""></div>
             </td>
-            <td scope='col'>
-                <div *ngIf='infection.day3'>1 доза</div>
+            <td scope='col' class="align-middle text-center">
+                <div *ngIf='infection.day3'><img src="../../assets/images/vaccine.png" alt=""></div>
             </td>
-            <td scope='col'>
-                <div *ngIf='infection.month2'>1 доза</div>
+            <td scope='col' class="align-middle text-center">
+                <div *ngIf='infection.month2'><img src="../../assets/images/vaccine.png" alt=""></div>
             </td>
-            <td scope='col'>
-                <div *ngIf='infection.month4'>1 доза</div>
+            <td scope='col' class="align-middle text-center">
+                <div *ngIf='infection.month4'><img src="../../assets/images/vaccine.png" alt=""></div>
             </td>
-            <td scope='col'>
-                <div *ngIf='infection.month6'>1 доза</div>
+            <td scope='col' class="align-middle text-center">
+                <div *ngIf='infection.month6'><img src="../../assets/images/vaccine.png" alt=""></div>
             </td>
-            <td scope='col'>
-                <div *ngIf='infection.month12'>1 доза</div>
+            <td scope='col' class="align-middle text-center">
+                <div *ngIf='infection.month12'><img src="../../assets/images/vaccine.png" alt=""></div>
             </td>
-            <td scope='col'>
-                <div *ngIf='infection.month18'>1 доза</div>
+            <td scope='col' class="align-middle text-center">
+                <div *ngIf='infection.month18'><img src="../../assets/images/vaccine.png" alt=""></div>
             </td>
-            <td scope='col'>
-                <div *ngIf='infection.year6'>1 доза</div>
+            <td scope='col' class="align-middle text-center">
+                <div *ngIf='infection.year6'><img src="../../assets/images/vaccine.png" alt=""></div>
             </td>
-            <td scope='col'>
-                <div *ngIf='infection.year14'>1 доза</div>
+            <td scope='col' class="align-middle text-center">
+                <div *ngIf='infection.year14'><img src="../../assets/images/vaccine.png" alt=""></div>
             </td>
-            <td scope='col'>
-                <div *ngIf='infection.year16'>1 доза</div>
+            <td scope='col' class="align-middle text-center">
+                <div *ngIf='infection.year16'><img src="../../assets/images/vaccine.png" alt=""></div>
             </td>
-            <td scope='col'>
-                <div *ngIf='infection.adult'>1 доза</div>
+            <td scope='col' class="align-middle text-center">
+                <div *ngIf='infection.adult'><img src="../../assets/images/vaccine.png" alt=""></div>
             </td>
         </tr>
         <tr>
-            <td colspan='12' class="collapsed-td">
+            <td colspan='1' class="collapsed-td border-right m-0 p-0"></td>
+            <td colspan='11' class="collapsed-td m-0 p-0">
                 <div id="{{i}}" #collapse="bs-collapse" [collapse]="!infection.isCollapse">
-                    <div class="card">
-                        <button type="button" class="close pull-right" (click)="infection.isCollapse = !infection.isCollapse">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                        <div class="card-body">
-                            <p>
-                                Симптоми: {{infection.simptoms}}
-                            </p>
-                            <p>
-                                Клініки:
-                            </p>
-                            <ul>
-                                <li *ngFor="let clinic of infection.clinics">{{clinic.clinic_name}}</li>
-                            </ul>
+                    <div class="card border-0">
+                        <!-- <button type="button" class="close pull-right"
+                            (click)="infection.isCollapse = !infection.isCollapse">
+                            <span aria-hidden="true">&times;</span>
+                        </button> -->
+                        <div class="card-body pt-0">
+                            <div>
+                                <p class="m-0 font-italic">Симптоми:</p>
+                                <p class="ml-5 text-justify">{{infection.simptoms}}</p>
+                            </div>
+                            <div>
+                                <p class="m-0 font-italic">Способи зараження:</p>
+                                <p class="ml-5 text-justify">{{infection.ways}}</p>
+                            </div>
+                            <div>
+                                <p class="m-0 font-italic">Ускладення:</p>
+                                <p class="ml-5 text-justify">{{infection.result}}</p>
+                            </div>
+                            <div>
+                                <p class="m-0 font-italic">Клініки, у яких присутня вакцина:</p>
+                                <p class="ml-4 mb-0 text-justify" *ngFor="let clinic of infection.clinics">
+                                        <a class="nav-link" 
+                                            routerLink='/map' 
+                                            routerLinkActive='active' 
+                                            [routerLinkActiveOptions]="{exact:true}">                                            
+                                            - {{clinic.clinic_name}}
+                                        </a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
