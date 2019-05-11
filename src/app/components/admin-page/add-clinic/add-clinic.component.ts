@@ -23,7 +23,7 @@ export class AddClinicComponent implements OnInit {
     lng: undefined,
     draggable: false,
     title: '',
-    icon: '/assets/images/vaccine.png',
+    icon: '/assets/images/marker.png',
     clinic_name: '',
     phone: '',
     address: '',

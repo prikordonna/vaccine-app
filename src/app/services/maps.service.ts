@@ -13,5 +13,4 @@ export class MapsService {
   public openWindow = new Subject();
 
   constructor() { }
-
 }
