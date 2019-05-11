@@ -3,12 +3,15 @@
     transition: 2s;
     &:hover {
         cursor: pointer;
+        transition: 2s;
         .card-hide {
-            display: block;           
+            display: block;
+            transition: 2s;
         }
     }
 }
 
 .card-hide {
     display: none;
+    transition: 2s;
 }

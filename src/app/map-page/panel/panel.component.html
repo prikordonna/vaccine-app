@@ -1,11 +1,11 @@
 <div class="container">
-  <div class="card border-primary mb-1" *ngFor="let location of (locations$ | async).data , let i = index">
-    <div class="card-body p-1" (click)="openWindow(location, i)">
-      <p class="card-title p-0 text-center">{{ location.title }}: {{location.clinic_name}}</p>
+  <div class="card border-primary mb-1" *ngFor="let clinic of (clinics$ | async).data , let i = index">
+    <div class="card-body p-1" (click)="openWindow(clinic, i)">
+      <p class="card-title p-0 text-center">{{ clinic.title }}: {{clinic.clinic_name}}</p>
       <div class="card-hide">
-        <p class="card-subtitle mb-2 text-muted">{{location.address}}</p>
-        <p class="card-text">Вакцини від: {{location.vaccines}}</p>
-        <a href="{{location.website}}" target="_blank" class="card-link">Відвідати веб-сайт</a>
+        <p class="card-subtitle mb-2 text-muted">{{clinic.address}}</p>
+        <p class="card-text">Вакцини від: {{clinic.vaccines}}</p>
+        <a href="{{clinic.website}}" target="_blank" class="card-link">Відвідати веб-сайт</a>
       </div>
     </div>
   </div>

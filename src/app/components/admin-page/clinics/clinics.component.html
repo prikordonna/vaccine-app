@@ -1,0 +1,99 @@
+<div *ngIf="(clinics$ | async).length > 0; else noItems">
+    <div class="container">
+        <table class="table table-responsive-md table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">Назва клініки</th>
+                    <th class="text-center">lat</th>
+                    <th class="text-center">lng</th>
+                    <th class="text-center">Title</th>
+                    <th class="text-center">Адреса</th>
+                    <th class="text-center">Веб-сайт</th>
+                    <th class="text-center">Присутні вакцини</th>
+                    <th class="text-center">Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let clinic of (clinics$ | async)">
+                    <td class="col-3">{{clinic.clinic_name}}</td>
+                    <td class="col-1">{{clinic.lat}}</td>
+                    <td class="col-1">{{clinic.lng}}</td>
+                    <td class="col-1">{{clinic.title}}</td>
+                    <td class="col-2">{{clinic.address}}</td>
+                    <td class="col-2">{{clinic.website}}</td>
+                    <td class="col-1">{{clinic.vaccines}}</td>
+                    <td class="col-1">
+                        <button type="button" class="btn btn-primary btn-block" (click)="openModal(edit); editClinic(clinic)">Редагувати</button>
+                        <button type="submit" class="btn btn-danger btn-block mt-1" (click)="openModal(del)">Видалити</button>
+
+                    </td>
+
+                    <ng-template #edit>
+                        <div class="modal-header">
+                            <h4 class="modal-title pull-left">Редагувати елемент</h4>
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" *ngIf="clinicToEdit">
+                            <form (ngSubmit)="editClinicForm.form.valid && updateClinic(clinicToEdit); modalRef.hide()" #editClinicForm="ngForm" novalidate>
+                                <div class="form-group">
+                                    <label>LAT: </label>
+                                    <input type="text" placeholder="Add  LAT" [(ngModel)]="clinicToEdit.lat" name="lat" class="form-control" #lat="ngModel" required [ngClass]="{'is-invalid': lat.invalid && (lat.dirty || lat.touched)}">
+                                </div>
+                                <div class="form-group">
+                                    <label>LNG: </label>
+                                    <input type="text" placeholder="Add  LNG" [(ngModel)]="clinicToEdit.lng" name="lng" class="form-control" #lng="ngModel" required [ngClass]="{'is-invalid': lng.invalid && (lng.dirty || lng.touched)}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Title: </label>
+                                    <input type="text" placeholder="Add  Title" [(ngModel)]="clinicToEdit.title" name="title" class="form-control" #title="ngModel" required [ngClass]="{'is-invalid': title.invalid && (title.dirty || title.touched)}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Назва клініки: </label>
+                                    <input type="text" placeholder="Назва клініки" [(ngModel)]="clinicToEdit.clinic_name" name="clinic_name" class="form-control" #clinic_name="ngModel" required [ngClass]="{'is-invalid': clinic_name.invalid && (clinic_name.dirty || clinic_name.touched)}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Адреса: </label>
+                                    <input type="text" placeholder="Адреса" [(ngModel)]="clinicToEdit.address" name="address" class="form-control" #clinic.address="ngModel" required [ngClass]="{'is-invalid': clinic.address.invalid && (clinic.address.dirty || clinic.address.touched)}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Веб-сайт: </label>
+                                    <input type="text" placeholder="Веб-сайт" [(ngModel)]="clinicToEdit.website" name="website" class="form-control" #website="ngModel" required [ngClass]="{'is-invalid': website.invalid && (website.dirty || website.touched)}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Контактний телефон: </label>
+                                    <input type="text" placeholder="Контактний телефон" [(ngModel)]="clinicToEdit.phone" name="phone" class="form-control" #phone="ngModel" required [ngClass]="{'is-invalid': phone.invalid && (phone.dirty || phone.touched)}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Присутні вакцини від інфекцій: </label>
+                                    <input type="text" placeholder="Присутні вакцини від інфекцій" [(ngModel)]="clinicToEdit.vaccines" name="vaccines" class="form-control" #vaccines="ngModel" required [ngClass]="{'is-invalid': vaccines.invalid && (vaccines.dirty || vaccines.touched)}">
+                                </div>
+                                <button type="submit" class="btn btn-primary float-right" (click)="modalRef.hide()" [disabled]="editClinicForm.form.pristine || editClinicForm.form.invalid">Зберегти зміни</button>
+                            </form>
+                        </div>
+                    </ng-template>
+
+                    <ng-template #del>
+                        <div class="modal-header">
+                            <h4 class="modal-title pull-left">Видалити елемент</h4>
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h3>Ви впевнені?</h3>
+                            <button type="submit" class="btn btn-danger btn-block mt-1" (click)="deleteClinic(clinic); modalRef.hide()">Видалити</button>
+                            <button type="button" class="btn btn-primary btn-block" (click)="modalRef.hide()">Відмінити</button>
+                        </div>
+                    </ng-template>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<ng-template #noItems>
+    <hr>
+    <h5>Відсутній елемент списку!</h5>
+</ng-template>
