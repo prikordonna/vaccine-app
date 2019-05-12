@@ -46,6 +46,7 @@ export class AuthService {
       uid: user.uid,
       displayName: user.displayName,
       email: user.email,
+      // photoUrl: user.photoUrl,
       roles: {
         reader: true
       }

@@ -16,7 +16,6 @@ import { Infection } from 'src/app/models/Infection';
 })
 
 export class InfoPageComponent implements OnInit {
-  // public rand =   Math.floor(Math.random() * 5);
   // caret: string = 'down';
 
   infections$: Observable<Infection[]>;

@@ -1,4 +1,6 @@
 <div *ngIf='auth.user$ | async as user; else login'>
+    <!-- <img src="{{user.photoURL}}" alt=""> -->
+    <div>{{user.email}}</div>
     <h1>Welcome {{user.displayName}}</h1>
     <div *ngIf='auth.canEdit(user)'>
         <a routerLink='/settings'>Адмін панель</a>
