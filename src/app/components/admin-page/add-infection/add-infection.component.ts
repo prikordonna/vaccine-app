@@ -10,7 +10,6 @@ import { Store, select } from '@ngrx/store';
 import { AppState, InfectionsState, getInfectionsState } from './../../../+store';
 import * as InfectionsActions from '../../../+store/infections/infections.action';
 import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-add-infection',
   templateUrl: './add-infection.component.html',
@@ -19,6 +18,8 @@ import { Observable } from 'rxjs';
 
 export class AddInfectionComponent implements OnInit {
   infectionState$: Observable<InfectionsState>;
+
+  public rand =   Math.floor(Math.random() * 7);
 
   infection: Infection = {
     name: '',
@@ -35,6 +36,7 @@ export class AddInfectionComponent implements OnInit {
     year14: false,
     year16: false,
     adult: false,
+    img: this.rand,
     clinics: [],
   }
 
