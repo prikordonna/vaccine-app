@@ -1,10 +1,11 @@
 export interface Roles {
-    reader: boolean;
+    reader: boolean,
     admin?: boolean
 }
 export interface User {
-    uid: string;
-    displayName: string;
-    email: string;
+    uid: string,
+    displayName: string,
+    email: string,
+    // photoUrl: string,
     roles: Roles
 }

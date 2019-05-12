@@ -17,5 +17,6 @@ export interface Infection {
   year14?: boolean;
   year16?: boolean;
   adult?: boolean;
+  img: number;
   clinics?: Clinic[];
 }
