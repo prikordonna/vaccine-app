@@ -20,7 +20,7 @@ export class MailsComponent implements OnInit {
   mailState$: Observable<MailState>;
   modalRef: BsModalRef | null;
   mails: Mail[];
-  mailReaded: boolean = false;
+  mailToMark: Mail;
 
   constructor(
     private mailService: MailService,
