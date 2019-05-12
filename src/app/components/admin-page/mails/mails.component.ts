@@ -50,8 +50,8 @@ export class MailsComponent implements OnInit {
   }
   
   markAsRead( mail ) {
-    this.mailReaded = true;
-    console.log(`item with ${mail.name} is picked`);
+    this.mailToMark = mail;
+    this.mailService.changeMailState(mail);
   }
 
 }
