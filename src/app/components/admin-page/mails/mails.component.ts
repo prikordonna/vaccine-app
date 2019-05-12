@@ -20,7 +20,7 @@ export class MailsComponent implements OnInit {
   mailState$: Observable<MailState>;
   modalRef: BsModalRef | null;
   mails: Mail[];
-  mailReaded: boolean = false;
+  mailToMark: Mail;
 
   constructor(
     private mailService: MailService,
@@ -50,8 +50,8 @@ export class MailsComponent implements OnInit {
   }
   
   markAsRead( mail ) {
-    this.mailReaded = true;
-    console.log(`item with ${mail.name} is picked`);
+    this.mailToMark = mail;
+    this.mailService.changeMailState(mail);
   }
 
 }

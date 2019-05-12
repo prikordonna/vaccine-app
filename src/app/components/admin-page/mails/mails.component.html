@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let mail of mails" [ngStyle]="{'background-color': mailReaded? 'green' : '#07679f33'}">
+                <tr *ngFor="let mail of mails" [ngStyle]="{'background-color': mail.readed? '' : '#07679f33'}">
                     <td class="col-5">{{mail.message}}</td>
                     <td class="col-5">{{getDate}}</td>
                     <td class="col-3">{{mail.email}}</td>

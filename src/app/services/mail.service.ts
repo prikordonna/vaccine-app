@@ -42,5 +42,9 @@ export class MailService {
     this.mailDoc = this.store.doc(`mails/${mail.id}`);
     this.mailDoc.delete();
    }
-
+  
+   changeMailState(mail: Mail) {
+    this.mailDoc = this.store.doc(`mails/${mail.id}`);
+    this.mailDoc.update({ readed: true });
+   }
 }
