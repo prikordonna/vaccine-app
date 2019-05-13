@@ -10,10 +10,9 @@
     background-image: url(/assets/images/doctor.png);
     background-size: cover;
     height: -webkit-fill-available;
-    margin-left: -19.3%;
-    margin-right: -19.2%;
 }
 
-::ng-deep .carousel-control-prev, ::ng-deep .carousel-control-next {
+::ng-deep .carousel-control-prev,
+ ::ng-deep .carousel-control-next {
     display: none;
-  }
+}

@@ -13,7 +13,7 @@ export class MailService {
     mailDoc: AngularFirestoreDocument<Mail>;
   
   constructor(private store: AngularFirestore) {
-    this.mailsCollection = store.collection<Mail>('mails');
+    this.mailsCollection = store.collection<Mail>('mails', ref=> ref.orderBy('readed'));
     this.mails = this.mailsCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Mail;

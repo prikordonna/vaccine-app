@@ -10,20 +10,16 @@
     <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item text-center">
-                <a class="nav-link" routerLink='/' routerLinkActive='active'
-                    [routerLinkActiveOptions]="{exact:true}">Головна</a>
+                <a class="nav-link" routerLink='/' routerLinkActive='active' [routerLinkActiveOptions]="{exact:true}">Головна</a>
             </li>
             <li class="nav-item text-center">
-                <a class="nav-link" routerLink='/info' routerLinkActive='active'
-                    [routerLinkActiveOptions]="{exact:true}">Про вакцини</a>
+                <a class="nav-link" routerLink='/info' routerLinkActive='active' [routerLinkActiveOptions]="{exact:true}">Про вакцини</a>
             </li>
             <li class="nav-item text-center">
-                <a class="nav-link" routerLink='/map' routerLinkActive='active'
-                    [routerLinkActiveOptions]="{exact:true}">Карта</a>
+                <a class="nav-link" routerLink='/map' routerLinkActive='active' [routerLinkActiveOptions]="{exact:true}">Карта</a>
             </li>
             <li class="nav-item text-center">
-                <a class="nav-link" routerLink='/contact' routerLinkActive='active'
-                    [routerLinkActiveOptions]="{exact:true}">Наші контакти</a>
+                <a class="nav-link" routerLink='/contact' routerLinkActive='active' [routerLinkActiveOptions]="{exact:true}">Наші контакти</a>
             </li>
         </ul>
         <ul class="my-2 my-lg-0 navbar-nav navbar-dark">
@@ -32,10 +28,9 @@
                     <a (click)='auth.SignIn()' class="nav-link text-center cursor">Увійти</a>
                 </ng-template>
             </li>
-            <li class="d-flex justify-content-center nav-item dropdown text-center navbar-dark"
-                *ngIf='auth.user$ | async as user; else login'>
-                <div class="notification nav-link mr-2" routerLink='/settings'>
-                    <a><img src="./../../../assets/images/notification.png" alt="Notification icon"></a>
+            <li class="d-flex justify-content-center nav-item dropdown text-center navbar-dark" *ngIf='auth.user$ | async as user; else login'>
+                <div *ngIf='auth.canEdit(user)' class="notification nav-link mr-2">
+                    <a routerLink='/settings' class="cursor"><img src="./../../../assets/images/notification.png" alt="Notification icon"></a>
                 </div>
                 <div class="navbar-dark" dropdown>
                     <a dropdownToggle class="dropdown-toggle nav-link  cursor">
@@ -43,12 +38,9 @@
                         <span class="caret"></span>
                     </a>
                     <ul *dropdownMenu class="dropdown-menu" role="menu">
-                        <li role="menuitem"><a class="dropdown-item text-center cursor"
-                                routerLink='/profile'>Профіль</a></li>
-                        <li role="menuitem" *ngIf='auth.canEdit(user)'><a class="dropdown-item text-center cursor"
-                                routerLink='/settings'>Адмін панель</a></li>
-                        <li role="menuitem"><a class="dropdown-item text-center cursor"
-                                (click)='auth.SignOut()'>Вийти</a></li>
+                        <li role="menuitem"><a class="dropdown-item text-center cursor" routerLink='/profile'>Профіль</a></li>
+                        <li role="menuitem" *ngIf='auth.canEdit(user)'><a class="dropdown-item text-center cursor" routerLink='/settings'>Адмін панель</a></li>
+                        <li role="menuitem"><a class="dropdown-item text-center cursor" (click)='auth.SignOut()'>Вийти</a></li>
                     </ul>
                 </div>
             </li>

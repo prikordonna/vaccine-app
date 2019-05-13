@@ -4,9 +4,9 @@
             <thead>
                 <tr>
                     <th class="text-center">Інфекція</th>
-                    <th class="text-center">Способи зараження</th>
-                    <th class="text-center">Симптоми</th>
-                    <th class="text-center">Наслідки</th>
+                    <th class="text-center d-none d-lg-table-cell">Способи зараження</th>
+                    <th class="text-center d-none d-lg-table-cell">Симптоми</th>
+                    <th class="text-center d-none d-md-table-cell">Наслідки</th>
                     <th class="text-center">Клініки</th>
                     <th class="text-center">Дії</th>
                 </tr>
@@ -14,9 +14,9 @@
             <tbody>
                 <tr *ngFor="let infection of (infections$ | async)">
                     <td>{{infection.name}}</td>
-                    <td>{{infection.ways}}</td>
-                    <td>{{infection.simptoms}}</td>
-                    <td>{{infection.result}}</td>
+                    <td class="d-none d-lg-table-cell">{{infection.ways}}</td>
+                    <td class="d-none d-lg-table-cell">{{infection.simptoms}}</td>
+                    <td class="d-none d-md-table-cell">{{infection.result}}</td>
                     <td>
                         <ul>
                             <li *ngFor="let clinic of infection.clinics">{{clinic.clinic_name}}</li>

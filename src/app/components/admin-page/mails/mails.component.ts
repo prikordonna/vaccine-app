@@ -20,7 +20,6 @@ export class MailsComponent implements OnInit {
   mailState$: Observable<MailState>;
   modalRef: BsModalRef | null;
   mails: Mail[];
-  mailToMark: Mail;
 
   constructor(
     private mailService: MailService,
@@ -39,7 +38,7 @@ export class MailsComponent implements OnInit {
     this.mailState$ = this.store.pipe(select('mails'));
     this.store.dispatch(new MailsActions.GetMails());
   }
-  
+
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
@@ -48,9 +47,8 @@ export class MailsComponent implements OnInit {
     this.mailService.deleteMail(mail);
     this.notification.warning();
   }
-  
+
   markAsRead( mail ) {
-    this.mailToMark = mail;
     this.mailService.changeMailState(mail);
   }
 
