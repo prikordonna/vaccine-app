@@ -1,0 +1,11 @@
+.new {
+    &:before {
+        content: 'New';
+        color: red;
+        font-size: 1rem;
+        position: absolute;
+        top: 0%;
+        left: 1%;
+        font-weight: 600;
+    }
+}

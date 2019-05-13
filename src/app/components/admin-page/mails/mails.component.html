@@ -11,13 +11,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let mail of (mailState$ | async).data" [ngStyle]="{'background-color': mail.readed? '' : '#07679f33'}">
-                    <td class="col-5">{{mail.message}}</td>
+                <tr *ngFor="let mail of (mailState$ | async).data" [className]="mail.readed ? '' : 'bg-info'">
+                    <td [className]="mail.readed ? 'col-5' : 'col-5 new'">{{mail.message}}</td>
                     <!-- <td class="col-5">{{getDate}}</td> -->
                     <td class="col-3 d-none d-md-table-cell">{{mail.email}}</td>
                     <td class="col-3 d-none d-lg-table-cell">{{mail.name}}</td>
                     <td class="col-1">
-                        <button type="button" class="btn btn-primary btn-block" (click)="markAsRead(mail)" [disabled]="mail.readed ? true : false">Прочитано</button>
+                        <button type="button" (click)="markAsRead(mail)" [className]="mail.readed ? 'd-none' : 'btn btn-primary btn-block'">Прочитано</button>
                         <button type="submit" class="btn btn-danger btn-block mt-1" (click)="openModal(del)">Видалити</button>
                     </td>
                     <ng-template #del>

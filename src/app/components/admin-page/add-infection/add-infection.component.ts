@@ -19,7 +19,7 @@ import { Observable } from 'rxjs';
 export class AddInfectionComponent implements OnInit {
   infectionState$: Observable<InfectionsState>;
 
-  public rand =   Math.floor(Math.random() * 7);
+  public rand = Math.floor(Math.random() * 7);
 
   infection: Infection = {
     name: '',
