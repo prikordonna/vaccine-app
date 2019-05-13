@@ -1,4 +1,14 @@
 <div class='container'>
+    <div class="header-section d-flex justify-content-between align-items-center">
+        <div class="header-section-text">
+            <h1>Календар профілактичних щеплень</h1>
+            <h5 class="text-muted font-weight-normal font-italic">Чинний, затверджений Міністерством охорони здоров'я
+                України у 2018 році</h5>
+        </div>
+        <div class="header-section-img">
+            <img src="../../assets/images/family.png" alt="">
+        </div>
+    </div>
     <table class="table table-responsive">
         <thead>
             <tr>
@@ -17,11 +27,13 @@
             </tr>
         </thead>
         <tbody *ngFor='let infection of (infections$ | async); let i = index'>
-            <tr (click)="infection.isCollapse = !infection.isCollapse" aria-controls="i" class='cursor' aria-expanded="false">
+            <tr (click)="infection.isCollapse = !infection.isCollapse" aria-controls="i" class='cursor'
+                aria-expanded="false">
                 <th scope="row" colspan='1' class="border-right align-middle text-center">
                     <img src="../../assets/images/bacteria_{{infection.img}}.png" alt="">
                     <p class="mb-0">{{infection.name}}</p>
-                    <img [src]="infection.isCollapse ? '../../assets/images/caret-up.png' : '../../assets/images/caret-down.png'" alt="">
+                    <img [src]="infection.isCollapse ? '../../assets/images/caret-up.png' : '../../assets/images/caret-down.png'"
+                        alt="">
                 </th>
                 <td scope='col' class="align-middle text-center">
                     <div *ngIf='infection.day1'><img src="../../assets/images/vaccine.png" alt=""></div>
@@ -63,9 +75,9 @@
                     <div id="{{i}}" #collapse="bs-collapse" [collapse]="!infection.isCollapse">
                         <div class="card border-0">
                             <!-- <button type="button" class="close pull-right"
-                            (click)="infection.isCollapse = !infection.isCollapse">
-                            <span aria-hidden="true">&times;</span>
-                        </button> -->
+                                        (click)="infection.isCollapse = !infection.isCollapse">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button> -->
                             <div class="card-body pt-0">
                                 <div>
                                     <p class="m-0 font-italic">Симптоми:</p>
@@ -82,7 +94,8 @@
                                 <div>
                                     <p class="m-0 font-italic">Клініки, у яких присутня вакцина:</p>
                                     <p class="ml-5 mb-0 text-justify" *ngFor="let clinic of infection.clinics">
-                                        <a class="nav-link p-0" routerLink='/map' routerLinkActive='active' [routerLinkActiveOptions]="{exact:true}">                                            
+                                        <a class="nav-link p-0" routerLink='/map' routerLinkActive='active'
+                                            [routerLinkActiveOptions]="{exact:true}">
                                             - {{clinic.clinic_name}}
                                         </a>
                                     </p>
