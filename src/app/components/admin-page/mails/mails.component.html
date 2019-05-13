@@ -1,4 +1,4 @@
-<div *ngIf="mails?.length > 0; else noItems">
+<div *ngIf="(mailState$ | async).data.length > 0; else noItems">
     <div class="container">
         <table class="table table-responsive table-hover">
             <thead class="table-borderless">
@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let mail of mails" [ngStyle]="{'background-color': mail.readed? '' : '#07679f33'}">
+                <tr *ngFor="let mail of (mailState$ | async).data" [ngStyle]="{'background-color': mail.readed? '' : '#07679f33'}">
                     <td class="col-5">{{mail.message}}</td>
                     <!-- <td class="col-5">{{getDate}}</td> -->
                     <td class="col-3 d-none d-md-table-cell">{{mail.email}}</td>
