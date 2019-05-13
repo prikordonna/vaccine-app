@@ -1,12 +1,14 @@
-<div *ngIf='auth.user$ | async as user; else login'>
-    <!-- <img src="{{user.photoURL}}" alt=""> -->
-    <div>{{user.email}}</div>
-    <h1>Welcome {{user.displayName}}</h1>
-    <div *ngIf='auth.canEdit(user)'>
-        <a routerLink='/settings'>Адмін панель</a>
+<div class='container'>
+    <div *ngIf='auth.user$ | async as user; else login'>
+        <!-- <img src="{{user.photoURL}}" alt=""> -->
+        <div>{{user.email}}</div>
+        <h1>Welcome {{user.displayName}}</h1>
+        <div *ngIf='auth.canEdit(user)'>
+            <a routerLink='/settings'>Адмін панель</a>
+        </div>
+        <button (click)='auth.SignOut()'>Вийти</button>
     </div>
-    <button (click)='auth.SignOut()'>Вийти</button>
+    <ng-template #login>
+        <button (click)='auth.SignIn()'>Увійти</button>
+    </ng-template>
 </div>
-<ng-template #login>
-
-</ng-template>

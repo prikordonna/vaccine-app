@@ -12,7 +12,10 @@ export class AdminPageComponent implements OnInit {
     public auth: AuthService
   ) { }
 
+
   ngOnInit() {
   }
+
+ 
 
 }

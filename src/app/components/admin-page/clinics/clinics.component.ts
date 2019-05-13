@@ -25,6 +25,10 @@ export class ClinicsComponent implements OnInit {
   infections$: Observable<Infection[]>;
 
   modalRef: BsModalRef;
+  config = {
+    ignoreBackdropClick: true,
+    keyboard: false
+  };
 
   clinicToEdit: Clinic;
   infections: Infection[];
@@ -68,7 +72,7 @@ export class ClinicsComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+    this.modalRef = this.modalService.show(template, this.config);
   }
 
   deleteClinic(clinic) {
@@ -83,7 +87,6 @@ export class ClinicsComponent implements OnInit {
       infection.clinics.splice(index, 1);
       this.store.dispatch(new InfectionsActions.UpdateInfection(infection));
     })
-
   }
 
   editClinic(clinic) {
