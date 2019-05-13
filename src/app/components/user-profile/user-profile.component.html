@@ -1,6 +1,6 @@
 <div class='container'>
     <div *ngIf='auth.user$ | async as user; else login'>
-        <!-- <img src="{{user.photoURL}}" alt=""> -->
+        <img src="{{user.photoURL}}" alt="" width="50px">
         <div>{{user.email}}</div>
         <h1>Welcome {{user.displayName}}</h1>
         <div *ngIf='auth.canEdit(user)'>

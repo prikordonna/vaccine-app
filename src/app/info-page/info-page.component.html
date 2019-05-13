@@ -21,7 +21,7 @@
                 <th scope="row" colspan='1' class="border-right align-middle text-center">
                     <img src="../../assets/images/bacteria_{{infection.img}}.png" alt="">
                     <p class="mb-0">{{infection.name}}</p>
-                    <img src="../../assets/images/caret-down.png" alt="">
+                    <img [src]="infection.isCollapse ? '../../assets/images/caret-up.png' : '../../assets/images/caret-down.png'" alt="">
                 </th>
                 <td scope='col' class="align-middle text-center">
                     <div *ngIf='infection.day1'><img src="../../assets/images/vaccine.png" alt=""></div>

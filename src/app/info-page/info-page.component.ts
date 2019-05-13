@@ -16,8 +16,6 @@ import { Infection } from 'src/app/models/Infection';
 })
 
 export class InfoPageComponent implements OnInit {
-  // caret: string = 'down';
-
   infections$: Observable<Infection[]>;
   constructor(
     private store: Store<AppState>
@@ -27,7 +25,4 @@ export class InfoPageComponent implements OnInit {
     this.infections$ = this.store.pipe(select(getInfectionData));
     this.store.dispatch(new InfectionsActions.GetInfections());
   }
-  // toggle() {
-  //   this.caret = this.caret != 'up' ? 'up' : 'down';
-  // }
 }
