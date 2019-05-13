@@ -1,14 +1,28 @@
-<div class='container'>
-    <div *ngIf='auth.user$ | async as user; else login'>
-        <img src="{{user.photoURL}}" alt="" width="50px">
-        <div>{{user.email}}</div>
-        <h1>Welcome {{user.displayName}}</h1>
-        <div *ngIf='auth.canEdit(user)'>
-            <a routerLink='/settings'>Адмін панель</a>
+<!-- ../../../assets/images/users.png -->
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="card" style="width: 18rem;" *ngIf='auth.user$ | async as user; else login'>
+            <img src="{{user.photoUrl}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title text-center">{{user.displayName}}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-center">{{user.email}}</li>
+                <li class="list-group-item text-center" *ngIf='auth.canEdit(user); else userRole'>Роль: Адмін</li>
+                <li class="list-group-item text-center" *ngIf='auth.canEdit(user); else userRole'>
+                    <a routerLink='/settings'>Адмін панель</a>
+                </li>
+                <ng-template #userRole>
+                    <li class="list-group-item text-center">Роль: КОРИСТУВАЧ</li>
+                    <li class="list-group-item text-center">Додати календар вакцинації</li>
+                </ng-template>
+            </ul>
         </div>
-        <button (click)='auth.SignOut()'>Вийти</button>
+
+        <ng-template #login>
+            <button (click)='auth.SignIn()' class="btn btn-primary btn-lg" type="button">Увійти</button>
+        </ng-template>
     </div>
-    <ng-template #login>
-        <button (click)='auth.SignIn()'>Увійти</button>
-    </ng-template>
+
 </div>
