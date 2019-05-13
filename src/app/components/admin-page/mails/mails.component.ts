@@ -25,16 +25,10 @@ export class MailsComponent implements OnInit {
     private mailService: MailService,
     private modalService: BsModalService,
     private store: Store<AppState>,
-    private notification: ToastrsService
+    private notification: ToastrsService,
   ) { }
 
   ngOnInit() {
-    this.mailService.getMails$()
-      .subscribe(
-        (mails) => {
-          this.mails = mails;
-        }
-      )
     this.mailState$ = this.store.pipe(select('mails'));
     this.store.dispatch(new MailsActions.GetMails());
   }
@@ -43,12 +37,12 @@ export class MailsComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  deleteMail( mail ) {
+  deleteMail(mail) {
     this.mailService.deleteMail(mail);
     this.notification.warning();
   }
 
-  markAsRead( mail ) {
+  markAsRead(mail) {
     this.mailService.changeMailState(mail);
   }
 

@@ -11,7 +11,7 @@ export class MailService {
     mailsCollection: AngularFirestoreCollection<Mail>;
     mails: Observable<Mail[]>;
     mailDoc: AngularFirestoreDocument<Mail>;
-  
+
   constructor(private store: AngularFirestore) {
     this.mailsCollection = store.collection<Mail>('mails', ref=> ref.orderBy('readed'));
     this.mails = this.mailsCollection.snapshotChanges().pipe(map(changes => {
@@ -23,7 +23,7 @@ export class MailService {
     )
   }
 
-  getMails$(): Observable<Mail[]> {
+  getMails$() {
     return this.mailsCollection.snapshotChanges()
       .pipe(
         map((changes) => changes.map((a) => {
@@ -44,7 +44,9 @@ export class MailService {
    }
   
    changeMailState(mail: Mail) {
+
     this.mailDoc = this.store.doc(`mails/${mail.id}`);
     this.mailDoc.update({ readed: true });
+
    }
 }
