@@ -4,24 +4,24 @@
             <thead>
                 <tr>
                     <th class="text-center">Назва клініки</th>
-                    <th class="text-center">lat</th>
-                    <th class="text-center">lng</th>
-                    <th class="text-center">Title</th>
-                    <th class="text-center">Адреса</th>
-                    <th class="text-center">Веб-сайт</th>
-                    <th class="text-center">Присутні вакцини</th>
+                    <th class="text-center d-none d-xl-table-cell">lat</th>
+                    <th class="text-center d-none d-xl-table-cell">lng</th>
+                    <th class="text-center d-none d-lg-table-cell">Title</th>
+                    <th class="text-center d-none d-md-table-cell">Адреса</th>
+                    <th class="text-center d-none d-lg-table-cell">Веб-сайт</th>
+                    <th class="text-center d-none d-sm-table-cell">Присутні вакцини</th>
                     <th class="text-center">Дії</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let clinic of (clinics$ | async)">
                     <td class="col-3">{{clinic.clinic_name}}</td>
-                    <td class="col-1">{{clinic.lat}}</td>
-                    <td class="col-1">{{clinic.lng}}</td>
-                    <td class="col-1">{{clinic.title}}</td>
-                    <td class="col-2">{{clinic.address}}</td>
-                    <td class="col-2">{{clinic.website}}</td>
-                    <td class="col-1">{{clinic.vaccines}}</td>
+                    <td class="col-1 d-none d-xl-table-cell">{{clinic.lat}}</td>
+                    <td class="col-1 d-none d-xl-table-cell">{{clinic.lng}}</td>
+                    <td class="col-1 d-none d-lg-table-cell">{{clinic.title}}</td>
+                    <td class="col-2 d-none d-md-table-cell">{{clinic.address}}</td>
+                    <td class="col-2 d-none d-lg-table-cell">{{clinic.website}}</td>
+                    <td class="col-1 d-none d-sm-table-cell">{{clinic.vaccines}}</td>
                     <td class="col-1">
                         <button type="button" class="btn btn-primary btn-block" (click)="openModal(edit); editClinic(clinic)">Редагувати</button>
                         <button type="submit" class="btn btn-danger btn-block mt-1" (click)="openModal(del)">Видалити</button>

@@ -1,12 +1,10 @@
 import { Mail } from '../../models/mail';
 
-export interface MailState {
+export interface MailsState {
     data: Mail[];
     error: Error | string;
-    readonly mailToDelete: Readonly<Mail>;
 }
-export const initialMailState: MailState = {
+export const initialMailsState: MailsState = {
     data: [],
-    error: null,
-    mailToDelete: null
+    error: null
 }

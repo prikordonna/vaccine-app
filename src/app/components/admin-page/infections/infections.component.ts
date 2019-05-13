@@ -31,7 +31,6 @@ export class InfectionsComponent implements OnInit {
 
 
   modalRef: BsModalRef | null;
-  modalRef2: BsModalRef;
   config = {
     ignoreBackdropClick: true,
     keyboard: false
@@ -78,16 +77,6 @@ export class InfectionsComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, this.config);
-  }
-  openModal2(template: TemplateRef<any>) {
-    this.modalRef2 = this.modalService.show(template, this.config);
-  }
-  closeFirstModal() {
-    if (!this.modalRef) {
-      return;
-    }
-    this.modalRef.hide();
-    this.modalRef = null;
   }
 
   deleteInfection(event, infection) {

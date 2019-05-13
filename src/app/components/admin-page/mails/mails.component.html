@@ -1,23 +1,23 @@
-<div *ngIf="mails?.length > 0; else noItems">
+<div *ngIf="(mailState$ | async).data.length > 0; else noItems">
     <div class="container">
         <table class="table table-responsive table-hover">
             <thead class="table-borderless">
                 <tr>
                     <th class="text-center">Повідомлення</th>
-                    <th class="text-center">Час</th>
-                    <th class="text-center">Імейл</th>
-                    <th class="text-center">Iм'я</th>
+                    <!-- <th class="text-center">Час</th> -->
+                    <th class="text-center d-none d-md-table-cell">Імейл</th>
+                    <th class="text-center d-none d-lg-table-cell">Iм'я</th>
                     <th class="text-center">Дії</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let mail of mails" [ngStyle]="{'background-color': mailReaded? 'green' : '#07679f33'}">
-                    <td class="col-5">{{mail.message}}</td>
-                    <td class="col-5">{{getDate}}</td>
-                    <td class="col-3">{{mail.email}}</td>
-                    <td class="col-3">{{mail.name}}</td>
+                <tr *ngFor="let mail of (mailState$ | async).data" [className]="mail.readed ? '' : 'bg-info'">
+                    <td [className]="mail.readed ? 'col-5' : 'col-5 new'">{{mail.message}}</td>
+                    <!-- <td class="col-5">{{getDate}}</td> -->
+                    <td class="col-3 d-none d-md-table-cell">{{mail.email}}</td>
+                    <td class="col-3 d-none d-lg-table-cell">{{mail.name}}</td>
                     <td class="col-1">
-                        <button type="button" class="btn btn-primary btn-block" (click)="markAsRead(mail)">Прочитано</button>
+                        <button type="button" (click)="markAsRead(mail)" [className]="mail.readed ? 'd-none' : 'btn btn-primary btn-block'">Прочитано</button>
                         <button type="submit" class="btn btn-danger btn-block mt-1" (click)="openModal(del)">Видалити</button>
                     </td>
                     <ng-template #del>

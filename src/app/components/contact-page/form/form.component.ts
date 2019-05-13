@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../../../+store';
+import * as MailsActions from '../../../+store/mail/mail.actions';
 
 import { Mail } from '../../../models/mail';
-import { MailService } from '../../../services/mail.service';
 import { ToastrsService } from '../../../services/toastrs.service';
-
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -12,7 +14,9 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
+
   @ViewChild('addMailForm') public addMailForm: NgForm;
+
   mail: Mail = {
     name: '',
     email: '',
@@ -20,23 +24,22 @@ export class FormComponent implements OnInit {
     readed: false
   }
 
-  constructor(private mailService: MailService, private notification: ToastrsService) { }
+  constructor(
+    private notification: ToastrsService,
+    private store: Store<AppState>,
+  ) { }
 
   ngOnInit() {
+    this.store.pipe(select('mails'));
   }
 
   onSubmit(): void {
-    if (this.mail.name != '' && this.mail.email != ''
-      && this.mail.message != '') {
-      this.mailService.addMail(this.mail);
-
-      this.mail.name = '';
-      this.mail.email = '';
-      this.mail.message = '';
-      this.mail.readed = false
-      
-    }
+    this.store.dispatch(new MailsActions.AddMail(this.mail));
+    this.mail.name = '';
+    this.mail.email = '';
+    this.mail.message = '';
+    this.mail.readed = false
     this.addMailForm.reset();
     this.notification.success();
-  }  
+  }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Mail } from '../models/mail';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection  } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators/';
 
@@ -8,22 +8,23 @@ import { map } from 'rxjs/operators/';
   providedIn: 'root'
 })
 export class MailService {
-    mailsCollection: AngularFirestoreCollection<Mail>;
-    mails: Observable<Mail[]>;
-    mailDoc: AngularFirestoreDocument<Mail>;
-  
+  mailsCollection: AngularFirestoreCollection<Mail>;
+  mails: Observable<Mail[]>;
+  mailDoc: AngularFirestoreDocument<Mail>;
+
   constructor(private store: AngularFirestore) {
-    this.mailsCollection = store.collection<Mail>('mails');
+    this.mailsCollection = store.collection<Mail>('mails', ref => ref.orderBy('readed'));
     this.mails = this.mailsCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Mail;
         data.id = a.payload.doc.id;
         return data;
-      })})
+      })
+    })
     )
   }
 
-  getMails$(): Observable<Mail[]> {
+  getMails$() {
     return this.mailsCollection.snapshotChanges()
       .pipe(
         map((changes) => changes.map((a) => {
@@ -32,15 +33,19 @@ export class MailService {
           return data;
         }))
       )
-   }
+  }
 
-   addMail(mail: Mail) {
-    this.mailsCollection.add(mail);
-   }
+  addMail(mail: Mail) {
+    return this.mailsCollection.add(mail);
+  }
 
-   deleteMail(mail: Mail) {
+  deleteMail(mail: Mail) {
     this.mailDoc = this.store.doc(`mails/${mail.id}`);
-    this.mailDoc.delete();
-   }
+    return this.mailDoc.delete();
+  }
 
+  changeMailState(mail: Mail) {
+    this.mailDoc = this.store.doc(`mails/${mail.id}`);
+    return this.mailDoc.update({ readed: true });
+  }
 }

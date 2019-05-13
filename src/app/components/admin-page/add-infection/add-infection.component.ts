@@ -19,7 +19,7 @@ import { Observable } from 'rxjs';
 export class AddInfectionComponent implements OnInit {
   infectionState$: Observable<InfectionsState>;
 
-  public rand =   Math.floor(Math.random() * 7);
+  public rand = Math.floor(Math.random() * 7);
 
   infection: Infection = {
     name: '',
@@ -72,17 +72,18 @@ export class AddInfectionComponent implements OnInit {
 
   }
 
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, this.config);
+  }
+
   selectClinic(clinic) {
     if (clinic.isSelected) {
       clinic.isSelected = !clinic.isSelected;
       let cliIndex = this.selectedClinics.findIndex((el: Clinic) => el == clinic);
       this.selectedClinics.splice(cliIndex, 1);
-      console.log(this.selectedClinics)
     } else {
       clinic.isSelected = !clinic.isSelected;
-      this.selectedClinics.push(clinic)
-      console.log(this.selectedClinics)
-    }
+      this.selectedClinics.push(clinic)    }
   }
 
   clearSelected() {
@@ -90,10 +91,6 @@ export class AddInfectionComponent implements OnInit {
       el.isSelected = false;
     })
     this.selectedClinics = [];
-  }
-
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, this.config);
   }
 
   onSubmit() {
