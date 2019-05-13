@@ -1,13 +1,12 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
-import { MailService } from '../../../services/mail.service';
 import { ToastrsService } from '../../../services/toastrs.service';
 import { Mail } from '../../../models/mail';
 
 import { Store, select } from '@ngrx/store';
 import { AppState } from './../../../+store';
-import { MailState } from './../../../+store/mail/mail.state';
+import { MailsState } from './../../../+store/mail/mail.state';
 import * as MailsActions from '../../../+store/mail/mail.actions';
 import { Observable } from 'rxjs';
 
@@ -17,12 +16,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./mails.component.scss']
 })
 export class MailsComponent implements OnInit {
-  mailState$: Observable<MailState>;
+  mailState$: Observable<MailsState>;
   modalRef: BsModalRef | null;
   mails: Mail[];
 
   constructor(
-    private mailService: MailService,
     private modalService: BsModalService,
     private store: Store<AppState>,
     private notification: ToastrsService,
@@ -38,12 +36,13 @@ export class MailsComponent implements OnInit {
   }
 
   deleteMail(mail) {
-    this.mailService.deleteMail(mail);
+    this.store.dispatch(new MailsActions.DeleteMail(mail));
     this.notification.warning();
   }
 
   markAsRead(mail) {
-    this.mailService.changeMailState(mail);
+    const doneMail = { ...mail, readed: true };
+    this.store.dispatch(new MailsActions.CheckMail(doneMail));
   }
 
 }
