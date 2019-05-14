@@ -1,0 +1,23 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+  	match /users/{userId} {
+    	allow read, write, update;
+      allow delete: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles['admin'] == true
+    }
+    
+    match /infections/{infectionId} {
+    	allow read;
+      allow write, update, delete: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles['admin'] == true
+    }
+    
+    match /clinics/{clinicId} {
+    	allow read;
+      allow write, update, delete: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles['admin'] == true
+    }
+    
+    match /mails/{clinicId} {
+    	allow read, write;
+      allow delete: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles['admin'] == true
+    }
+  }
+}
