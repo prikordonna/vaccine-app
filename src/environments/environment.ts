@@ -10,7 +10,8 @@ export const environment = {
     databaseURL: "https://vaccinate-bc66e.firebaseio.com",
     projectId: "vaccinate-bc66e",
     storageBucket: "vaccinate-bc66e.appspot.com",
-    messagingSenderId: "246304262330"
+    messagingSenderId: "246304262330",
+    production: true
   }
 };
 

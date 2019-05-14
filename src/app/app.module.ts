@@ -8,10 +8,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 
 //page_modules
-import { MainPageModule} from './components/main-page/main-page.module';
-import { AdminPageModule } from './components/admin-page/admin-page.module';
+import { MainPageModule} from './main-page/main-page.module';
+import { AdminPageModule } from './admin-page/admin-page.module';
 import { InfoPageModule } from './info-page/info-page.module';
-import { ContactPageModule } from './components/contact-page/contact-page.module';
+import { ContactPageModule } from './contact-page/contact-page.module';
 
 //components
 import { AppComponent } from './app.component';
