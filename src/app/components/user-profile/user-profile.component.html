@@ -9,14 +9,18 @@
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item text-center">{{user.email}}</li>
-                <li class="list-group-item text-center" *ngIf='auth.canEdit(user); else userRole'>Роль: Адмін</li>
-                <li class="list-group-item text-center" *ngIf='auth.canEdit(user); else userRole'>
-                    <a routerLink='/settings'>Адмін панель</a>
-                </li>
+                <div *ngIf='auth.canEdit(user); else userRole'>
+                    <li class="list-group-item text-center" >Роль: АДМІН</li>
+                    <li class="list-group-item text-center card-link">
+                        <a routerLink='/settings'>Адмін панель</a>
+                    </li>
+                </div>                
                 <ng-template #userRole>
                     <li class="list-group-item text-center">Роль: КОРИСТУВАЧ</li>
-                    <li class="list-group-item text-center">Додати календар вакцинації</li>
                 </ng-template>
+                <li class="list-group-item text-center">
+                    <a href="" class="card-link">Додати календар вакцинації</a>
+                </li>
             </ul>
         </div>
 

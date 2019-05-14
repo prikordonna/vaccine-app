@@ -13,11 +13,11 @@
         <form (ngSubmit)="addClinicForm.form.valid && onSubmit()" #addClinicForm="ngForm" novalidate>
             <div class="form-group">
                 <label>LAT: </label>
-                <input type="text" placeholder="Add  LAT" [(ngModel)]="clinic.lat" name="lat" class="form-control" #lat="ngModel" required [ngClass]="{'is-invalid': lat.invalid && (lat.dirty || lat.touched)}">
+                <input type="number" placeholder="Add  LAT" [(ngModel)]="clinic.lat" name="lat" class="form-control" #lat="ngModel" required [ngClass]="{'is-invalid': lat.invalid && (lat.dirty || lat.touched)}">
             </div>
             <div class="form-group">
                 <label>LNG: </label>
-                <input type="text" placeholder="Add  LNG" [(ngModel)]="clinic.lng" name="lng" class="form-control" #lng="ngModel" required [ngClass]="{'is-invalid': lng.invalid && (lng.dirty || lng.touched)}">
+                <input type="number" placeholder="Add  LNG" [(ngModel)]="clinic.lng" name="lng" class="form-control" #lng="ngModel" required [ngClass]="{'is-invalid': lng.invalid && (lng.dirty || lng.touched)}">
             </div>
             <div class="form-group">
                 <label>Title: </label>
