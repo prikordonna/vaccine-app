@@ -6,7 +6,8 @@ import { InfoPageComponent } from './info-page/info-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { MapPageComponent } from './map-page/map-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserCardComponent } from './user-profile/user-card/user-card.component';
 
 const routs: Routes = [
   {
@@ -26,7 +27,10 @@ const routs: Routes = [
   },
   {
     path: "profile", component: UserProfileComponent
-  }
+  },
+  {
+    path: "card/:uid", component: UserCardComponent
+  },
 ];
 
 @NgModule({

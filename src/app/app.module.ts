@@ -12,11 +12,11 @@ import { MainPageModule} from './main-page/main-page.module';
 import { AdminPageModule } from './admin-page/admin-page.module';
 import { InfoPageModule } from './info-page/info-page.module';
 import { ContactPageModule } from './contact-page/contact-page.module';
+import { UserProfileModule } from './user-profile/user-profile.module';
 
 //components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 //FireStore
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -50,7 +50,6 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [
     AppComponent,
     HeaderComponent,
-    UserProfileComponent,
     ],
   imports: [
     BrowserModule,
@@ -81,6 +80,7 @@ import { ToastrModule } from 'ngx-toastr';
     InfoPageModule,
     ContactPageModule,
     AdminPageModule,
+    UserProfileModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [

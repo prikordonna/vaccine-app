@@ -29,8 +29,8 @@
                 </ng-template>
             </li>
             <li class="d-flex justify-content-center nav-item dropdown text-center navbar-dark" *ngIf='auth.user$ | async as user; else login'>
-                <div *ngIf='auth.canEdit(user)' class="d-flex notification nav-link mr-2">
-                    <a routerLink='/settings' class="d-flex cursor"><img src="./../../../assets/images/notification.png" alt="Повідомлення"><span *ngIf="unreaded.length > 0" class="badge badge-light">{{unreaded.length}}</span></a>
+                <div *ngIf='auth.canEdit(user) && unreaded.length > 0' class="d-flex notification nav-link mr-2">
+                    <a routerLink='/settings' class="d-flex cursor"><img src="./../../../assets/images/notification.png" alt="Повідомлення"><span class="badge badge-light">{{unreaded.length}}</span></a>
                 </div>
                 <div class="navbar-dark" dropdown>
                     <a dropdownToggle class="dropdown-toggle nav-link  cursor">

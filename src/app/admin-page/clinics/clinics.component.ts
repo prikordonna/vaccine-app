@@ -1,15 +1,14 @@
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-
 import { Component, OnInit, TemplateRef } from '@angular/core';
-
-import { Observable, Subscription } from 'rxjs';
 
 //ngrx
 import { Store, select } from '@ngrx/store';
 import { AppState, getClinicData, getClinicToEdit, getInfectionData } from '../../+store';
-
 import * as ClinicsActions from '../../+store/clinics/clinics.actions';
 import * as InfectionsActions from '../../+store/infections/infections.action';
+import { Observable, Subscription } from 'rxjs';
+
+//modal
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Clinic } from '../../models/Clinic';
 import { Infection } from 'src/app/models/Infection';
