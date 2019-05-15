@@ -7,6 +7,9 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { MapPageComponent } from './map-page/map-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { MailsComponent } from './admin-page/mails/mails.component';
+import { InfectionsComponent } from './admin-page/infections/infections.component';
+import { ClinicsComponent } from './admin-page/clinics/clinics.component';
 
 const routs: Routes = [
   {
@@ -22,7 +25,28 @@ const routs: Routes = [
     path: 'contact', component: ContactPageComponent, data: {animation: 'Contact'}
   },
   {
-    path: "settings", component: AdminPageComponent, data: {animation: 'Settings'}
+    path: "settings", 
+    component: AdminPageComponent,
+    children: [
+      {
+        path: "",
+        redirectTo: "infections",
+        pathMatch: "full"
+      },
+      {
+        path: "mails",
+        component: MailsComponent
+      },
+      {
+        path: "clinics",
+        component: ClinicsComponent
+      },
+      {
+        path: "infections",
+        component: InfectionsComponent
+      }
+    ], 
+    data: {animation: 'Settings'}
   },
   {
     path: "profile", component: UserProfileComponent
