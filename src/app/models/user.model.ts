@@ -8,5 +8,5 @@ export interface User {
     email: string,
     photoUrl: string,
     roles: Roles,
-    card?: any
+    card?: Array<any>
 }

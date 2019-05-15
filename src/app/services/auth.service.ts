@@ -19,17 +19,17 @@ export class AuthService {
     private router: Router,
   ) {
     this.user$ = this.afAuth.authState.pipe(
-    switchMap( user => {
-      if (user) {
-        return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
-      } else {
-        return of(null);
-      }
-    })
+      switchMap(user => {
+        if (user) {
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+        } else {
+          return of(null);
+        }
+      })
     );
   }
 
-  async SignIn () {
+  async SignIn() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);
     return this.updateUserData(credential.user);
@@ -49,32 +49,26 @@ export class AuthService {
       photoUrl: user.photoURL,
       roles: {
         reader: true
-      }
-      }
-      return userRef.set(data, { merge: true } );
+      },
+      card: []
+    }
+    return userRef.set(data, { merge: true });
   }
 
   public createUserCard(user) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-    const data = {
-      uid: user.uid,
-      displayName: user.displayName,
-      email: user.email,
-      photoUrl: user.photoURL,
-      roles: {
-        reader: true
-      },
+    const data = {...user,
       card: user.card
     }
-    return userRef.set(data, { merge: true } );
+    return userRef.set(data, { merge: true });
   }
 
-  canRead(user: User) :boolean {
+  canRead(user: User): boolean {
     const allowed = ['reader', 'admin'];
     return this.checkAuthorization(user, allowed)
   }
 
-  canEdit(user: User) :boolean {
+  canEdit(user: User): boolean {
     const allowed = ['admin'];
     return this.checkAuthorization(user, allowed)
   }
