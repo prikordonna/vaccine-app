@@ -54,6 +54,21 @@ export class AuthService {
       return userRef.set(data, { merge: true } );
   }
 
+  public createUserCard(user) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    const data = {
+      uid: user.uid,
+      displayName: user.displayName,
+      email: user.email,
+      photoUrl: user.photoURL,
+      roles: {
+        reader: true
+      },
+      card: user.card
+    }
+    return userRef.set(data, { merge: true } );
+  }
+
   canRead(user: User) :boolean {
     const allowed = ['reader', 'admin'];
     return this.checkAuthorization(user, allowed)

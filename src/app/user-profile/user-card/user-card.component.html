@@ -1,0 +1,65 @@
+<div *ngIf="auth.user$ | async as user" class='container'>
+    <div class="header-section d-flex justify-content-between align-items-center">
+        <div class="header-section-text">
+            <h1>Карта щеплень {{user.displayName}}</h1>
+        </div>
+    </div>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th scope="col" class="border-right border-top-0">Вік/ <br> Інфекція</th>
+                <th scope="col" class="align-middle border-top-0">3-5 діб</th>
+                <th scope="col" class="align-middle border-top-0">1 доба</th>
+                <th scope="col" class="align-middle border-top-0">2 місяці</th>
+                <th scope="col" class="align-middle border-top-0">4 місяці</th>
+                <th scope="col" class="align-middle border-top-0">6 місяців</th>
+                <th scope="col" class="align-middle border-top-0">12 місяців</th>
+                <th scope="col" class="align-middle border-top-0">18 місяців</th>
+                <th scope="col" class="align-middle border-top-0">6 років</th>
+                <th scope="col" class="align-middle border-top-0">14 років</th>
+                <th scope="col" class="align-middle border-top-0">16 років</th>
+                <th scope="col" class="align-middle border-top-0">кожні 10 років</th>
+            </tr>
+        </thead>
+        <tbody *ngFor='let infection of (infections$ | async); let i = index'>
+            <tr>
+                <th scope="row" colspan='1' class="border-right align-middle text-center">
+                    <p class="mb-0">{{infection.name}}</p>
+                </th>
+                <td scope='col' class="align-middle text-center">
+                    <div *ngIf='infection.day1'><img src="../../assets/images/vaccine.png" alt=""></div>
+                </td>
+                <td scope='col' class="align-middle text-center">
+                    <div *ngIf='infection.day3'><img src="../../assets/images/vaccine.png" alt=""></div>
+                </td>
+                <td scope='col' class="align-middle text-center">
+                    <div *ngIf='infection.month2'><img src="../../assets/images/vaccine.png" alt=""></div>
+                </td>
+                <td scope='col' class="align-middle text-center">
+                    <div *ngIf='infection.month4'><img src="../../assets/images/vaccine.png" alt=""></div>
+                </td>
+                <td scope='col' class="align-middle text-center">
+                    <div *ngIf='infection.month6'><img src="../../assets/images/vaccine.png" alt=""></div>
+                </td>
+                <td scope='col' class="align-middle text-center">
+                    <div *ngIf='infection.month12'><img src="../../assets/images/vaccine.png" alt=""></div>
+                </td>
+                <td scope='col' class="align-middle text-center">
+                    <div *ngIf='infection.month18'><img src="../../assets/images/vaccine.png" alt=""></div>
+                </td>
+                <td scope='col' class="align-middle text-center">
+                    <div *ngIf='infection.year6'><img src="../../assets/images/vaccine.png" alt=""></div>
+                </td>
+                <td scope='col' class="align-middle text-center">
+                    <div *ngIf='infection.year14'><img src="../../assets/images/vaccine.png" alt=""></div>
+                </td>
+                <td scope='col' class="align-middle text-center">
+                    <div *ngIf='infection.year16'><img src="../../assets/images/vaccine.png" alt=""></div>
+                </td>
+                <td scope='col' class="align-middle text-center">
+                    <div *ngIf='infection.adult'><img src="../../assets/images/vaccine.png" alt=""></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
