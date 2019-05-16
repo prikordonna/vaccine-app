@@ -1,21 +1,21 @@
 <div class='container'>
     <div *ngIf='auth.user$ | async as user; else login'>
         <div class="admin-example" *ngIf='auth.canEdit(user) else notAdmin'>
-            <tabset class="d-flex flex-row justify-content-center">
-                <!-- <tab heading="Інфекції" routerLink='/settings/infections'>
+            <tabset>
+                <tab heading="Повідомлення">
+                    <app-mails></app-mails>
+                </tab>
+                <tab heading="Інфекції">
                     <app-add-infection></app-add-infection>
                     <app-infections></app-infections>
                 </tab>
-                <tab heading="Клініки" routerLink='/settings/clinics'>
+                <tab heading="Клініки">
                     <app-add-clinic></app-add-clinic>
                     <app-clinics></app-clinics>
                 </tab>
-                <tab class="active" heading="Повідомлення" routerLink='/settings/mails'>
-                    <app-mails></app-mails>
-                </tab> -->
-                <button type="button" class="btn btn-primary mr-4" routerLink='/settings/infections'>Інфекції</button>
+                <!-- <button type="button" class="btn btn-primary mr-4" routerLink='/settings/infections'>Інфекції</button>
                 <button type="button" class="btn btn-primary mr-4" routerLink='/settings/clinics'>Клініки</button>
-                <button type="button" class="btn btn-primary mr-4" routerLink='/settings/mails'>Повідомлення</button>
+                <button type="button" class="btn btn-primary mr-4" routerLink='/settings/mails'>Повідомлення</button> -->
             </tabset>
         </div>
     </div>
