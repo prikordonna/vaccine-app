@@ -1,24 +1,24 @@
 #vaccinum {
-  font-style: italic;
-  font-size: 1em;
-  font-weight: bold;
+    font-style: italic;
+    font-size: 1em;
+    font-weight: bold;
 }
 
 .main {
-  margin-top: -5em;
-  background-image: url(/assets/images/doctor.png);
-  background-size: cover;
-  height: 100vh;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-color: #007b9f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    margin-top: -5em;
+    background-image: url(/assets/images/doctor-min.png);
+    background-size: cover;
+    height: 100vh;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #007b9f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 ::ng-deep .carousel-control-prev,
 ::ng-deep .carousel-control-next {
-  display: none;
+    display: none;
 }

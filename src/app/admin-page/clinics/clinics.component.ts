@@ -83,8 +83,12 @@ export class ClinicsComponent implements OnInit {
     this.store.dispatch(new InfectionsActions.GetInfections());
     this.infections.forEach(infection => {
       let index = infection.clinics.findIndex(el => el.id == clinic.id);
-      infection.clinics.splice(index, 1);
-      this.store.dispatch(new InfectionsActions.UpdateInfection(infection));
+      if(index == -1) {
+        return
+      } else {
+        infection.clinics.splice(index, 1);
+        this.store.dispatch(new InfectionsActions.UpdateInfection(infection));
+      }
     })
   }
 
