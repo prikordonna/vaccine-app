@@ -1,4 +1,4 @@
-<div *ngIf="(auth.user$ | async).card; else createCardContainer" class='container'>
+<div *ngIf="(auth.user$ | async)?.card; else createCardContainer" class='container'>
     <div class="header-section d-flex justify-content-between align-items-center">
         <div class="header-section-text">
             <h1>Карта щеплень {{user.displayName}}</h1>
@@ -28,62 +28,63 @@
                 </th>
                 <td scope='col' class="align-middle text-center">
                     <div *ngIf='infection.hasOwnProperty("day1")'>
-                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="day1" [checked]="infection.day1" [disabled]="infection.day1" (click)="checkInfection(infection, infection.adult)">
+                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="day1" [checked]="infection.day1" [disabled]="infection.day1" (click)="checkInfection(infection, 'day1')">
                     </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
                     <div *ngIf='infection.hasOwnProperty("day3")'>
-                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="day3" [checked]="infection.day3" [disabled]="infection.day3" (click)="checkInfection(infection, infection.adult)">
+                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="day3" [checked]="infection.day3" [disabled]="infection.day3" (click)="checkInfection(infection, 'day3')">
                     </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
                     <div *ngIf='infection.hasOwnProperty("month2")'>
-                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="month2" [checked]="infection.month2" [disabled]="infection.month2" (click)="checkInfection(infection, infection.adult)">
+                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="month2" [checked]="infection.month2" [disabled]="infection.month2" (click)="checkInfection(infection, 'month2')">
                     </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
                     <div *ngIf='infection.hasOwnProperty("month4")'>
-                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="month4" [checked]="infection.month4" [disabled]="infection.month4" (click)="checkInfection(infection, infection.adult)">
+                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="month4" [checked]="infection.month4" [disabled]="infection.month4" (click)="checkInfection(infection, 'month4')">
                     </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
                     <div *ngIf='infection.hasOwnProperty("month6")'>
-                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="month6" [checked]="infection.month6" [disabled]="infection.month6" (click)="checkInfection(infection, infection.adult)">
+                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="month6" [checked]="infection.month6" [disabled]="infection.month6" (click)="checkInfection(infection, 'month6')">
                     </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
                     <div *ngIf='infection.hasOwnProperty("month12")'>
-                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="month12" [checked]="infection.month12" [disabled]="infection.month12" (click)="checkInfection(infection, infection.adult)">
+                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="month12" [checked]="infection.month12" [disabled]="infection.month12" (click)="checkInfection(infection, 'month12')">
                     </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
                     <div *ngIf='infection.hasOwnProperty("month18")'>
-                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="month18" [checked]="infection.month18" [disabled]="infection.month18" (click)="checkInfection(infection, infection.adult)">
+                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="month18" [checked]="infection.month18" [disabled]="infection.month18" (click)="checkInfection(infection, 'month18')">
                     </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
                     <div *ngIf='infection.hasOwnProperty("year6")'>
-                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="year6" [checked]="infection.year6" [disabled]="infection.year6" (click)="checkInfection(infection, infection.adult)">
+                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="year6" [checked]="infection.year6" [disabled]="infection.year6" (click)="checkInfection(infection, 'year6')">
                     </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
                     <div *ngIf='infection.hasOwnProperty("year14")'>
-                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="year14" [checked]="infection.year14" [disabled]="infection.year14" (click)="checkInfection(infection, infection.adult)">
+                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="year14" [checked]="infection.year14" [disabled]="infection.year14" (click)="checkInfection(infection, 'year14')">
                     </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
                     <div *ngIf='infection.hasOwnProperty("year16")'>
-                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="year16" [checked]="infection.year16" [disabled]="infection.year16" (click)="checkInfection(infection, infection.adult)">
+                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="year16" [checked]="infection.year16" [disabled]="infection.year16" (click)="checkInfection(infection, 'year16')">
                     </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
                     <div *ngIf='infection.hasOwnProperty("adult")'>
-                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="adult" [checked]="infection.adult" [disabled]="infection.adult" (click)="checkInfection(infection, infection.adult)">
+                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" name="adult" [checked]="infection.adult" [disabled]="infection.adult" (click)="checkInfection(infection, 'adult')">
                     </div>
                 </td>
             </tr>
         </tbody>
     </table>
+    <button class="btn btn-primary float-right" (click)="openModal(edit)">Виправити карту</button>
 </div>
 <ng-template #createCardContainer>
     <div class="container">

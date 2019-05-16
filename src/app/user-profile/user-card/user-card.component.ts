@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import { AppState, getInfectionData } from '../../+store';
 import * as InfectionsActions from '../../+store/infections/infections.action';
+
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Infection } from 'src/app/models/Infection';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,9 +18,16 @@ export class UserCardComponent implements OnInit {
   infections: Infection[];
   public user;
 
+  modalRef: BsModalRef | null;
+  config = {
+    ignoreBackdropClick: true,
+    keyboard: false
+  };
+
   constructor(
     private store: Store<AppState>,
     public auth: AuthService,
+    private modalService: BsModalService,
   ) { }
 
   ngOnInit() {
@@ -33,6 +42,10 @@ export class UserCardComponent implements OnInit {
     this.store.dispatch(new InfectionsActions.GetInfections());
   }
 
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, this.config);
+  }
   createCard() {
     this.user.card = [];
     this.infections.forEach((infection) => {
