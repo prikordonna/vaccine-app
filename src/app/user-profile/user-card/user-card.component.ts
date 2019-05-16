@@ -19,7 +19,7 @@ export class UserCardComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private auth: AuthService
+    public auth: AuthService
   ) { }
 
   ngOnInit() {
