@@ -1,24 +1,24 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { FormControl } from '@angular/forms';
 
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../+store';
 import * as MailsActions from '../../+store/mail/mail.actions';
 
 import { Mail } from '../../models/mail';
 import { ToastrsService } from '../../services/toastrs.service';
 import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
 
   @ViewChild('addMailForm') public addMailForm: NgForm;
-  //formEmail = new FormControl('');
+  private userSubscription: Subscription; 
 
   mail: Mail = {
     name: '',
@@ -34,7 +34,16 @@ export class FormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.pipe(select('mails'));
+    this.userSubscription = this.auth.user$.subscribe(user => {
+      this.mail.name = user.displayName;
+      this.mail.email = user.email;
+    })
+  }
+
+  ngOnDestroy() {
+    if(this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 
   onSubmit(): void {
