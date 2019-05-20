@@ -23,7 +23,28 @@ const routs: Routes = [
     path: 'contact', component: ContactPageComponent, data: {animation: 'Contact'}
   },
   {
-    path: "settings", component: AdminPageComponent, data: {animation: 'Settings'}
+    path: "settings", 
+    component: AdminPageComponent,
+    // children: [
+    //   {
+    //     path: "",
+    //     redirectTo: "infections",
+    //     pathMatch: "full"
+    //   },
+    //   {
+    //     path: "mails",
+    //     component: MailsComponent
+    //   },
+    //   {
+    //     path: "clinics",
+    //     component: ClinicsComponent
+    //   },
+    //   {
+    //     path: "infections",
+    //     component: InfectionsComponent
+    //   }
+    // ], 
+    data: {animation: 'Settings'}
   },
   {
     path: "profile", component: UserProfileComponent
