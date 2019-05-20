@@ -2,13 +2,29 @@
     <div class="header-section d-flex justify-content-between align-items-center">
         <div class="header-section-text">
             <h1>Календар профілактичних щеплень</h1>
-            <h5 class="text-muted font-weight-normal font-italic">Чинний, затверджений Міністерством охорони здоров'я
-                України у 2018 році</h5>
+            <h5 class="text-muted font-weight-normal font-italic">Чинний, затверджений Міністерством охорони здоров'я України у 2018 році</h5>
         </div>
         <div class="header-section-img d-sm-block d-none">
             <img src="../../assets/images/family.png" alt="family" class="img-fluid">
         </div>
     </div>
+    <div>
+        <h5>Примітки до таблиці:</h5>
+        <p>Таблиця містить інформацію про інфекції та вік особи, в якому необхідно провести вакцинацію. Кожний рядок таблиці - окрема інфекція, кожний стовбець - вік людини.</p>
+        <div class="header-section d-flex justify-content-between align-items-center">
+            <div class="header-section-text row">
+                <div class="col-12">
+                    <label for="checkmark-icon">Вакцинація зроблена:</label>
+                    <img class="ml-2" src="../../assets/images/checkmark.png" name="checkmark-icon" alt="">
+                </div>
+                <div class="col-12">
+                    <label for="vaccine-icon">Рекомендація виконати вакцинацію:</label>
+                    <img class="ml-2" src="../../assets/images/vaccine.png" name="vaccine-icon" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <table class="table table-responsive">
         <thead>
             <tr>
@@ -27,46 +43,66 @@
             </tr>
         </thead>
         <tbody *ngFor='let infection of (infections$ | async); let i = index'>
-            <tr (click)="infection.isCollapse = !infection.isCollapse" aria-controls="i" class='cursor'
-                aria-expanded="false">
+            <tr (click)="infection.isCollapse = !infection.isCollapse" aria-controls="i" class='cursor' aria-expanded="false">
                 <th scope="row" colspan='1' class="border-right align-middle text-center">
                     <img src="../../assets/images/bacteria_{{infection.img}}.png" alt="">
                     <p class="mb-0">{{infection.name}}</p>
-                    <img [src]="infection.isCollapse ? '../../assets/images/caret-up.png' : '../../assets/images/caret-down.png'"
-                        alt="">
+                    <img [src]="infection.isCollapse ? '../../assets/images/caret-up.png' : '../../assets/images/caret-down.png'" alt="">
                 </th>
                 <td scope='col' class="align-middle text-center">
-                    <div *ngIf='infection.day1'><img src="../../assets/images/vaccine.png" alt=""></div>
+                    <div *ngIf='infection.day1'>
+                        <img [src]="checkVaccineStatus(infection, 'day1') ? '../../assets/images/checkmark.png' : '../../assets/images/vaccine.png'" alt="">
+                    </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
-                    <div *ngIf='infection.day3'><img src="../../assets/images/vaccine.png" alt=""></div>
+                    <div *ngIf='infection.day3'>
+                        <img [src]="checkVaccineStatus(infection, 'day3') ? '../../assets/images/checkmark.png' : '../../assets/images/vaccine.png'" alt="">
+                    </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
-                    <div *ngIf='infection.month2'><img src="../../assets/images/vaccine.png" alt=""></div>
+                    <div *ngIf='infection.month2'>
+                        <img [src]="checkVaccineStatus(infection, 'month2') ? '../../assets/images/checkmark.png' : '../../assets/images/vaccine.png'" alt="">
+                    </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
-                    <div *ngIf='infection.month4'><img src="../../assets/images/vaccine.png" alt=""></div>
+                    <div *ngIf='infection.month4'>
+                        <img [src]="checkVaccineStatus(infection, 'month4') ? '../../assets/images/checkmark.png' : '../../assets/images/vaccine.png'" alt="">
+                    </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
-                    <div *ngIf='infection.month6'><img src="../../assets/images/vaccine.png" alt=""></div>
+                    <div *ngIf='infection.month6'>
+                        <img [src]="checkVaccineStatus(infection, 'month6') ? '../../assets/images/checkmark.png' : '../../assets/images/vaccine.png'" alt="">
+                    </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
-                    <div *ngIf='infection.month12'><img src="../../assets/images/vaccine.png" alt=""></div>
+                    <div *ngIf='infection.month12'>
+                        <img [src]="checkVaccineStatus(infection, 'month12') ? '../../assets/images/checkmark.png' : '../../assets/images/vaccine.png'" alt="">
+                    </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
-                    <div *ngIf='infection.month18'><img src="../../assets/images/vaccine.png" alt=""></div>
+                    <div *ngIf='infection.month18'>
+                        <img [src]="checkVaccineStatus(infection, 'month18') ? '../../assets/images/checkmark.png' : '../../assets/images/vaccine.png'" alt="">
+                    </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
-                    <div *ngIf='infection.year6'><img src="../../assets/images/vaccine.png" alt=""></div>
+                    <div *ngIf='infection.year6'>
+                        <img [src]="checkVaccineStatus(infection, 'year6') ? '../../assets/images/checkmark.png' : '../../assets/images/vaccine.png'" alt="">
+                    </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
-                    <div *ngIf='infection.year14'><img src="../../assets/images/vaccine.png" alt=""></div>
+                    <div *ngIf='infection.year14'>
+                        <img [src]="checkVaccineStatus(infection, 'year14') ? '../../assets/images/checkmark.png' : '../../assets/images/vaccine.png'" alt="">
+                    </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
-                    <div *ngIf='infection.year16'><img src="../../assets/images/vaccine.png" alt=""></div>
+                    <div *ngIf='infection.year16'>
+                        <img [src]="checkVaccineStatus(infection, 'year16') ? '../../assets/images/checkmark.png' : '../../assets/images/vaccine.png'" alt="">
+                    </div>
                 </td>
                 <td scope='col' class="align-middle text-center">
-                    <div *ngIf='infection.adult'><img src="../../assets/images/vaccine.png" alt=""></div>
+                    <div *ngIf='infection.adult'>
+                        <img [src]="checkVaccineStatus(infection, 'adult') ? '../../assets/images/checkmark.png' : '../../assets/images/vaccine.png'" alt="">
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -94,8 +130,7 @@
                                 <div>
                                     <p class="m-0 font-italic">Клініки, у яких присутня вакцина:</p>
                                     <p class="ml-5 mb-0 text-justify" *ngFor="let clinic of infection.clinics">
-                                        <a class="nav-link p-0" routerLink='/map' routerLinkActive='active'
-                                            [routerLinkActiveOptions]="{exact:true}">
+                                        <a class="nav-link p-0" routerLink='/map' routerLinkActive='active' [routerLinkActiveOptions]="{exact:true}">
                                             - {{clinic.clinic_name}}
                                         </a>
                                     </p>

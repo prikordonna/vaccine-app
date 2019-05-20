@@ -11,6 +11,8 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Clinic } from 'src/app/models';
 import { Infection } from '../../models/Infection';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-add-infection',
@@ -19,6 +21,7 @@ import { Infection } from '../../models/Infection';
 })
 
 export class AddInfectionComponent implements OnInit {
+  public user: User;
   infectionState$: Observable<InfectionsState>;
   clinics$: Observable<Clinic[]>;
 
@@ -57,9 +60,15 @@ export class AddInfectionComponent implements OnInit {
   constructor(
     private modalService: BsModalService,
     private store: Store<AppState>,
+    public auth: AuthService,
   ) { }
 
   ngOnInit() {
+    this.auth.user$.subscribe((el) => {
+      if (el) {
+        this.user = el;
+      }
+    })
     this.clinics$ = this.store.pipe(select(getClinicData));
     this.infectionState$ = this.store.pipe(select(getInfectionsState));
 

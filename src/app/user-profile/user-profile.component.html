@@ -1,4 +1,3 @@
-<!-- ../../../assets/images/users.png -->
 <div class="container">
     <div class="row justify-content-center">
         <div class="card" style="width: 18rem;" *ngIf='auth.user$ | async as user; else login'>
@@ -13,13 +12,8 @@
                     <button type="button" class="btn btn-primary btn-block" routerLink='/settings'>Адмін панель</button>
                 </li>
                 <li class="list-group-item text-center">
-                    <button type="button" class="btn btn-success btn-block" [routerLink]="['/card', user.uid]">Мій календар щеплень</button>
+                    <button type="button" class="btn btn-success btn-block" [routerLink]="['/card', user.uid]" (click)="createCard()">Мій календар щеплень</button>
                 </li>
-                <!-- <ng-template #createCard>
-                    <li class="list-group-item text-center">
-                        <button type="button" class="btn btn-success btn-block" (click)="openModal(createCardModal); addInfectionsToUser()">Створити картку</button>
-                    </li>
-                </ng-template> -->
                 <ng-template #userRole>
                     <li class="list-group-item text-center">Роль: КОРИСТУВАЧ</li>
                     <li class="list-group-item text-center">Додати календар вакцинації</li>
@@ -31,73 +25,3 @@
         </ng-template>
     </div>
 </div>
-
-<!-- <ng-template #createCardModal>
-    <div class="modal-header">
-        <h4 class="modal-title pull-left">Створити картку</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide(); clearSelected()">
-                <span aria-hidden="true">&times;</span>
-            </button>
-    </div>
-    <div class="modal-body">
-        <form (ngSubmit)="onSubmit()" #createCardForm="ngForm" novalidate>
-            <div class="form-group">
-                <h4>Для отримання особистої картки заповніть форму.</h4>
-                <p>Вам подається список інфекцій. Якщо Ви робили вакцинацію від інфекції нажміть на неї і оберіть вік, в якому Ви робили вакцінацію.</p>
-                <p>Можете вказати декілька дат, якщо Ви виконували вакцинацію повторно.</p>
-            </div>
-            <div *ngFor="let infection of (infections$ | async); let i = index" class="form-group">
-                <button type="button" class="btn btn-primary btn-block" (click)="infection.isCollapsed = !infection.isCollapsed" aria-controls="i" aria-expanded="false">
-                            {{infection.name}}
-                        </button>
-                <div id="{{i}}" #collapse="bs-collapse" [collapse]="!infection.isCollapsed">
-                    <div *ngIf="infection.day1" class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="day1" name='day1'>
-                        <label class="custom-control-label" for="day1" (click)="checkVaccineDate(infection, 'day1')">1 день</label>
-                    </div>
-                    <div *ngIf="infection.day3" class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="day3" name='day3'>
-                        <label class="custom-control-label" for="day3">3-5 дні</label>
-                    </div>
-                    <div *ngIf="infection.month2" class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="month2" name='month2'>
-                        <label class="custom-control-label" for="month2">2 місяці</label>
-                    </div>
-                    <div *ngIf="infection.month4" class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="month4" name='month4'>
-                        <label class="custom-control-label" for="month4">4 місяці</label>
-                    </div>
-                    <div *ngIf="infection.month6" class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="month6" name='month6'>
-                        <label class="custom-control-label" for="month6">6 місяців</label>
-                    </div>
-                    <div *ngIf="infection.month12" class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="month12" name='month12'>
-                        <label class="custom-control-label" for="month12">12 місяців</label>
-                    </div>
-                    <div *ngIf="infection.month18" class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="month18" name='month18'>
-                        <label class="custom-control-label" for="month18">18 місяців</label>
-                    </div>
-                    <div *ngIf="infection.year6" class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="year6" name='year6'>
-                        <label class="custom-control-label" for="year6">6 років</label>
-                    </div>
-                    <div *ngIf="infection.year14" class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="year14" name='year14'>
-                        <label class="custom-control-label" for="year14">14 років</label>
-                    </div>
-                    <div *ngIf="infection.year16" class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="year16" name='year16'>
-                        <label class="custom-control-label" for="year16">16 років</label>
-                    </div>
-                    <div *ngIf="infection.adult" class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="adult" name='adult'>
-                        <label class="custom-control-label" for="adult">Дорослі</label>
-                    </div>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary float-right" (click)="modalRef.hide()">Додати</button>
-        </form>
-    </div>
-</ng-template> -->
