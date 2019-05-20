@@ -36,8 +36,10 @@ export class InfoPageComponent implements OnInit {
   checkVaccineStatus(infection, infectionDate) {
     if (this.user && this.user.card) {
       const userInfection = this.user.card.find(el => el.id == infection.id);
-      if (userInfection[infectionDate]) {
-        return true;
+      if (userInfection) {
+        if (userInfection[infectionDate]) {
+          return true;
+        }
       }
     } else {
       return false;
