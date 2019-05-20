@@ -1,13 +1,13 @@
-<form (ngSubmit)="addMailForm.form.valid && onSubmit()" #addMailForm="ngForm" novalidate>
+<form (ngSubmit)="addMailForm.form.valid && onSubmit()" *ngIf='(auth.user$ | async) as user; else noAuth' #addMailForm="ngForm" novalidate>
   <h3>Відгуки та пропозиції:</h3>
 
   <div class="form-group" [class.has-error]="name.invalid && name.touched" [class.has-success]="name.valid">
-    <input required placeholder="Iм'я" [(ngModel)]="mail.name" name="name" id="name" class="form-control" #name="ngModel" [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched), 'is-valid': name.valid}">
+    <input required placeholder="Iм'я" [(ngModel)]="user.displayName" name="name" id="name" class="form-control" #name="ngModel" [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched), 'is-valid': name.valid}">
     <span class="help-block" *ngIf="name.invalid && name.touched">Введіть ім'я</span>
   </div>
 
   <div class="form-group" [class.has-error]="email.invalid && email.touched" [class.has-success]="email.valid">
-    <input required email placeholder="Електронна скринька" [(ngModel)]="mail.email" name="email" id="email" class="form-control"  #email="ngModel" [ngClass]="{'is-invalid': email.invalid && (email.dirty || email.touched), 'is-valid': email.valid}">
+    <input required email placeholder="Електронна скринька" [(ngModel)]="user.email" name="email" id="email" class="form-control"  #email="ngModel" [ngClass]="{'is-invalid': email.invalid && (email.dirty || email.touched), 'is-valid': email.valid}">
     <span class="help-block" *ngIf="email.errors?.required && email.touched">Введіть імейл</span>
     <span class="help-block" *ngIf="email.errors?.email && email.touched">Некоректний імейл</span>
   </div>
@@ -18,3 +18,25 @@
 
   <button type="submit" class="btn btn-primary float-right" [disabled]="addMailForm.form.pristine">Відправити</button>
 </form>
+<ng-template #noAuth>
+  <form (ngSubmit)="addMailForm.form.valid && onSubmit()" #addMailForm="ngForm" novalidate>
+    <h3>Відгуки та пропозиції:</h3>
+  
+    <div class="form-group" [class.has-error]="name.invalid && name.touched" [class.has-success]="name.valid">
+      <input required placeholder="Iм'я" [(ngModel)]="mail.name" name="name" id="name" class="form-control" #name="ngModel" [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched), 'is-valid': name.valid}">
+      <span class="help-block" *ngIf="name.invalid && name.touched">Введіть ім'я</span>
+    </div>
+  
+    <div class="form-group" [class.has-error]="email.invalid && email.touched" [class.has-success]="email.valid">
+      <input required email placeholder="Електронна скринька" [(ngModel)]="mail.email" name="email" id="email" class="form-control"  #email="ngModel" [ngClass]="{'is-invalid': email.invalid && (email.dirty || email.touched), 'is-valid': email.valid}">
+      <span class="help-block" *ngIf="email.errors?.required && email.touched">Введіть імейл</span>
+      <span class="help-block" *ngIf="email.errors?.email && email.touched">Некоректний імейл</span>
+    </div>
+  
+    <div class="form-group" [class.has-error]="message.invalid && message.touched" [class.has-success]="message.valid">
+      <textarea required placeholder="Повідомлення" [(ngModel)]="mail.message" name="message" id="message" class="form-control" #message="ngModel" [ngClass]="{'is-invalid': message.invalid && (message.dirty || message.touched), 'is-valid': message.valid}" cols="10" rows="7"></textarea>
+    </div>
+  
+    <button type="submit" class="btn btn-primary float-right" [disabled]="addMailForm.form.pristine">Відправити</button>
+  </form>
+</ng-template>

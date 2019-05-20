@@ -14,6 +14,18 @@ export class ToastrsService {
     });
   }
 
+  edit () {
+    this.toastr.success('Редагування успішне!', 'Зміни встипили в дію',{
+      positionClass: 'toast-bottom-center'
+    });
+  }
+
+  cancel () {
+    this.toastr.warning('Відміна збереження!', 'Дані не збережені в профілі',{
+      positionClass: 'toast-bottom-center'
+    });
+  }
+
   warning () {
     this.toastr.warning('Ви видалили елемент', 'Статус: Успішно',{
       positionClass: 'toast-bottom-center'
