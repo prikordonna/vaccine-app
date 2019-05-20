@@ -7,6 +7,7 @@ import * as MailsActions from '../../+store/mail/mail.actions';
 
 import { Mail } from '../../models/mail';
 import { ToastrsService } from '../../services/toastrs.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-form',
@@ -27,10 +28,12 @@ export class FormComponent implements OnInit {
   constructor(
     private notification: ToastrsService,
     private store: Store<AppState>,
+    public auth: AuthService
   ) { }
 
   ngOnInit() {
     this.store.pipe(select('mails'));
+    
   }
 
   onSubmit(): void {
