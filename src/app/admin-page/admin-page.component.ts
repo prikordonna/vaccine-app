@@ -18,7 +18,6 @@ export class AdminPageComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.unreadedMails)
     this.mailService.getMails$()
       .pipe(
         map(

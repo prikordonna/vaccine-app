@@ -1,15 +1,17 @@
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { Infection } from '../../models/Infection';
-import { ClinicService } from '../../services/clinic.service';
-import { map } from 'rxjs/operators';
-import { Clinic } from 'src/app/models';
 
 import { Store, select } from '@ngrx/store';
-import { AppState, InfectionsState, getInfectionsState } from '../../+store';
+import { AppState, InfectionsState, getInfectionsState, getClinicData } from '../../+store';
 import * as InfectionsActions from '../../+store/infections/infections.action';
-import { Observable } from 'rxjs';
+
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
+import { Clinic } from 'src/app/models';
+import { Infection } from '../../models/Infection';
+
 @Component({
   selector: 'app-add-infection',
   templateUrl: './add-infection.component.html',
@@ -18,6 +20,9 @@ import { Observable } from 'rxjs';
 
 export class AddInfectionComponent implements OnInit {
   infectionState$: Observable<InfectionsState>;
+  clinics$: Observable<Clinic[]>;
+
+  public clinicDataSub: Subscription;
 
   public rand = Math.floor(Math.random() * 7);
 
@@ -51,12 +56,14 @@ export class AddInfectionComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService,
-    private clinicService: ClinicService,
     private store: Store<AppState>,
   ) { }
 
   ngOnInit() {
-    this.clinicService.getClinics$()
+    this.clinics$ = this.store.pipe(select(getClinicData));
+    this.infectionState$ = this.store.pipe(select(getInfectionsState));
+
+    this.clinicDataSub = this.clinics$
       .pipe(
         map(clinic => {
           clinic['isSelected'] = false;
@@ -68,8 +75,6 @@ export class AddInfectionComponent implements OnInit {
           this.clinicList = clinics;
         }
       )
-    this.infectionState$ = this.store.pipe(select(getInfectionsState));
-
   }
 
   openModal(template: TemplateRef<any>) {
@@ -83,7 +88,8 @@ export class AddInfectionComponent implements OnInit {
       this.selectedClinics.splice(cliIndex, 1);
     } else {
       clinic.isSelected = !clinic.isSelected;
-      this.selectedClinics.push(clinic)    }
+      this.selectedClinics.push(clinic)
+    }
   }
 
   clearSelected() {

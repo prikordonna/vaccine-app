@@ -3,23 +3,20 @@
         <div class="admin-example" *ngIf='auth.canEdit(user) else notAdmin'>
             <tabset>
                 <tab heading="Повідомлення">
+                    <!-- <tab [heading]="mailService.unreadedMails.length> 0 ? 'Повідомлення (${mailService.unreadedMails.length})' : 'Повідомлення'"> -->
                     <app-mails></app-mails>
                 </tab>
                 <tab heading="Інфекції">
                     <app-add-infection></app-add-infection>
                     <app-infections></app-infections>
                 </tab>
-                <tab heading="Клініки">
+                <tab id="clinics" heading="Клініки">
                     <app-add-clinic></app-add-clinic>
                     <app-clinics></app-clinics>
                 </tab>
-                <!-- <button type="button" class="btn btn-primary mr-4" routerLink='/settings/infections'>Інфекції</button>
-                <button type="button" class="btn btn-primary mr-4" routerLink='/settings/clinics'>Клініки</button>
-                <button type="button" class="btn btn-primary mr-4" routerLink='/settings/mails'>Повідомлення</button> -->
             </tabset>
         </div>
     </div>
-
     <ng-template #login>
         <h1 class="text-danger text-center">Увійдіть, щоб отримати доступ</h1>
     </ng-template>
