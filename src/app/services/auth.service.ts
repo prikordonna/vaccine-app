@@ -50,7 +50,6 @@ export class AuthService {
       roles: {
         reader: true
       },
-      card: []
     }
     return userRef.set(data, { merge: true });
   }
