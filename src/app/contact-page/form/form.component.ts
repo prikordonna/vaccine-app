@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../+store';
@@ -17,6 +18,7 @@ import { AuthService } from '../../services/auth.service';
 export class FormComponent implements OnInit {
 
   @ViewChild('addMailForm') public addMailForm: NgForm;
+  //formEmail = new FormControl('');
 
   mail: Mail = {
     name: '',
@@ -33,7 +35,6 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     this.store.pipe(select('mails'));
-    
   }
 
   onSubmit(): void {

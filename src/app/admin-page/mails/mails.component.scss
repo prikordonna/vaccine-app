@@ -1,11 +1,13 @@
 .new {
     &:before {
         content: 'New';
-        color: red;
+        color: #ffffff;
+        background-color: #ff0000af;
+        padding: 0 10px;
         font-size: 1rem;
         position: absolute;
-        top: 0%;
-        left: 1%;
+        top: 0;
+        left: 0;
         font-weight: 600;
     }
 }
